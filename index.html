@@ -1,1 +1,46 @@
-<h1>This is heading 1</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Join Roblox Game</title>
+    <script>
+        // Function to extract query parameters from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to redirect to the Roblox game
+        function redirectToRoblox() {
+            const placeId = getQueryParam('placeid');
+            const serverId = getQueryParam('serverid');
+
+            if (placeId && serverId) {
+                // Check if the user is on a mobile device
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+                // Redirect to the appropriate deep link
+                if (isMobile) {
+                    window.location.href = `robloxmobile://placeID=${placeId}&gameInstanceId=${serverId}`;
+                } else {
+                    window.location.href = `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${serverId}`;
+                }
+
+                // Fallback: Redirect to the Roblox game page if deep link fails
+                setTimeout(() => {
+                    window.location.href = `https://www.roblox.com/games/${placeId}`;
+                }, 2000);
+            } else {
+                console.error('Place ID or Server ID is missing.');
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = redirectToRoblox;
+    </script>
+</head>
+<body>
+    <p>Redirecting to Roblox game...</p>
+</body>
+</html>
