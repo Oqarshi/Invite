@@ -3,12 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Join Roblox Game</title>
+    <title>Roblox Invite Loader</title>
+    <h1>Roblox Invite Loader</h1>
+    <h1>--------------------</h1>
+    <style>
+        /* Dark Mode CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #333;
+            border-top: 4px solid #0085dd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        .countdown {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0085dd;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
     <script>
         // Function to extract query parameters from the URL
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
+        }
+
+        // Function to start the countdown
+        function startCountdown(duration, action) {
+            let timeLeft = duration;
+            const countdownElement = document.getElementById('countdown');
+
+            const timer = setInterval(() => {
+                countdownElement.innerText = `Time left: ${timeLeft} seconds`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    action();
+                }
+            }, 1000);
         }
 
         // Function to redirect to the Roblox game
@@ -32,15 +105,35 @@
                     window.location.href = `https://www.roblox.com/games/${placeId}`;
                 }, 2000);
             } else {
-                console.error('Place ID or Server ID is missing.');
+                // Display "Invalid link" message
+                document.getElementById('message').innerText = 'Invalid link. Redirecting to Roblox...';
+                // Start countdown for redirect to Roblox.com
+                startCountdown(5, () => {
+                    window.location.href = 'https://www.roblox.com';
+                });
             }
         }
 
-        // Call the function when the page loads
-        window.onload = redirectToRoblox;
+        // Function to close the page after 30 seconds
+        function autoClosePage() {
+            startCountdown(30, () => {
+                window.close();
+            });
+        }
+
+        // Call the functions when the page loads
+        window.onload = () => {
+            redirectToRoblox();
+            autoClosePage();
+        };
     </script>
 </head>
 <body>
-    <p>Redirecting to Roblox game...</p>
+    <div class="container">
+        <h1 id="message">Redirecting to Roblox game...</h1>
+        <p>This page will automatically close in 30 seconds.</p>
+        <div class="loading-spinner"></div>
+        <div class="countdown" id="countdown">Time left: 30 seconds</div>
+    </div>
 </body>
 </html>
