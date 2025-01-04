@@ -4,9 +4,7 @@
 
 
 
-# **Roblox Server Regions - UserScript**
-
-## Hey Guys Im currently workingon another version so I will update the script when that one is done!
+# **Roblox Locate - UserScript**
 
 ## **Overview**  
 This userscript retrieves the server details of a specified number of servers for your selected Roblox game, identifies their locations, and allows you to organize them by region to optimize your ping. It offers a free, open-source alternative to paid Roblox extensions like RoPro, RoGold, and RoQoL..
@@ -20,7 +18,7 @@ This userscript retrieves the server details of a specified number of servers fo
 - Displays detailed information, including **city**, **country**, and **region** (if available).  
 
 ### **2. Enhanced Server List**  
-- Rebuilds the server list to include metrics like **ping** and **FPS**.  
+- Rebuilds the server list to include metrics like **ping** and **FPS** for the server region. 
 - Implements a color-coded ping system:  
   - 🟢 **Green**: Best ping  
   - 🟠 **Orange**: Average ping  
