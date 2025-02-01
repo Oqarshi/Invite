@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Join Roblox Game</title>
     <style>
-        /* Modern Dark Mode Design */
         body {
             margin: 0;
             padding: 0;
@@ -62,21 +61,88 @@
         }
     </style>
     <script>
-        // Function to extract query parameters from the URL
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+        function showLoadingOverlay() {
+            const content = document.createElement('div');
+            content.style.position = 'fixed';
+            content.style.top = 'calc(50% - 15px)';
+            content.style.left = '50%';
+            content.style.transform = 'translate(-50%, -50%)';
+            content.style.width = '400px';
+            content.style.height = '250px';
+            content.style.backgroundColor = '#1e1e1e';
+            content.style.display = 'flex';
+            content.style.flexDirection = 'column';
+            content.style.justifyContent = 'center';
+            content.style.alignItems = 'center';
+            content.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+            content.style.borderRadius = '12px';
+            content.style.zIndex = '1000000';
+            content.style.opacity = '0';
+            content.style.transition = 'opacity 0.5s ease';
+            content.style.fontFamily = 'Arial, sans-serif';
+
+            const loadingText = document.createElement('p');
+            loadingText.textContent = 'Joining Roblox Game...';
+            loadingText.style.fontSize = '20px';
+            loadingText.style.color = '#fff';
+            loadingText.style.marginTop = '20px';
+            loadingText.style.fontWeight = 'bold';
+
+            const base64Image = document.createElement('img');
+            base64Image.src = 'data:image/jpeg;base64,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';
+            base64Image.style.width = '80px';
+            base64Image.style.height = '80px';
+            base64Image.style.borderRadius = '8px';
+
+            const loadingBoxes = document.createElement('div');
+            loadingBoxes.style.display = 'flex';
+            loadingBoxes.style.alignItems = 'center';
+            loadingBoxes.style.justifyContent = 'center';
+            loadingBoxes.style.marginTop = '15px';
+
+            for (let i = 0; i < 3; i++) {
+                const box = document.createElement('div');
+                box.style.width = '10px';
+                box.style.height = '10px';
+                box.style.backgroundColor = '#fff';
+                box.style.margin = '0 5px';
+                box.style.borderRadius = '2px';
+                box.style.animation = `pulse 1.2s ${i * 0.2}s infinite`;
+                loadingBoxes.appendChild(box);
+            }
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.5); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            content.appendChild(base64Image);
+            content.appendChild(loadingText);
+            content.appendChild(loadingBoxes);
+
+            document.body.appendChild(content);
+
+            setTimeout(() => { content.style.opacity = '1'; }, 10);
+            setTimeout(() => {
+                content.style.opacity = '0';
+                setTimeout(() => { document.body.removeChild(content); }, 500);
+            }, 8000);
         }
 
-        // Function to start the countdown
+        function getQueryParam(param) {
+            return new URLSearchParams(window.location.search).get(param);
+        }
+
         function startCountdown(duration, action) {
             let timeLeft = duration;
             const countdownElement = document.getElementById('countdown');
-
             const timer = setInterval(() => {
                 countdownElement.innerText = `Time left: ${timeLeft} seconds`;
                 timeLeft--;
-
                 if (timeLeft < 0) {
                     clearInterval(timer);
                     action();
@@ -84,44 +150,24 @@
             }, 1000);
         }
 
-        // Function to redirect to the Roblox game
         function redirectToRoblox() {
             const placeId = getQueryParam('placeid');
             const serverId = getQueryParam('serverid');
-
             if (placeId && serverId) {
-                // Check if the user is on a mobile device
+                showLoadingOverlay();
                 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-                // Redirect to the appropriate deep link
-                if (isMobile) {
-                    window.location.href = `robloxmobile://placeID=${placeId}&gameInstanceId=${serverId}`;
-                } else {
-                    window.location.href = `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${serverId}`;
-                }
-
-                // Fallback: Redirect to the Roblox game page if deep link fails
-                setTimeout(() => {
-                    window.location.href = `https://www.roblox.com/games/${placeId}`;
-                }, 2000);
+                window.location.href = isMobile ? `robloxmobile://placeID=${placeId}&gameInstanceId=${serverId}` : `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${serverId}`;
+                setTimeout(() => { window.location.href = `https://www.roblox.com/games/${placeId}`; }, 2000);
             } else {
-                // Display "Invalid link" message
                 document.getElementById('message').innerText = 'Invalid link. Redirecting to Roblox...';
-                // Start countdown for redirect to Roblox.com
-                startCountdown(5, () => {
-                    window.location.href = 'https://www.roblox.com';
-                });
+                startCountdown(5, () => { window.location.href = 'https://www.roblox.com'; });
             }
         }
 
-        // Function to close the page after 30 seconds
         function autoClosePage() {
-            startCountdown(30, () => {
-                window.close();
-            });
+            startCountdown(30, () => { window.close(); });
         }
 
-        // Call the functions when the page loads
         window.onload = () => {
             redirectToRoblox();
             autoClosePage();
