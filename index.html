@@ -155,16 +155,14 @@
             const serverId = getQueryParam('serverid');
             if (placeId && serverId) {
                 showLoadingOverlay();
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                window.location.href = isMobile ? `robloxmobile://placeID=${placeId}&gameInstanceId=${serverId}` : `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${serverId}`;
-                setTimeout(() => { 
-                    window.location.href = `https://www.roblox.com/games/${placeId}`; 
-                }, 15000); // Changed from 30000 to 15000 (15 seconds)
+                const url = `https://www.roblox.com/games/${placeId}?ROLOCATE_GAMEID=${placeId}_SERVERID=${serverId}`;
+                window.location.href = url;
             } else {
                 document.getElementById('message').innerText = 'Invalid link. Redirecting to Roblox...';
                 startCountdown(5, () => { window.location.href = 'https://www.roblox.com'; });
             }
         }
+
 
         function autoClosePage() {
             startCountdown(15, () => { window.close(); }); // Changed from 30 to 15 seconds
