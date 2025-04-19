@@ -156,12 +156,15 @@
             if (placeId && serverId) {
                 showLoadingOverlay();
                 const url = `https://www.roblox.com/games/${placeId}?ROLOCATE_GAMEID=${placeId}_SERVERID=${serverId}`;
-                window.location.href = url;
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 15000); // Wait 15 seconds before redirecting
             } else {
                 document.getElementById('message').innerText = 'Invalid link. Redirecting to Roblox...';
                 startCountdown(5, () => { window.location.href = 'https://www.roblox.com'; });
             }
         }
+
 
 
         function autoClosePage() {
