@@ -448,6 +448,54 @@
       a:hover::after {
         transform: scaleX(1);
       }
+      /* New: No Support Tag */
+      .browser-status.no-support {
+        color: #ef4444;
+      }
+      
+      /* Popup styles */
+      .reason-popup {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 15px 20px;
+        color: white;
+        max-width: 80%;
+        text-align: center;
+        z-index: 10000;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+      }
+      
+      .reason-popup.fade-out {
+        animation: fadeOut 0.5s ease forwards;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; bottom: 0; }
+        to { opacity: 1; bottom: 20px; }
+      }
+      
+      @keyframes fadeOut {
+        from { opacity: 1; bottom: 20px; }
+        to { opacity: 0; bottom: 0; }
+      }
+      
+      /* Make browser names clickable */
+      .browser-name {
+        cursor: pointer;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      
+      .browser-name:hover {
+        color: #dc2626;
+      }
     </style>
   </head>
   <body>
@@ -500,9 +548,9 @@
           <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 20px; margin: 15px 0; border: 1px solid rgba(255,255,255,0.05);">
             <div style="display: grid; grid-template-columns: max-content 1fr; gap: 12px; align-items: center;">
               <span style="color: #888; font-size: 0.9rem;">Current Version:</span>
-              <span style="font-size: 1.4rem; font-weight: 700; color: #dc2626; letter-spacing: 0.5px;">v38.4</span>
+              <span style="font-size: 1.4rem; font-weight: 700; color: #dc2626; letter-spacing: 0.5px;">v40.0</span>
               <span style="color: #888; font-size: 0.9rem;">Release Date:</span>
-              <span>June 19, 2025</span>
+              <span>July 4, 2025</span>
             </div>
           </div>
           <div style="margin-top: 5px; font-size: 0.9rem; color: #aaa;">
@@ -517,10 +565,10 @@
               <span>Changelog highlights:</span>
             </div>
             <ul style="margin-left: 20px; color: #ccc; line-height: 1.7;">
-              <li>Fixed some bugs</li>
-              <li>Four new settings options</li>
-              <li>One new server filter option</li>
-              <li>Servers in Oregon and Ohio have been added</li>
+              <li>SmartSearch has been added.</li>
+              <li>Mutual Friends have been added.</li>
+              <li>Disable chat option has been added.</li>
+              <li>Quick Launch Games has been added.</li>
             </ul>
           </div>
         </div>
@@ -542,7 +590,7 @@
           </div>
           <div class="step">
             <div class="step-number">2</div>
-            <h3>Go to Greastfork</h3>
+            <h3>Go to Greasyfork</h3>
             <p>Click the "Install from GreasyFork" button above. Note: GreasyFork is a trusted repository for userscripts.</p>
           </div>
           <div class="step">
@@ -559,33 +607,93 @@
       </div>
     </section>
     <!-- Browser Support -->
+
+    <!-- Browser Support -->
     <section class="container">
       <div class="browser-support">
         <h2>Browser Compatibility</h2>
         <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">RoLocate works on most browsers</p>
         <div class="browsers">
           <div class="browser">
-            <div class="browser-name">Chrome</div>
+            <div class="browser-name" data-reason="Chrome has discontinued Manifest V2 extensions, which Violentmonkey relies on. Tampermonkey is available but has bugs limiting Rolocate's functionality.">Chrome</div>
             <div class="browser-status partial">⚠️ Limited Support</div>
           </div>
           <div class="browser">
-            <div class="browser-name">Firefox</div>
+            <div class="browser-name" data-reason="Firefox fully supports userscript managers and Rolocate works without issues.">Firefox</div>
             <div class="browser-status">✅ Fully Supported</div>
           </div>
           <div class="browser">
-            <div class="browser-name">Edge</div>
+            <div class="browser-name" data-reason="Edge fully supports userscript managers and Rolocate works without issues.">Edge</div>
             <div class="browser-status">✅ Fully Supported</div>
           </div>
           <div class="browser">
-            <div class="browser-name">Safari</div>
+            <div class="browser-name" data-reason="Safari fully supports userscript managers and Rolocate works without issues.">Safari</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="Opera fully supports userscript managers and Rolocate works without issues.">Opera</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="Brave fully supports userscript managers and Rolocate works without issues.">Brave</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Extension Compatibility -->
+    <section class="container">
+      <div class="browser-support">
+        <h2>Extension Compatibility</h2>
+        <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">See if RoLocate is compatible with other extensions.</p>
+        <div class="browsers">
+          <div class="browser">
+            <div class="browser-name" data-reason="The server filters from RoPro may break but almost all other features are compatible.">Ropro</div>
+            <div class="browser-status">✅ Almost Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="BTRoblox is fully compatible with Rolocate and works without issues.">BTRoblox</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="There maybe issues with the homepage customization.">RoSeal</div>
+            <div class="browser-status">✅ Almost Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="RoGold (Free) is fully compatible with Rolocate and works without issues.">RoGold (Free)</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="RoGold has known conflicts with Rolocate that cause unexpected behavior.">RoGold (Ultimate)</div>
+            <div class="browser-status no-support">❌ No Support</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="Roblox+ is fully compatible with Rolocate and works without issues.">Roblox+</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="RoValra is fully compatible with Rolocate and works without issues.">RoValra</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="BetterBLOX is fully compatible with Rolocate and works without issues.">BetterBLOX</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="RoQol is fully compatible with Rolocate and works without issues.">RoQol</div>
+            <div class="browser-status">✅ Fully Supported</div>
+          </div>
+          <div class="browser">
+            <div class="browser-name" data-reason="Some features may break.">Roblokis</div>
             <div class="browser-status partial">⚠️ Limited Support</div>
           </div>
           <div class="browser">
-            <div class="browser-name">Opera</div>
+            <div class="browser-name" data-reason="DashBlox is fully compatible with Rolocate and works without issues.">DashBlox</div>
             <div class="browser-status">✅ Fully Supported</div>
           </div>
           <div class="browser">
-            <div class="browser-name">Brave</div>
+            <div class="browser-name" data-reason="RoValk is fully compatible with Rolocate and works without issues.">RoValk</div>
             <div class="browser-status">✅ Fully Supported</div>
           </div>
         </div>
@@ -613,7 +721,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-question">Can I use RoLocate on mobile?</div>
-          <div class="faq-answer">RoLocate is designed for desktop browsers. It is possible however on android devices if you have the firefox browser installed.</div>
+          <div class="faq-answer">RoLocate is designed for desktop browsers. It is possible however on android devices if you have the firefox/edge browser installed.</div>
         </div>
         <div class="faq-item">
           <div class="faq-question">How does RoLocate find server locations?</div>
@@ -632,5 +740,34 @@
         <p>&copy; 2025 RoLocate. Open-source project available under a Custom License – Personal Use Only.</p>
       </div>
     </footer>
+
+    <script>
+      // Handle click events on browser/extension names
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('browser-name') && e.target.dataset.reason) {
+          // Remove any existing popup
+          let existingPopup = document.querySelector('.reason-popup');
+          if (existingPopup) {
+            existingPopup.remove();
+          }
+
+          // Create new popup
+          let popup = document.createElement('div');
+          popup.className = 'reason-popup';
+          popup.textContent = e.target.dataset.reason;
+          
+          document.body.appendChild(popup);
+          
+          // Auto-remove after 3 seconds
+          setTimeout(function() {
+            popup.classList.add('fade-out');
+            // Remove after animation completes
+            setTimeout(function() {
+              popup.remove();
+            }, 500);
+          }, 3000);
+        }
+      });
+    </script>
   </body>
 </html>
