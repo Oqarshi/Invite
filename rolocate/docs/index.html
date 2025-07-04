@@ -191,13 +191,11 @@
       .docs-header h1 .version-badge {
         font-size: 1.5rem;
         vertical-align: baseline;
-        /* Changed from middle to baseline for better alignment */
         margin-left: 12px;
         color: white;
         font-weight: 700;
         position: relative;
         top: -6px;
-        /* Fine-tune vertical alignment if needed */
         background: rgba(220, 38, 38, 0.05);
         padding: 2px 10px;
         border-radius: 20px;
@@ -464,7 +462,6 @@
 
       a {
         color: #ef4444;
-        /* Tailwind red-500 */
         text-decoration: none;
         position: relative;
         transition: color 0.2s ease;
@@ -485,7 +482,6 @@
 
       a:hover {
         color: #f87171;
-        /* Slightly lighter red on hover */
       }
 
       a:hover::after {
@@ -498,11 +494,33 @@
         margin-top: 1.25rem;
         margin-bottom: 0.5rem;
         color: #f87171;
-        /* Tailwind red-400 */
         border-left: 3px solid #ef4444;
-        /* Tailwind red-500 */
         padding-left: 0.6rem;
         letter-spacing: 0.2px;
+      }
+
+      /* Step-by-step guide styling */
+      .step-guide {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .step-guide h4 {
+        color: #dc2626;
+        margin-bottom: 15px;
+      }
+
+      .step-guide ol {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .step-guide li {
+        margin-bottom: 10px;
+        color: #cccccc;
       }
     </style>
   </head>
@@ -551,6 +569,24 @@
               <a href="#server-filters">Server Filters</a>
             </li>
             <li>
+              <a href="#smartsearch">SmartSearch</a>
+            </li>
+            <li>
+              <a href="#ad-blocker">Remove All Roblox Ads</a>
+            </li>
+            <li>
+              <a href="#recent-servers">Recent Servers</a>
+            </li>
+            <li>
+              <a href="#game-quality">Game Quality Filter</a>
+            </li>
+            <li>
+              <a href="#mutual-friends">Mutual Friends</a>
+            </li>
+            <li>
+              <a href="#quick-launch-games">Quick Launch Games</a>
+            </li>
+            <li>
               <a href="#troubleshooting">Troubleshooting</a>
             </li>
             <li>
@@ -562,14 +598,15 @@
         <main class="docs-content">
           <!-- Header -->
           <header class="docs-header">
-            <h1>Documentation <span class="version-badge">v38.4</span>
+            <h1>Documentation <span class="version-badge">v40.0</span>
             </h1>
             <p class="subtitle">The guide for RoLocate</p>
           </header>
+          
           <!-- Overview Section -->
           <section id="overview" class="docs-section">
             <h2>Overview</h2>
-            <p>RoLocate is a free userscript that adds many features but most populat of them all is the server filtering features.</p>
+            <p>RoLocate is a free userscript that adds many features but most popular of them all is the server filtering features.</p>
             <div class="info-box">
               <p>
                 <strong>Note:</strong> All data processing is done locally in your browser.
@@ -584,46 +621,56 @@
                 <strong>Open Source:</strong> Source code is available on greasyfork!
               </li>
               <li>
-                <strong>Regular Updates:</strong> Maybe idk lmao don't trust this.
+                <strong>Regular Updates:</strong> Maybe idk lmao don't trust this. 
               </li>
             </ul>
           </section>
+          
           <!-- Features Section -->
           <section id="features" class="docs-section">
             <h2>Features</h2>
             <div class="feature-grid">
               <div class="feature-card">
                 <h4>Server Filters</h4>
-                <p>Filter through servers. You can even find the regions of each server!</p>
+                <p>Filter through servers. You can filter by player count, region, or randomly.</p>
               </div>
               <div class="feature-card">
-                <h4>Show Old Greeting</h4>
-                <p>Shows the old greeting Roblox had on their home page.</p>
-              </div>
-              <div class="feature-card">
-                <h4>Disable Trailer Autoplay</h4>
-                <p>Prevents trailers from autoplaying on Roblox game pages.</p>
+                <h4>SmartSearch</h4>
+                <p>Lightning fast search that shows results as you type with almost instant results.</p>
               </div>
               <div class="feature-card">
                 <h4>Remove All Roblox Ads</h4>
-                <p>Blocks most ads on the Roblox site.</p>
+                <p>Removes all the ads on Roblox.</p>
+              </div>
+              <div class="feature-card">
+                <h4>Recent Servers</h4>
+                <p>Quickly return to the server your were previously in.</p>
               </div>
               <div class="feature-card">
                 <h4>Game Quality Filter</h4>
-                <p>Removes games from the charts/discover page based on your settings.</p>
+                <p>Filter out low-quality games based on ratings and player counts.</p>
               </div>
               <div class="feature-card">
-                <h4>Quick Navigation</h4>
-                <p>Ability to add quick navigations to the leftside panel of the Roblox page.</p>
+                <h4>Mutual Friends</h4>
+                <p>See if someone shares the same friend as you.</p>
+              </div>
+              <div class="feature-card">
+                <h4>Quick Launch Games</h4>
+                <p>Quickly play your games on the homepage.</p>
+              </div>
+              <div class="feature-card">
+                <h4>Etc:</h4>
+                <p>+12 more features to discover!</p>
               </div>
             </div>
           </section>
+          
           <!-- Getting Started Section -->
           <section id="getting-started" class="docs-section">
             <h2>Getting Started</h2>
             <p>After installing the userscript it will start working on Roblox.com</p>
             <h3>First Launch</h3>
-            <p>The first time you go on to roblox.com with the userscirpt a popup will appear telling you about the recent updates. You can close this.</p>
+            <p>The first time you go on to roblox.com with the userscript a popup will appear telling you about the recent updates. You can close this.</p>
             <div class="info-box success">
               <p>
                 <strong>Quick Start:</strong> All settings can be changed on the settings menu on the top right corner.
@@ -642,14 +689,15 @@
                 <strong>Recent Servers:</strong> Will be located on the server tab on games and under the private server list.
               </li>
               <li>
-                <strong>Quick Navigation:</strong> On the Left side of the roblox page.
+                <strong>SmartSearch:</strong> Replaces the default Roblox search bar at the top of every page.
               </li>
             </ul>
           </section>
-          <!-- Configuration Section -->
+          
+          <!-- Server Filters Section -->
           <section id="server-filters" class="docs-section">
             <h2>Server Filters</h2>
-            <p>RoLocate allows you to filter through servers easily.</p>
+            <p>RoLocate allows you to filter through servers to find exactly what you're looking for.</p>
             <p>
               <img src="../assets/server-filter.webp" class="inline-image" alt="example" style="transform: scale(1.2);">
             <h3>Filtering Features:</h3>
@@ -664,23 +712,199 @@
                 <strong>Player Count:</strong> Find servers with a specific player count.
               </li>
               <li>
-                <strong>Random Shuffle:</strong> Randomly show servers.
-              </li>
-              <li>
                 <strong>Server Region:</strong> Shows a variety of server locations to join.
               </li>
               <li>
                 <strong>Best Connection:</strong> Automatically join the fastest server.
               </li>
               <li>
-                <strong>Join Small Server:</strong> Join a small server.
-              </li>
-              <li>
                 <strong>Newest Server:</strong> Find servers that are less than 5 minutes old.
               </li>
             </ul>
             </p>
+            
+            <div class="step-guide">
+              <h4>How to Use Server Filters:</h4>
+              <ol>
+                <li>Navigate to any Roblox game page</li>
+                <li>Click on the "Servers" tab</li>
+                <li>Look for the "Filter" button next to "Exclude Full Servers"</li>
+                <li>Click the Filter button to open the filtering options</li>
+                <li>And enjoy! :)</li>
+              </ol>
+            </div>
           </section>
+
+          <!-- SmartSearch Section -->
+          <section id="smartsearch" class="docs-section">
+            <h2>SmartSearch</h2>
+            <p>Lightning fast search that shows results as you type with almost instant results.</p>
+            
+            <h3>Key Advantages:</h3>
+            <ul>
+              <li>
+                <strong>Instant Results:</strong> See games, users, and groups appear as you type
+              </li>
+              <li>
+                <strong>Intelligent Sorting:</strong> Most relevant results appear first based on similarity
+              </li>
+              <li>
+                <strong>Tab-Based Navigation:</strong> Switch between Games, Users, and Groups
+              </li>
+            </ul>
+            
+            <div class="step-guide">
+              <h4>How to Use SmartSearch:</h4>
+              <ol>
+                <li>Click on the SmartSearch bar at the top of the page</li>
+                <li>Start typing</li>
+                <li>Instantly see results appear in the dropdown</li>
+                <li>Switch between Games, Users, and Groups using the tabs</li>
+                <li>Click any result to go directly to that page</li>
+              </ol>
+            </div>
+            
+            <div class="info-box">
+              <p>
+                <strong>Performance Note:</strong> SmartSearch loads cards immediately while fetching thumbnails in the background for maximum responsiveness. This can result in slowdowns on very old devices.
+              </p>
+            </div>
+          </section>
+
+          <!-- Remove Ads Section -->
+          <section id="ad-blocker" class="docs-section">
+            <h2>Remove All Roblox Ads</h2>
+            <p>Enjoy Roblox without ads!</p>
+            
+            <div class="step-guide">
+              <h4>How to Enable:</h4>
+              <ol>
+                <li>Click the RoLocate settings button (top right corner)</li>
+                <li>Click the Appearance tab</li>
+                <li>Toggle "Remove All Roblox Ads"</li>
+              </ol>
+            </div>
+            
+            <h3>What Gets Removed:</h3>
+            <ul>
+              <li>All banner ads</li>
+              <li>Sponsored game ads</li>
+            </ul>
+          </section>
+
+          <!-- Recent Servers Section -->
+          <section id="recent-servers" class="docs-section">
+            <h2>Recent Servers</h2>
+            <p>Quickly return to the server your were previously in.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+              <li>
+                <strong>Last 3 Days:</strong> Automatically tracks your recent servers for the last 3 days
+              </li>
+              <li>
+                <strong>One Click Return:</strong> Rejoin servers with a single click
+              </li>
+              <li>
+                <strong>Server Details:</strong> Shows player count and region information
+              </li>
+            </ul>
+            
+            <div class="step-guide">
+              <h4>How to Access Recent Servers:</h4>
+              <ol>
+                <li>Go to any Roblox game page</li>
+                <li>Click on the "Servers" tab</li>
+                <li>Look for the "Recent Servers" section below private servers</li>
+                <li>Click any server to rejoin instantly</li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- Game Quality Filter Section -->
+          <section id="game-quality" class="docs-section">
+            <h2>Game Quality Filter</h2>
+            <p>Filter out low-quality games based on ratings and player counts.</p>
+            
+            <h3>Filter Criteria:</h3>
+            <ul>
+              <li>
+                <strong>Minimum Rating:</strong> Hide games below a certain rating threshold
+              </li>
+              <li>
+                <strong>Player Count Range:</strong> Filter games by active player count
+              </li>
+              <li>
+                <strong>Content Quality:</strong> Detect and filter low-effort games
+              </li>
+              <li>
+                <strong>Popularity Threshold:</strong> Filter out obscure games with few players
+              </li>
+            </ul>
+            
+            <div class="step-guide">
+              <h4>How to Configure:</h4>
+              <ol>
+                <li>Click the RoLocate settings button (top right corner)</li>
+                <li>Click the Extras tab</li>
+                <li>Toggle "Game Quality Filter"</li>
+                <li>Click the "Edit" button</li>
+                <li>Configure settings</li>
+                <li>Click save and refresh the page</li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- Mutual Friends Section -->
+          <section id="mutual-friends" class="docs-section">
+            <h2>Mutual Friends</h2>
+            <p>See if someone shares the same friend as you.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+              <li>
+                <strong>Friend Indicator:</strong> Shows which friends you share with others
+              </li>
+              <li>
+                <strong>Smooth Animtations:</strong> Looks like it was made by Roblox
+              </li>
+            </ul>
+            
+            <div class="step-guide">
+              <h4>How to Use:</h4>
+              <ol>
+                <li>Go to any user's profile page</li>
+                <li>And you can see the mutual friends!</li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- Mutual Friends Section -->
+          <section id="quick-launch-games" class="docs-section">
+            <h2>Quick Launch Games</h2>
+            <p>Quickly play your games on the homepage!</p>
+            
+            <h3>How to Configure:</h3>
+            <ul>
+              <li>
+                Click on the <strong>Add Game</strong> icon on the homepage
+              </li>
+              <li>
+                Enter the <strong>Game ID</strong> and click <strong>Add Game</strong>
+              </li>
+              <li>
+                Click on your game to play directly from the homepage
+              </li>
+            </ul>
+
+            <div class="info-box">
+              <p>
+                <strong>Note:</strong> Sometimes it may not work due an error with the Roblox API. If this happens, try refreshing the page or waiting a few seconds. There is a maximum of 10 games that can be added to the quick launch list.
+              </p>
+            </div>
+
+          </section>
+
           <!-- Troubleshooting Section -->
           <section id="troubleshooting" class="docs-section">
             <h2>Troubleshooting</h2>
@@ -702,20 +926,27 @@
               <li>Try again later or try a different game.</li>
               <li>If issue still persists then report on Greasyfork.</li>
             </ul>
-            <h5>Error: Could not estimate location. Fatal error, please report on Greasyfork. Using default (New York).</h5>
-            <ul>
-              <li>Usually happens if you have a vpn enabled or your on a browser that blocks the request.</li>
-            </ul>
-            <h3>Greasyfork Issues:</h3>
-            <ul>
-              <li>Note: You maybe requests to enable certain settings or provide screenshots</li>
-            </ul>
+            
+            <h3>General Troubleshooting Steps:</h3>
+            <div class="step-guide">
+              <h4>If RoLocate isn't working:</h4>
+              <ol>
+                <li>Refresh the Roblox page</li>
+                <li>Check if your userscript manager is enabled</li>
+                <li>Verify RoLocate is installed and enabled</li>
+                <li>Disable other Roblox extensions temporarily</li>
+                <li>Check browser console for errors (F12)</li>
+                <li>Reinstall RoLocate if issues persist</li>
+              </ol>
+            </div>
+
             <div class="info-box warning">
               <p>
                 <strong>Enable Console Logs:</strong> You can enable console logs by going to the settings menu and enabling "Enable Console Logs". This will help you debug issues.
               </p>
             </div>
           </section>
+          
           <!-- About Section -->
           <section id="about" class="docs-section">
             <h2>About</h2>
@@ -731,20 +962,8 @@
                 <a href="https://greasyfork.org/en/scripts/523727-rolocate/code" target="_blank">GreasyFork</a>
               </li>
               <li>
-                <strong>Invite & FAQ Source Code:</strong>
-                <a href="https://github.com/Oqarshi/Invite" target="_blank">GitHub</a>
-              </li>
-              <li>
-                <strong>Website Source Code:</strong>
-                <a href="https://github.com/Oqarshi/Invite/tree/main/rolocate" target="_blank">Github</a>
-              </li>
-              <li>
                 <strong>Suggest or Report Issues:</strong>
                 <a href="https://greasyfork.org/en/scripts/523727-rolocate/feedback" target="_blank">Submit Feedback</a>
-              </li>
-              <li>
-                <strong>Inspiration:</strong>
-                <a href="https://github.com/AntiBoomz/BTRoblox" target="_blank">BTRoblox Team</a>
               </li>
             </ul>
             <div class="info-box">
