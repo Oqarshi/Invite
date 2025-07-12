@@ -1,100 +1,139 @@
-## The backend for the invite feature for Roblox Locate is located here.
+# 🌍 RoLocate – Free Roblox Server Filtering  
+A powerful, **100% free** alternative to paid Roblox extensions.
 
-
-
-
-
-# **Roblox Locate - UserScript**
-
-## **Overview**  
-This userscript retrieves the server details of a specified number of servers for your selected Roblox game, identifies their locations, and allows you to organize them by region to optimize your ping. It offers a free, open-source alternative to paid Roblox extensions like RoPro, RoGold, and RoQoL..
 
 ---
 
-## **Features**  
-
-### **1. Server Location Fetching**  
-- Retrieves server locations using their IP addresses.  
-- Displays detailed information, including **city**, **country**, and **region** (if available).  
-
-### **2. Enhanced Server List**  
-- Rebuilds the server list to include metrics like **ping** and **FPS** for the server region. 
-- Implements a color-coded ping system:  
-  - 🟢 **Green**: Best ping  
-  - 🟠 **Orange**: Average ping  
-  - 🔴 **Red**: Worst ping  
-
-### **3. Advanced Filtering**  
-- Adds dropdown menus for filtering servers by **country** and **city**.  
-- Automatically selects a city if only one city exists for the chosen country.  
-
-### **4. Invite Link Feature**  
-- Each server card features an **"Invite"** button.  
-- Clicking the button copies the server’s invite link directly to your clipboard.  
-
-### **5. Auto-Run Functionality**  
-- Automatically filters servers upon page load when enabled.  
-- Includes a convenient toggle to turn the auto-run feature on or off.  
+## 🌐 Official Website & Credits  
+🔗 [**RoLocate Official Page**](https://oqarshi.github.io/Invite/rolocate)  
+> 🚨 Greasyfork the **only official source** to install RoLocate.  
+> Do **not trust** third-party versions or reuploads.  
 
 ---
 
-## **Installation**  
+## 🏆 Credits
 
-### Prerequisites  
-1. Install a userscript manager extension for your browser:  
-   - [Tampermonkey](https://www.tampermonkey.net/)  
-   - [Greasemonkey](https://www.greasespot.net/)  
-   - [Violentmonkey](https://violentmonkey.github.io/)
-
-### Steps  
-1. Open your userscript manager and create a new script.  
-2. Pastethe script code into the editor or click install on this page.  
-3. Save and enable the userscript.  
+🛠️ Created & maintained by **Oqarshi**
 
 ---
 
-## **Usage**  
 
-1. Go to any Roblox game page (e.g., [Phantom Forces](https://www.roblox.com/games/292439477/Christmas-Update-Phantom-Forces)).  
-2. Click the **"Filter Server Region"** button to start the filtering process. 
-3. Select the **amount** of servers you want to search for.
-4. Use the dropdown menus to refine your server selection by **country** and **city**.  
-5. Copy invite links by clicking the **"Invite"** button on any server card.  
+## 🧠 What is RoLocate?  
+**RoLocate** is a **Roblox userscript** that adds a ton of features, with most popular being **server filtering** and the **SmartSearch** functionality.
 
 ---
 
-## **Auto-Run Feature**  
+## 🎥 Demo Previews
 
-- The auto-run feature simplifies server filtering by activating automatically when a game page loads.  
-- Enable or disable it using the toggle next to the **"Filter Server Region"** button.  
-
----
-
-## **Technical Details**  
-
-- **Script Name**: Roblox Server Regions  
-- **Version**: 8.0  
-- **Author**: Oqarshi  
-- **Applicable URLs**: `https://www.roblox.com/games/*`  
-- **Grant Permission**: `GM_xmlhttpRequest`  
+### 💡 Server Filter Demo  
+![Server Filter Demo](https://raw.githubusercontent.com/Oqarshi/Invite/191cdc17ced81de87e552cd31e7981d09b34f025/rolocate/assets/ServerFilterDemo.gif)
 
 ---
 
-## **Supported Extensions**  
-This userscript is compatible with the following verified Roblox extensions:  
-- RoGold  
-- RoPro  
-- RoQOL  
-- RoBox  
-- RoSeal  
+### 💡 Smart Search Demo  
+![Smart Search Demo](https://raw.githubusercontent.com/Oqarshi/Invite/191cdc17ced81de87e552cd31e7981d09b34f025/rolocate/assets/smartsearch-demo.gif)
 
 ---
 
-## **Credits**  
+## 🚀 Features
+    
+### ⚙️ General Tab
+- 🔍 **SmartSearch** – Instantly search for games, users, and groups directly from the Roblox search bar.
+- 🌍 **Auto Server Regions** – Replaces Roblox’s 8 default servers with enhanced servers showing region and ping info.
+- ⚡ **Fast Server Search** – Increases server list loading speed up to 100x. Replaces avatars with static icons to reduce load time.
+- 🔄 **Invert Player Count** – Shows lowest-population servers first when enabled, highest when disabled. Works across both region and server popups.
+- 🕓 **Recent Servers** – Displays servers you've joined in the past 3 days for quick access.
 
-- **Referenced Code**: Special thanks to the **BTRoblox Team** for their valuable open-source extension, available on [GitHub](https://github.com/AntiBoomz/BTRoblox). ❤️    
-- **Live Server Updates**: Data sourced from [BGP.he.net - AS22697](https://bgp.he.net/AS22697#_prefixes).  
-- **Location Identification Method**: Based on a guide by **Duduble**, available on the [Roblox Developer Forum](https://devforum.roblox.com/t/how-to-find-the-server-region-from-the-website/2862705/5).  
-- **Additional Insights**: Thanks to **TheShowCaseMaker** for their comprehensive list of server IPs and ranges, found on the [Roblox Developer Forum](https://devforum.roblox.com/t/all-roblox-server-ips-and-ranges/1802411).  
-- **Code Inspiration**: Shoutout to **IsDatYoMama10** also known as **Exilon24** for his project, [RobloxServerFinder](https://github.com/Exilon24/RobloxServerFinder).  
-- **Author**: Developed by **Oqarshi**.
+---
+
+### 🎨 Appearance Tab
+- 👋 **Show Old Greeting** – Brings back the classic Roblox homepage greeting.
+- 🎬 **Disable Trailer Autoplay** – Stops trailers from auto-playing on game pages.
+- 📍 **Smart Join Popup** – Displays a custom join popup with server location and details before you join.
+- ❌ **Remove All Roblox Ads** – Blocks most ads sitewide on the Roblox platform.
+- 🧭 **Quick Nav** – Adds customizable quick navigation buttons to the left panel of the Roblox site.
+
+---
+
+### 🚀 Advanced Tab
+- 🛠️ **Enable Console Logs** – Enables script logs in your browser’s console for debugging or monitoring.
+- ✅ **Enable Server Filters** – Activates the advanced server filtering UI on game pages.
+- 🔁 **Enable Server Hop Button** – Adds a button to quickly hop to a new server on game pages.
+- 🔔 **Enable Notifications** – Enables in-browser notifications for script actions and updates.
+- 📌 **Set Default Location** – Lets you set a fallback region manually if your location can’t be detected automatically.
+
+---
+
+### ✨ Extra Tab
+- 🧹 **Game Quality Filter** – Automatically removes low-quality games from the discover and charts pages based on your personal settings.
+- 🧑‍🤝‍🧑 **Mutual Friends** – Shows mutual friends when viewing another user's profile.
+- 💬 **Disable Chat** – Completely removes the chat feature from the Roblox website.
+- 🚀 **Quick Launch Games** – Lets you instantly launch your favorite games from the Roblox homepage.
+
+---
+
+## 📥 Installation
+
+### 1. Install a Userscript Manager Extension
+
+You'll need a **userscript manager** to get started. I recommend **Violentmonkey** because it helps with **faster server region searching**.
+
+If you're using **Chrome** and Violentmonkey is blocked, you can try **ScriptCat** instead. Just keep in mind that its **English translation isn't fully complete**.
+
+**Heads up:** **Tampermonkey is *not recommended*** right now, since it has a bug that can slow down server region searching by up to *100×*.
+
+### 2. Go to Greasyfork
+
+Click the "Install from GreasyFork" button above. Note: GreasyFork is a trusted repository for userscripts.
+
+### 3. Install the Script
+
+On the GreasyFork page, click the install button. Confirm the action if your userscript manager shows a popup. Note: You can see the source code if you click the code tab on the top.
+
+### 4. Visit Roblox
+
+Go to Roblox.com and enjoy the free features!
+
+---
+
+## ❓ FAQ
+
+### 🔹 Does RoLocate work on all browsers?
+Almost, RoLocate does work on all major browsers except Safari which I have not tested it on yet so there is no garantee it will work.
+
+### 🔹 Is RoLocate free to use?
+Yes, RoLocate is completely free to use and open-source.
+
+### 🔹 How do I update RoLocate?
+If you installed from GreasyFork, updates are automatic!
+
+### 🔹 I don't see the filter button!
+Firstly try refreshing the page. If that does not work then try reinstalling everything again. As a last resort ask a question on [GreasyFork](https://greasyfork.org/en/scripts/523727-rolocate/feedback).
+
+### 🔹 Can I use RoLocate on mobile?
+RoLocate is designed for desktop browsers. It is possible however on android devices if you have the Firefox/Edge browser installed.
+
+### 🔹 How does RoLocate find server locations?
+RoLocate uses this modified technique for finding server locations: [Roblox dev Forums](https://devforum.roblox.com/t/server-region-from-website/2862705).
+
+### 🔹 My question isn't answered here!
+Go to [GreasyFork](https://greasyfork.org/en/scripts/523727-rolocate/feedback) to get more help or the [troubleshooting page](https://oqarshi.github.io/Invite/rolocate/docs/#troubleshooting).
+
+---
+
+## 🔮 Upcoming Features (Whenever I Feel Like Updating 😎)
+
+- 📊 **Live Player Count Updates**  
+- 🌐 **Preferred Region**
+
+---
+
+## 📜 License
+
+📄 **Custom License – Personal Use Only**  
+> You may use and modify this script for **personal, non-commercial purposes only**.  
+> **Do not reupload, resell, or redistribute** any version of this script.
+
+---
+
+🎉 **Enjoy RoLocate!** Feedback and suggestions are always welcome!
