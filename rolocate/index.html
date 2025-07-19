@@ -26,22 +26,6 @@
         position: relative;
       }
 
-      /* Additional floating dots for more dynamic feel */
-      body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image:
-          radial-gradient(circle at 10px 10px, rgba(255, 255, 255, 0.06) 0.8px, transparent 0.8px),
-          radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.04) 1.2px, transparent 1.2px);
-        background-size: 45px 45px, 60px 60px;
-        pointer-events: none;
-        z-index: -1;
-      }
-
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -50,8 +34,7 @@
 
       /* Navigation */
       nav {
-        background: transparent;
-        backdrop-filter: blur(10px);
+        background-color: rgba(34, 34, 38, 0.5);
         padding: 15px 0;
         position: fixed;
         width: 100%;
@@ -386,6 +369,9 @@
               <a href="install/">Install</a>
             </li>
             <li>
+              <a href="changelog/">Changelog</a>
+            </li>
+            <li>
               <a href="https://greasyfork.org/en/scripts/523727-rolocate/feedback" target="_blank" rel="noopener noreferrer" style="line-height:1;"> Feedback/Support <svg viewBox="2 2 20 20" style="display:inline-block;vertical-align:middle;margin-left:-5px;width:12px;height:12px;stroke:gray;stroke-width:1.8;fill:none;">
                   <path d="M5 19L19 5M10 5h9v9" />
                 </svg>
@@ -413,7 +399,7 @@
                 <div class="stat-label">Active Users</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">18+</div>
+                <div class="stat-number">20+</div>
                 <div class="stat-label">Features</div>
               </div>
             </div>
