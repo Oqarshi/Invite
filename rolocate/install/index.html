@@ -26,21 +26,6 @@
         position: relative;
       }
 
-      body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image:
-          radial-gradient(circle at 10px 10px, rgba(255, 255, 255, 0.06) 0.8px, transparent 0.8px),
-          radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.04) 1.2px, transparent 1.2px);
-        background-size: 45px 45px, 60px 60px;
-        pointer-events: none;
-        z-index: -1;
-      }
-
       .container {
         max-width: 900px;
         margin: 0 auto;
@@ -50,7 +35,7 @@
       /* Navigation */
       nav {
         background: transparent;
-        backdrop-filter: blur(10px);
+        background-color: rgba(34, 34, 38, 0.5);
         padding: 15px 0;
         position: fixed;
         width: 100%;
@@ -146,12 +131,11 @@
       }
 
       .install-card {
-        background: rgba(255, 255, 255, 0.05);
+        background: #26262a;
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 15px;
         padding: 30px;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
       }
 
       .install-card:hover {
@@ -218,12 +202,11 @@
       }
 
       .step {
-        background: rgba(255, 255, 255, 0.05);
+        background: #26262a;
         border-left: 4px solid #dc2626;
         border-radius: 0 15px 15px 0;
         padding: 25px;
         position: relative;
-        backdrop-filter: blur(10px);
       }
 
       .step-number {
@@ -276,11 +259,10 @@
 
       /* Browser Support */
       .browser-support {
-        background: rgba(255, 255, 255, 0.05);
+        background: #26262a;
         border-radius: 15px;
         padding: 30px;
         margin-bottom: 60px;
-        backdrop-filter: blur(10px);
       }
 
       .browser-support h2 {
@@ -339,11 +321,10 @@
       }
 
       .faq-item {
-        background: rgba(255, 255, 255, 0.05);
+        background: #26262a;
         border-radius: 10px;
         margin-bottom: 15px;
         overflow: hidden;
-        backdrop-filter: blur(10px);
       }
 
       .faq-question {
@@ -459,8 +440,7 @@
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
+        background: #26262a;
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
         padding: 15px 20px;
@@ -508,11 +488,14 @@
         </a>
         <ul class="nav-links">
           <li>
-            <a href="../docs/">Documentation</a>
-          </li>
-          <li>
             <a href="../">Home</a>
           </li>
+          <li>
+            <a href="../docs/">Documentation</a>
+          </li>
+            <li>
+              <a href="../changelog/">Changelog</a>
+            </li>
           <li>
             <a href="https://greasyfork.org/en/scripts/523727-rolocate/feedback" target="_blank" rel="noopener noreferrer" style="line-height:1;"> Feedback/Support <svg viewBox="2 2 20 20" style="display:inline-block;vertical-align:middle;margin-left:-5px;width:12px;height:12px;stroke:gray;stroke-width:1.8;fill:none;">
                 <path d="M5 19L19 5M10 5h9v9" />
@@ -548,9 +531,9 @@
           <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 20px; margin: 15px 0; border: 1px solid rgba(255,255,255,0.05);">
             <div style="display: grid; grid-template-columns: max-content 1fr; gap: 12px; align-items: center;">
               <span style="color: #888; font-size: 0.9rem;">Current Version:</span>
-              <span style="font-size: 1.4rem; font-weight: 700; color: #dc2626; letter-spacing: 0.5px;">v40.0</span>
+              <span style="font-size: 1.4rem; font-weight: 700; color: #dc2626; letter-spacing: 0.5px;">v41.0</span>
               <span style="color: #888; font-size: 0.9rem;">Release Date:</span>
-              <span>July 4, 2025</span>
+              <span>July 19, 2025</span>
             </div>
           </div>
           <div style="margin-top: 5px; font-size: 0.9rem; color: #aaa;">
@@ -565,10 +548,8 @@
               <span>Changelog highlights:</span>
             </div>
             <ul style="margin-left: 20px; color: #ccc; line-height: 1.7;">
-              <li>SmartSearch has been added.</li>
-              <li>Mutual Friends have been added.</li>
-              <li>Disable chat option has been added.</li>
-              <li>Quick Launch Games has been added.</li>
+              <li>Added Better Friends</li>
+              <li>Lots of bug fixes</li>
             </ul>
           </div>
         </div>
@@ -581,12 +562,22 @@
         <div class="steps">
           <div class="step">
             <div class="step-number">1</div>
-            <h3>Install a Userscript Manager</h3>
-            <p> You'll need a userscript manager. I recommend <a href="https://violentmonkey.github.io/" target="_blank">
+            <h3>Install a Userscript Manager Extension</h3>
+            <p>
+              You'll need a userscript manager to get started. I recommend 
+              <a href="https://violentmonkey.github.io/" target="_blank" rel="noopener noreferrer">
                 <code>Violentmonkey</code>
-              </a> because it offers faster searching for server regions. If you're on Chrome, you can use <a href="https://www.tampermonkey.net/" target="_blank">
-                <code>Tampermonkey</code>
-              </a>; however, its features are limited, and it requires you to enable developer settings on the extension page. </p>
+              </a> because it helps with faster server region searching.
+            </p>
+            <p>
+              If you're using Chrome and Violentmonkey is blocked, you can try 
+              <a href="https://docs.scriptcat.org/en/" target="_blank" rel="noopener noreferrer">
+                <code>ScriptCat</code>
+              </a> instead. Just keep in mind that its English translation isn't fully complete.
+            </p>
+            <p>
+              <strong>Heads up:</strong> Tampermonkey is <em>not recommended</em> right now, since it has a bug that can slow down server region searching by up to 100×.
+            </p>
           </div>
           <div class="step">
             <div class="step-number">2</div>
@@ -615,8 +606,8 @@
         <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">RoLocate works on most browsers</p>
         <div class="browsers">
           <div class="browser">
-            <div class="browser-name" data-reason="Chrome has discontinued Manifest V2 extensions, which Violentmonkey relies on. Tampermonkey is available but has bugs limiting Rolocate's functionality.">Chrome</div>
-            <div class="browser-status partial">⚠️ Limited Support</div>
+            <div class="browser-name" data-reason="Chrome fully supports userscript managers and Rolocate works without issues.">Chrome</div>
+            <div class="browser-status">✅ Fully Supported</div>
           </div>
           <div class="browser">
             <div class="browser-name" data-reason="Firefox fully supports userscript managers and Rolocate works without issues.">Firefox</div>
@@ -627,8 +618,8 @@
             <div class="browser-status">✅ Fully Supported</div>
           </div>
           <div class="browser">
-            <div class="browser-name" data-reason="Safari fully supports userscript managers and Rolocate works without issues.">Safari</div>
-            <div class="browser-status">✅ Fully Supported</div>
+            <div class="browser-name" data-reason="RoLocate has not been tested on Safari yet.">Safari</div>
+            <div class="browser-status partial">⚠️ Limited Support</div>
           </div>
           <div class="browser">
             <div class="browser-name" data-reason="Opera fully supports userscript managers and Rolocate works without issues.">Opera</div>
@@ -646,11 +637,11 @@
     <section class="container">
       <div class="browser-support">
         <h2>Extension Compatibility</h2>
-        <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">See if RoLocate is compatible with other extensions.</p>
+        <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">I try to keep RoLocate compatible with most extensions, but sometimes it’s just not possible. Please check here!</p>
         <div class="browsers">
           <div class="browser">
-            <div class="browser-name" data-reason="The server filters from RoPro may break but almost all other features are compatible.">Ropro</div>
-            <div class="browser-status">✅ Almost Fully Supported</div>
+            <div class="browser-name" data-reason="The server filters from RoPro may break and the playtime on the homepage.">Ropro</div>
+            <div class="browser-status partial">⚠️ Limited Support</div>
           </div>
           <div class="browser">
             <div class="browser-name" data-reason="BTRoblox is fully compatible with Rolocate and works without issues.">BTRoblox</div>
@@ -658,7 +649,7 @@
           </div>
           <div class="browser">
             <div class="browser-name" data-reason="There maybe issues with the homepage customization.">RoSeal</div>
-            <div class="browser-status">✅ Almost Fully Supported</div>
+            <div class="browser-status partial ">⚠️ Limited Support</div>
           </div>
           <div class="browser">
             <div class="browser-name" data-reason="RoGold (Free) is fully compatible with Rolocate and works without issues.">RoGold (Free)</div>
@@ -685,7 +676,7 @@
             <div class="browser-status">✅ Fully Supported</div>
           </div>
           <div class="browser">
-            <div class="browser-name" data-reason="Some features may break.">Roblokis</div>
+            <div class="browser-name" data-reason="Some features may break due to the custom css.">Roblokis</div>
             <div class="browser-status partial">⚠️ Limited Support</div>
           </div>
           <div class="browser">
@@ -704,8 +695,8 @@
       <div class="container">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
-          <div class="faq-question">Why does chrome not fully support Rolocate?</div>
-          <div class="faq-answer">Due to Chrome's recent changes to Manifest V2 extension support, extensions like Violentmonkey are no longer available. While Tampermonkey is a good substitute, it still has bugs limiting Rolocate's functionality.</div>
+          <div class="faq-question">Does RoLocate work on all browsers?</div>
+          <div class="faq-answer">Almost, RoLocate does work on all major browsers except Safari which I have not tested it on yet so there is no garantee it will work.</div>
         </div>
         <div class="faq-item">
           <div class="faq-question">Is Rolocate free to use?</div>
