@@ -1,0 +1,324 @@
+{
+  "versions": [
+    {
+      "version": "41.0",
+      "date": "2025-07-19",
+      "type": "major",
+      "description": "Added some features and fixed bugs",
+      "changes": {
+        "added": [
+          "Better Friends & Best Friends",
+          "Added 'Clear All' button for recent servers.",
+          "Added toggle for server location popup in Settings."
+        ],
+        "improved": [
+          "SmartSearch now prioritizes friends.",
+          "Finding server regions is now ~3x faster with fast search on. Also improved the fallback logic."
+        ],
+        "fixed": [
+          "Fixed Serverhop button not showing a popup.",
+          "Fixed Quick Launch not working without SmartSearch.",
+          "Fixed duplicate arrow in server popup.",
+          "Fixed a bug where the setting remove all roblox ads would crash roblox if the extension ublock origin is installed. ",
+          "Fixed margin error on homepage.",
+          "Fixed the script lagging when various popups are open.",
+          "Fixed the script not working on some games that have 0 players.",
+          "Fixed the bug with infinite location checking if user has no location set and refuses to set any location.",
+          "Fixed console flooding with debug logs when console logging is disabled."
+        ]
+      }
+
+    },
+    {
+      "version": "40.0",
+      "date": "2025-07-04",
+      "type": "major",
+      "description": "Added multiple new features including Smartsearch and Quick Launch Games",
+      "changes": {
+        "added": [
+          "Smartsearch",
+          "Quick Launch Games",
+          "Mutual Friends",
+          "Disable Chat option",
+          "New Region Popup",
+          "New Documentation Website"
+        ],
+        "improved": [
+          "CSS Styles"
+        ]
+      }
+    },
+    {
+      "version": "38.4",
+      "date": "2025-06-20",
+      "type": "minor",
+      "description": "Server region improvements and new locations",
+      "changes": {
+        "added": [
+          "New server regions: Portland, Oregon; Seattle, Washington; Columbus, Ohio",
+          "4 new functions for server region handling",
+          "New documentation page"
+        ],
+        "improved": [
+          "Server region UI for better usability",
+          "Code organization with centralized server region library"
+        ]
+      }
+    },
+    {
+      "version": "37.4",
+      "date": "2025-05-19",
+      "type": "patch",
+      "description": "Language support and bug fixes",
+      "changes": {
+        "added": [
+          "Language support",
+          "First time popup"
+        ],
+        "fixed": [
+          "Various bugs"
+        ]
+      }
+    },
+    {
+      "version": "36.3",
+      "date": "2025-05-10",
+      "type": "minor",
+      "description": "Performance improvement for server search",
+      "changes": {
+        "added": [
+          "New Fast Server search feature (100x faster)"
+        ]
+      }
+    },
+    {
+      "version": "35.3",
+      "date": "2025-05-02",
+      "type": "minor",
+      "description": "Settings menu improvements and bug fixes",
+      "changes": {
+        "added": [
+          "Set Default Location Mode in Advanced Settings"
+        ],
+        "improved": [
+          "Settings menu revamp"
+        ],
+        "fixed": [
+          "Bug with infinite location checking"
+        ]
+      }
+    },
+    {
+      "version": "34.3",
+      "date": "2025-04-20",
+      "type": "major",
+      "description": "Added new features and UI improvements",
+      "changes": {
+        "added": [
+          "Recent Servers",
+          "Quick Navigation",
+          "Show Old Greeting option",
+          "Enable Server Hop Button"
+        ],
+        "improved": [
+          "UI for server filters",
+          "Remove All Roblox Ads detection"
+        ],
+        "fixed": [
+          "Various bugs"
+        ]
+      }
+    },
+    {
+      "version": "33.3",
+      "date": "2025-03-17",
+      "type": "patch",
+      "description": "Bug fix for server recognition",
+      "changes": {
+        "fixed": [
+          "Issue of script not recognizing servers existed"
+        ]
+      }
+    },
+    {
+      "version": "32.3",
+      "date": "2025-02-22",
+      "type": "patch",
+      "description": "Bug fixes",
+      "changes": {
+        "fixed": [
+          "Various bugs"
+        ]
+      }
+    },
+    {
+      "version": "31.3",
+      "date": "2025-02-17",
+      "type": "major",
+      "description": "UI improvements and new features",
+      "changes": {
+        "added": [
+          "Help tab in settings",
+          "Auto Run Server Regions feature"
+        ],
+        "improved": [
+          "Server regions filter UI"
+        ]
+      }
+    },
+    {
+      "version": "30.3",
+      "date": "2025-02-15",
+      "type": "major",
+      "description": "Major UI overhaul and new settings menu",
+      "changes": {
+        "added": [
+          "Settings menu",
+          "New settings button"
+        ],
+        "improved": [
+          "Most UIs revamped",
+          "Accuracy of player count server filter",
+          "Accuracy of server regions"
+        ],
+        "removed": [
+          "Standalone credits (moved to settings)"
+        ]
+      }
+    },
+    {
+      "version": "27.3",
+      "date": "2025-02-08",
+      "type": "patch",
+      "description": "Minor fixes and improvements",
+      "changes": {
+        "fixed": [
+          "Various typos"
+        ],
+        "improved": [
+          "Player count popup alignment"
+        ]
+      }
+    },
+    {
+      "version": "27.2",
+      "date": "2025-02-07",
+      "type": "minor",
+      "description": "UI enhancements for Dark Mode",
+      "changes": {
+        "added": [
+          "Tooltip for server hop button"
+        ],
+        "improved": [
+          "UI color to match Roblox's Dark Mode",
+          "Multi-page UIs"
+        ]
+      }
+    },
+    {
+      "version": "26.2",
+      "date": "2025-02-02",
+      "type": "major",
+      "description": "Added Server Hop Button",
+      "changes": {
+        "added": [
+          "Server Hop Button"
+        ]
+      }
+    },
+    {
+      "version": "25.2",
+      "date": "2025-02-01",
+      "type": "minor",
+      "description": "UI improvements and loading indicator",
+      "changes": {
+        "added": [
+          "Loader when joining a game"
+        ],
+        "improved": [
+          "Appearance of server selector by region"
+        ]
+      }
+    },
+    {
+      "version": "24.9",
+      "date": "2025-01-25",
+      "type": "minor",
+      "description": "Experimental server regions feature",
+      "changes": {
+        "added": [
+          "Server regions to experimental features"
+        ]
+      }
+    },
+    {
+      "version": "24.8",
+      "date": "2025-01-25",
+      "type": "patch",
+      "description": "Bug fix for connection button delay",
+      "changes": {
+        "fixed": [
+          "Delay with best connection button"
+        ]
+      }
+    },
+    {
+      "version": "24.7",
+      "date": "2025-01-25",
+      "type": "minor",
+      "description": "New player location feature and additions",
+      "changes": {
+        "added": [
+          "Locate Player feature",
+          "Experiment tag for buttons",
+          "First time popup",
+          "FAQ website"
+        ]
+      }
+    },
+    {
+      "version": "23.4",
+      "date": "2025-01-22",
+      "type": "patch",
+      "description": "Server region updates",
+      "changes": {
+        "added": [
+          "Servers in New York"
+        ],
+        "improved": [
+          "Renamed UK servers to City of London for accuracy"
+        ]
+      }
+    },
+    {
+      "version": "22.4",
+      "date": "2025-01-20",
+      "type": "minor",
+      "description": "GUI code rewrite",
+      "changes": {
+        "improved": [
+          "Rewrote GUI code for Player Count popup",
+          "Rewrote GUI code for Server Region popup"
+        ]
+      }
+    },
+    {
+      "version": "21.4",
+      "date": "2025-01-18",
+      "type": "patch",
+      "description": "About section update",
+      "changes": {
+        "improved": [
+          "Updated About me section"
+        ]
+      }
+    },
+    {
+      "version": "21.3",
+      "date": "2025-01-14",
+      "type": "patch",
+      "description": "Initial version",
+      "changes": {}
+    }
+  ]
+}
