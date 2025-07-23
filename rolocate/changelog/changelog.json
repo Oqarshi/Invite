@@ -1,6 +1,18 @@
 {
   "versions": [
     {
+      "version": "41.1",
+      "date": "2025-07-23",
+      "type": "patch",
+      "description": "Adapted to roblox update.",
+      "changes": {
+        "fixed": [
+          "Fixed Recent Servers not showing up after Roblox changed 'Friends' to 'Connections'."
+        ]
+      }
+
+    },
+    {
       "version": "41.0",
       "date": "2025-07-19",
       "type": "major",
