@@ -4,10 +4,10 @@
       "version": "41.2",
       "date": "2025-07-23",
       "type": "minor",
-      "description": "Revert Classic Terms",
+      "description": "Restore Classic Terms",
       "changes": {
         "added": [
-          "Added Revert Classic Terms"
+          "Added Restore Classic Terms"
         ]
       }
 
