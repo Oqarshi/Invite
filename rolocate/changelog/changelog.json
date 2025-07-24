@@ -1,6 +1,18 @@
 {
   "versions": [
     {
+      "version": "41.3",
+      "date": "2025-07-24",
+      "type": "minor",
+      "description": "Bug fixes",
+      "changes": {
+        "fixed": [
+          "Fixed a bug where recent servers would not show up after a game was played."
+        ]
+      }
+
+    },
+    {
       "version": "41.2",
       "date": "2025-07-23",
       "type": "minor",
