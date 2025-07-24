@@ -1,6 +1,18 @@
 {
   "versions": [
     {
+      "version": "41.2",
+      "date": "2025-07-23",
+      "type": "minor",
+      "description": "Revert Classic Terms",
+      "changes": {
+        "fixed": [
+          "Added Revert Classic Terms"
+        ]
+      }
+
+    },
+    {
       "version": "41.1",
       "date": "2025-07-23",
       "type": "patch",
