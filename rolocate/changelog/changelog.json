@@ -6,7 +6,7 @@
       "type": "minor",
       "description": "Revert Classic Terms",
       "changes": {
-        "fixed": [
+        "added": [
           "Added Revert Classic Terms"
         ]
       }
