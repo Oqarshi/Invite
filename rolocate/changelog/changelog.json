@@ -1,16 +1,33 @@
 {
   "versions": [
     {
+      "version": "41.4",
+      "date": "2025-07-32",
+      "type": "minor",
+      "description": "Bug fixes",
+      "changes": {
+        "added": [
+          "Presets"
+        ],
+        "improved": [
+          "Best Connection",
+          "Restire Classic Terms"
+        ],
+        "fixed": [
+          "Continue section not showing up"
+        ]
+      }
+    },
+    {
       "version": "41.3",
       "date": "2025-07-24",
-      "type": "minor",
+      "type": "patch",
       "description": "Bug fixes",
       "changes": {
         "fixed": [
           "Fixed a bug where recent servers would not show up after a game was played."
         ]
       }
-
     },
     {
       "version": "41.2",
@@ -22,7 +39,6 @@
           "Added Restore Classic Terms"
         ]
       }
-
     },
     {
       "version": "41.1",
@@ -34,7 +50,6 @@
           "Fixed Recent Servers not showing up after Roblox changed 'Friends' to 'Connections'."
         ]
       }
-
     },
     {
       "version": "41.0",
@@ -63,7 +78,6 @@
           "Fixed console flooding with debug logs when console logging is disabled."
         ]
       }
-
     },
     {
       "version": "40.0",
