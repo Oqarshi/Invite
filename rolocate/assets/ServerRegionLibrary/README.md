@@ -14,4 +14,5 @@
 
 5. `main.py` is executed to determine the regions of the unknown servers.
 
-6. Once resolved, `main.py` automatically updates `serverregion.js` with the new server region data.
+6. Once found, `main.py` automatically updates `serverregion.js` with the new server region data.
+
