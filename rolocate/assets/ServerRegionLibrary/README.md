@@ -2,10 +2,16 @@
 
 ## How It Works
 
-1. A modified version of `rolocate` scans Roblox servers at a rate of ~2000 servers per minute.
-2. It compares the discovered IPs to `serverregion.js`.
-3. It generates a list of unknown server IPs.
-4. The list of unknown server IPs is saved to `input.txt`.
-5. `main.py` is run to find the regions of the unknown servers.
-6. `main.py` automatically updates `serverregion.js`.
+1. A modified version of **RoLocate** scans Roblox servers at a rate of ~2000 servers per minute.  
+   - In the official build, this scanning code is commented out.  
+   - Userscripts can bypass most rate limits by using `GM_xmlhttpRequest`, making the scan very fast.
 
+2. The discovered server IPs are compared against `serverregion.js`.
+
+3. Any unmatched (unknown) server IPs are collected into a list.
+
+4. This list of unknown IPs is saved to `input.txt`.
+
+5. `main.py` is executed to determine the regions of the unknown servers.
+
+6. Once resolved, `main.py` automatically updates `serverregion.js` with the new server region data.
