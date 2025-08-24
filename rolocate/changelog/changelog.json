@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "42.0",
+      "date": "2025-08-23",
+      "type": "minor",
+      "description": "Bug fixes & Updates",
+      "changes": {
+        "improved": [
+          "Best Connection",
+          "Restore Classic Terms (Added more terms & some language support)",
+          "Added more server regions (portland, seattle, columbus, ashburn, tokyo, etc)"
+        ],
+        "fixed": [
+          "GameQualityFilter Removing games form favorites and continue section"
+        ]
+      }
+    },
+    {
       "version": "41.4",
       "date": "2025-07-31",
       "type": "minor",
@@ -11,7 +27,7 @@
         ],
         "improved": [
           "Best Connection",
-          "Restire Classic Terms"
+          "Restore Classic Terms"
         ],
         "fixed": [
           "Continue section not showing up"
