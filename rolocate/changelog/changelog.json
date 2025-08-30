@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "42.1",
+      "date": "2025-08-30",
+      "type": "minor",
+      "description": "Brazil servers added",
+      "changes": {
+        "improved": [
+          "Servers have been added in Brazil."
+        ]
+      }
+    },
+    {
       "version": "42.0",
       "date": "2025-08-23",
       "type": "minor",
