@@ -1,5 +1,46 @@
 {
   "versions": [
+      {
+      "version": "43.3",
+      "date": "2025-10-11",
+      "type": "major",
+      "description": "Major update, bug Fixes, and more",
+      "changes": {
+        "added": [
+          "Compact Private Servers have been added. Enabled by default.",
+          "Custom Backgrounds: This allows you to change the background of the roblox website."
+        ],
+        "improved": [
+          "You can now choose what the adblocker blocks/hides. Available in settings."
+        ],
+        "fixed": [
+          "Fixed a bug where searching for servers would cause lag.",
+          "Fixed some bugs in GameQualityFilter."
+        ]
+      }
+    },
+      {
+      "version": "42.3",
+      "date": "2025-09-12",
+      "type": "patch",
+      "description": "Bug Fix",
+      "changes": {
+        "fixed": [
+          "Roblox fixing their server search limit again. Reverted back to 100 servers."
+        ]
+      }
+    },
+      {
+      "version": "42.2",
+      "date": "2025-08-30",
+      "type": "patch",
+      "description": "Temporary fix",
+      "changes": {
+        "fixed": [
+          "Limited Roblox server search to 50"
+        ]
+      }
+    },
     {
       "version": "42.1",
       "date": "2025-08-30",
