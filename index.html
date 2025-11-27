@@ -186,7 +186,7 @@
         .game-title {
             font-size: 26px;
             font-weight: 700;
-            color: #ffffff;
+            color: #e5e5e5;
             margin-bottom: 24px;
             line-height: 1.3;
             letter-spacing: -0.5px;
@@ -216,14 +216,14 @@
         .stat-value {
             font-size: 22px;
             font-weight: 700;
-            color: #ffffff;
+            color: #f0f0f0;
             display: block;
             margin-bottom: 6px;
         }
 
         .stat-label {
             font-size: 11px;
-            color: #808080;
+            color: #a0a0a0;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
@@ -240,13 +240,13 @@
         .status-title {
             font-size: 18px;
             font-weight: 700;
-            color: #ffffff;
+            color: #e5e5e5;
             margin-bottom: 8px;
         }
 
         .status-message {
             font-size: 14px;
-            color: #b0b0b0;
+            color: #c0c0c0;
             margin-bottom: 20px;
         }
 
@@ -262,14 +262,14 @@
 
         .progress-fill {
             height: 100%;
-            background: #ffffff;
+            background: #e5e5e5;
             border-radius: 4px;
             transition: width 0.3s ease;
         }
 
         .countdown-text {
             font-size: 13px;
-            color: #c0c0c0;
+            color: #d0d0d0;
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -404,34 +404,60 @@
             const placeId = getQueryParam('placeid');
             
             if (!placeId) {
-                showError('Invalid game link');
+                showError('Invalid game link - missing place ID', true);
                 return null;
             }
 
             try {
-                // plz no ddos attack. :) thx!!!
-                // bypass cors to get roblox api data
                 const corsProxy = 'https://proxy.omednotfound.workers.dev/?url=';
                 
+                // Fetch universe ID
                 const universeResponse = await fetch(`${corsProxy}${encodeURIComponent('https://apis.roblox.com/universes/v1/places/' + placeId + '/universe')}`);
+                
+                if (!universeResponse.ok) {
+                    throw new Error(`Failed to fetch universe data: ${universeResponse.status}`);
+                }
+                
                 const universeData = await universeResponse.json();
+                
+                if (!universeData.universeId) {
+                    throw new Error('Invalid place ID or game not found');
+                }
+                
                 const universeId = universeData.universeId;
 
+                // Fetch game info and thumbnail
                 const [thumbnailResponse, gameInfoResponse] = await Promise.all([
                     fetch(`${corsProxy}${encodeURIComponent('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' + universeId + '&countPerUniverse=1&defaults=true&size=768x432&format=Png&isCircular=false')}`),
                     fetch(`${corsProxy}${encodeURIComponent('https://games.roblox.com/v1/games?universeIds=' + universeId)}`)
                 ]);
 
+                // Check response status
+                if (!thumbnailResponse.ok || !gameInfoResponse.ok) {
+                    // Rate limited (429) - still continue to launch game
+                    if (gameInfoResponse.status === 429 || thumbnailResponse.status === 429) {
+                        console.warn('Rate limited - continuing with game launch');
+                        return null; // Return null but don't show error
+                    }
+                    throw new Error('Failed to fetch game information');
+                }
+
                 const thumbnailData = await thumbnailResponse.json();
                 const gameInfoData = await gameInfoResponse.json();
 
+                // Validate data structure
+                if (!gameInfoData.data || !Array.isArray(gameInfoData.data) || gameInfoData.data.length === 0) {
+                    console.warn('Game information not available - continuing with launch');
+                    return null; // Return null but don't show error
+                }
+
                 return {
-                    thumbnail: thumbnailData.data[0]?.thumbnails[0]?.imageUrl,
+                    thumbnail: thumbnailData.data?.[0]?.thumbnails?.[0]?.imageUrl,
                     gameInfo: gameInfoData.data[0]
                 };
             } catch (error) {
                 console.error('Error fetching game data:', error);
-                showError('Failed to load game information');
+                // Don't show error for rate limits or data issues - just continue
                 return null;
             }
         }
@@ -448,22 +474,32 @@
                 document.getElementById('thumbnailPlaceholder').classList.add('hidden');
             }
 
-            document.getElementById('gameTitle').textContent = gameInfo.name;
+            document.getElementById('gameTitle').textContent = gameInfo.name || 'Unknown Game';
 
-            document.getElementById('playingCount').textContent = formatNumber(gameInfo.playing);
-            document.getElementById('visitsCount').textContent = formatNumber(gameInfo.visits);
+            document.getElementById('playingCount').textContent = formatNumber(gameInfo.playing || 0);
+            document.getElementById('visitsCount').textContent = formatNumber(gameInfo.visits || 0);
             document.getElementById('gameStats').style.display = 'grid';
         }
 
-        function showError(message) {
+        function showError(message, critical = false) {
             document.getElementById('statusTitle').textContent = 'Error';
             document.getElementById('statusMessage').textContent = message;
             document.getElementById('statusSection').classList.add('error-state');
             document.getElementById('progressFill').style.width = '0%';
             
-            setTimeout(() => {
-                window.location.href = 'https://www.roblox.com';
-            }, 5000);
+            if (critical) {
+                // Only redirect to roblox.com if it's a critical error (missing params)
+                document.getElementById('countdownText').textContent = 'Redirecting to Roblox...';
+                setTimeout(() => {
+                    window.location.href = 'https://www.roblox.com';
+                }, 3000);
+            } else {
+                // For non-critical errors, still try to launch the game
+                document.getElementById('countdownText').textContent = 'Launching anyway...';
+                setTimeout(() => {
+                    redirectToRoblox();
+                }, 2000);
+            }
         }
 
         function startCountdown(duration, onTick, onComplete) {
@@ -491,7 +527,7 @@
             const serverId = getQueryParam('serverid');
             
             if (!placeId || !serverId) {
-                showError('Invalid game link');
+                showError('Invalid game link - missing parameters', true);
                 return;
             }
 
@@ -513,16 +549,20 @@
         window.onload = async () => {
             const gameData = await fetchGameData();
             
+            // Even if gameData is null (rate limited or error), still launch the game
             if (gameData) {
                 displayGameData(gameData);
-                
-                document.getElementById('statusTitle').textContent = 'Ready to Launch';
-                document.getElementById('statusMessage').textContent = 'Starting in a moment...';
-                
-                startCountdown(5, null, () => {
-                    redirectToRoblox();
-                });
+            } else {
+                // If no game data, just show generic loading message
+                document.getElementById('gameTitle').textContent = 'Launching Roblox Game...';
             }
+            
+            document.getElementById('statusTitle').textContent = 'Ready to Launch';
+            document.getElementById('statusMessage').textContent = 'Starting in a moment...';
+            
+            startCountdown(5, null, () => {
+                redirectToRoblox();
+            });
         };
     </script>
 </body>
