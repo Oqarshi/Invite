@@ -5,182 +5,525 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Join Roblox Game</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: #1b1b1f;
+            background-image:
+              radial-gradient(circle at 15px 15px, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+            background-size: 30px 30px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            text-align: center;
+            min-height: 100vh;
+            padding: 20px;
+            padding-top: 80px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: rgba(34, 34, 38, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #dc2626;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text-underline {
+            color: #ef4444;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .logo-text-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            left: 0;
+            bottom: -2px;
+            background-color: #ef4444;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
+        }
+
+        .logo-text-underline:hover {
+            color: #f87171;
+        }
+
+        .logo-text-underline:hover::after {
+            transform: scaleX(1);
+        }
+
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+            border-radius: 5px;
         }
 
         .container {
-            max-width: 400px;
-            padding: 30px;
-            background-color: #2a2a2a;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 550px;
+            width: 100%;
+            background: #252529;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
         }
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #0085dd;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
-        p {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #cccccc;
+        .thumbnail-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            background: #1e1e22;
         }
 
-        .loading-spinner {
-            border: 4px solid #333;
-            border-top: 4px solid #0085dd;
+        .game-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            transition: transform 0.3s ease;
+        }
+
+        .game-thumbnail.loaded {
+            display: block;
+        }
+
+        .thumbnail-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, #252529 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .thumbnail-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .thumbnail-placeholder.hidden {
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #ffffff;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        .countdown {
-            font-size: 18px;
-            font-weight: bold;
-            color: #0085dd;
-            margin-top: 20px;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
-    </style>
-    <script>
-        function showLoadingOverlay() {
-            const content = document.createElement('div');
-            content.style.position = 'fixed';
-            content.style.top = 'calc(50% - 15px)';
-            content.style.left = '50%';
-            content.style.transform = 'translate(-50%, -50%)';
-            content.style.width = '400px';
-            content.style.height = '250px';
-            content.style.backgroundColor = '#1e1e1e';
-            content.style.display = 'flex';
-            content.style.flexDirection = 'column';
-            content.style.justifyContent = 'center';
-            content.style.alignItems = 'center';
-            content.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-            content.style.borderRadius = '12px';
-            content.style.zIndex = '1000000';
-            content.style.opacity = '0';
-            content.style.transition = 'opacity 0.5s ease';
-            content.style.fontFamily = 'Arial, sans-serif';
 
-            const loadingText = document.createElement('p');
-            loadingText.textContent = 'Joining Roblox Game...';
-            loadingText.style.fontSize = '20px';
-            loadingText.style.color = '#fff';
-            loadingText.style.marginTop = '20px';
-            loadingText.style.fontWeight = 'bold';
+        .content {
+            padding: 32px;
+        }
 
-            const base64Image = document.createElement('img');
-            base64Image.src = 'data:image/jpeg;base64,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';
-            base64Image.style.width = '80px';
-            base64Image.style.height = '80px';
-            base64Image.style.borderRadius = '8px';
+        .game-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 24px;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
 
-            const loadingBoxes = document.createElement('div');
-            loadingBoxes.style.display = 'flex';
-            loadingBoxes.style.alignItems = 'center';
-            loadingBoxes.style.justifyContent = 'center';
-            loadingBoxes.style.marginTop = '15px';
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
 
-            for (let i = 0; i < 3; i++) {
-                const box = document.createElement('div');
-                box.style.width = '10px';
-                box.style.height = '10px';
-                box.style.backgroundColor = '#fff';
-                box.style.margin = '0 5px';
-                box.style.borderRadius = '2px';
-                box.style.animation = `pulse 1.2s ${i * 0.2}s infinite`;
-                loadingBoxes.appendChild(box);
+        .stat {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #808080;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .status-section {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            position: relative;
+        }
+
+        .status-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .status-message {
+            font-size: 14px;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #ffffff;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .countdown-text {
+            font-size: 13px;
+            color: #c0c0c0;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .countdown-text::before {
+            content: '⏱';
+            font-size: 16px;
+        }
+
+        .error-state {
+            background: rgba(237, 66, 69, 0.15);
+            border-color: rgba(237, 66, 69, 0.3);
+        }
+
+        .error-state .status-title {
+            color: #ff6b6b;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 20px;
             }
 
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes pulse {
-                    0%, 100% { transform: scale(1); }
-                    50% { transform: scale(1.5); }
-                }
-            `;
-            document.head.appendChild(style);
+            .content {
+                padding: 24px;
+            }
 
-            content.appendChild(base64Image);
-            content.appendChild(loadingText);
-            content.appendChild(loadingBoxes);
+            .game-title {
+                font-size: 22px;
+            }
 
-            document.body.appendChild(content);
+            .game-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
 
-            setTimeout(() => { content.style.opacity = '1'; }, 10);
-            setTimeout(() => {
-                content.style.opacity = '0';
-                setTimeout(() => { document.body.removeChild(content); }, 500);
-            }, 8000);
+            .stat {
+                padding: 14px 10px;
+            }
+
+            .stat-value {
+                font-size: 18px;
+            }
+
+            .stat-label {
+                font-size: 10px;
+            }
+
+            .nav-links {
+                display: none;
+            }
         }
 
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1b1b1f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #dc2626;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img class="logo-svg" src="data:image/jpeg;base64,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" alt="RoLocate Logo">
+                <span class="logo-text-underline">RoLocate</span>
+            </a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="thumbnail-container">
+            <div class="thumbnail-placeholder" id="thumbnailPlaceholder">
+                <div class="spinner"></div>
+            </div>
+            <img class="game-thumbnail" id="gameThumbnail" alt="Game Thumbnail">
+            <div class="thumbnail-overlay"></div>
+        </div>
+        
+        <div class="content">
+            <h1 class="game-title" id="gameTitle">Loading game information...</h1>
+            
+            <div class="game-stats" id="gameStats" style="display: none;">
+                <div class="stat">
+                    <span class="stat-value" id="playingCount">-</span>
+                    <span class="stat-label">Playing</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="visitsCount">-</span>
+                    <span class="stat-label">Visits</span>
+                </div>
+            </div>
+
+            <div class="status-section" id="statusSection">
+                <div class="status-title" id="statusTitle">Preparing to launch...</div>
+                <div class="status-message" id="statusMessage">Getting game ready</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <div class="countdown-text" id="countdownText">Time remaining: 5s</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
         function getQueryParam(param) {
             return new URLSearchParams(window.location.search).get(param);
         }
 
-        function startCountdown(duration, action) {
-            let timeLeft = duration;
-            const countdownElement = document.getElementById('countdown');
-            const timer = setInterval(() => {
-                countdownElement.innerText = `Time left: ${timeLeft} seconds`;
-                timeLeft--;
-                if (timeLeft < 0) {
-                    clearInterval(timer);
-                    action();
-                }
-            }, 1000);
+        function formatNumber(num) {
+            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
         }
-        function redirectToRoblox() {
+
+        async function fetchGameData() {
             const placeId = getQueryParam('placeid');
-            const serverId = getQueryParam('serverid');
-            if (placeId && serverId) {
-                showLoadingOverlay();
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                window.location.href = isMobile ? `robloxmobile://placeID=${placeId}&gameInstanceId=${serverId}` : `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${serverId}`;
-                setTimeout(() => { 
-                    window.location.href = `https://www.roblox.com/games/${placeId}#?ROLOCATE_GAMEID=${placeId}_SERVERID=${serverId}`; 
-                }, 15000); // Changed from 30000 to 15000 (15 seconds)
-            } else {
-                document.getElementById('message').innerText = 'Invalid link. Redirecting to Roblox...';
-                startCountdown(5, () => { window.location.href = 'https://www.roblox.com'; });
+            
+            if (!placeId) {
+                showError('Invalid game link');
+                return null;
+            }
+
+            try {
+                // plz no ddos attack. :) thx!!!
+                // bypass cors to get roblox api data
+                const corsProxy = 'https://proxy.omednotfound.workers.dev/?url=';
+                
+                const universeResponse = await fetch(`${corsProxy}${encodeURIComponent('https://apis.roblox.com/universes/v1/places/' + placeId + '/universe')}`);
+                const universeData = await universeResponse.json();
+                const universeId = universeData.universeId;
+
+                const [thumbnailResponse, gameInfoResponse] = await Promise.all([
+                    fetch(`${corsProxy}${encodeURIComponent('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' + universeId + '&countPerUniverse=1&defaults=true&size=768x432&format=Png&isCircular=false')}`),
+                    fetch(`${corsProxy}${encodeURIComponent('https://games.roblox.com/v1/games?universeIds=' + universeId)}`)
+                ]);
+
+                const thumbnailData = await thumbnailResponse.json();
+                const gameInfoData = await gameInfoResponse.json();
+
+                return {
+                    thumbnail: thumbnailData.data[0]?.thumbnails[0]?.imageUrl,
+                    gameInfo: gameInfoData.data[0]
+                };
+            } catch (error) {
+                console.error('Error fetching game data:', error);
+                showError('Failed to load game information');
+                return null;
             }
         }
 
-        function autoClosePage() {
-            startCountdown(15, () => { window.close(); }); // Changed from 30 to 15 seconds
+        function displayGameData(data) {
+            if (!data || !data.gameInfo) return;
+
+            const gameInfo = data.gameInfo;
+
+            if (data.thumbnail) {
+                const thumbnail = document.getElementById('gameThumbnail');
+                thumbnail.src = data.thumbnail;
+                thumbnail.classList.add('loaded');
+                document.getElementById('thumbnailPlaceholder').classList.add('hidden');
+            }
+
+            document.getElementById('gameTitle').textContent = gameInfo.name;
+
+            document.getElementById('playingCount').textContent = formatNumber(gameInfo.playing);
+            document.getElementById('visitsCount').textContent = formatNumber(gameInfo.visits);
+            document.getElementById('gameStats').style.display = 'grid';
         }
 
-        window.onload = () => {
-            redirectToRoblox();
-            autoClosePage();
+        function showError(message) {
+            document.getElementById('statusTitle').textContent = 'Error';
+            document.getElementById('statusMessage').textContent = message;
+            document.getElementById('statusSection').classList.add('error-state');
+            document.getElementById('progressFill').style.width = '0%';
+            
+            setTimeout(() => {
+                window.location.href = 'https://www.roblox.com';
+            }, 5000);
+        }
+
+        function startCountdown(duration, onTick, onComplete) {
+            let timeLeft = duration;
+            const totalDuration = duration;
+            
+            const timer = setInterval(() => {
+                const progress = ((totalDuration - timeLeft) / totalDuration) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('countdownText').textContent = `Time remaining: ${timeLeft}s`;
+                
+                if (onTick) onTick(timeLeft);
+                
+                timeLeft--;
+                
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    if (onComplete) onComplete();
+                }
+            }, 1000);
+        }
+
+        function redirectToRoblox() {
+            const placeId = getQueryParam('placeid');
+            const serverId = getQueryParam('serverid');
+            
+            if (!placeId || !serverId) {
+                showError('Invalid game link');
+                return;
+            }
+
+            document.getElementById('statusTitle').textContent = 'Launching Game...';
+            document.getElementById('statusMessage').textContent = 'Opening Roblox';
+
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const deepLink = isMobile 
+                ? `robloxmobile://placeID=${placeId}&gameInstanceId=${serverId}`
+                : `roblox://experiences/start?placeId=${placeId}&gameInstanceId=${serverId}`;
+            
+            window.location.href = deepLink;
+
+            setTimeout(() => {
+                window.location.href = `https://www.roblox.com/games/${placeId}#ROLOCATE_GAMEID=${placeId}_SERVERID=${serverId}`;
+            }, 15000);
+        }
+
+        window.onload = async () => {
+            const gameData = await fetchGameData();
+            
+            if (gameData) {
+                displayGameData(gameData);
+                
+                document.getElementById('statusTitle').textContent = 'Ready to Launch';
+                document.getElementById('statusMessage').textContent = 'Starting in a moment...';
+                
+                startCountdown(5, null, () => {
+                    redirectToRoblox();
+                });
+            }
         };
     </script>
-</head>
-<body>
-    <div class="container">
-        <h1 id="message">Joining Roblox Game...</h1>
-        <p>Please wait while we redirect you to the game.</p>
-        <div class="loading-spinner"></div>
-        <div class="countdown" id="countdown">Time left: 15 seconds</div>
-    </div>
 </body>
 </html>

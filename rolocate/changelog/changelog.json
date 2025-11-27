@@ -1,6 +1,25 @@
 {
   "versions": [
-      {
+    {
+      "version": "44.3",
+      "date": "????",
+      "type": "major",
+      "description": "Major update, bug Fixes, and more",
+      "changes": {
+        "added": [
+          "Server versions now show when searching for server regions, allowing you to find the oldest or newest servers."
+        ],
+        "improved": [
+          "You can now move games around in Quick Launch Games.",
+          "Mutual Friends now shows the thumnbnail of the mutual friend.",
+          "Compact Private Servers UI improvements."
+        ],
+        "fixed": [
+          "Fixed Mutual Friends not working."
+        ]
+      }
+    },
+    {
       "version": "43.3",
       "date": "2025-10-11",
       "type": "major",
@@ -19,7 +38,7 @@
         ]
       }
     },
-      {
+    {
       "version": "42.3",
       "date": "2025-09-12",
       "type": "patch",
@@ -30,7 +49,7 @@
         ]
       }
     },
-      {
+    {
       "version": "42.2",
       "date": "2025-08-30",
       "type": "patch",
