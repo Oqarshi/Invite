@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "44.4",
+      "date": "2025-12-6",
+      "type": "patch",
+      "description": "Bug Fix",
+      "changes": {
+        "fixed": [
+          "Fixed recent servers not working."
+        ]
+      }
+    },
+    {
       "version": "44.3",
       "date": "2025-12-6",
       "type": "major",
