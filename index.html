@@ -30,6 +30,11 @@
             overflow-x: hidden;
         }
 
+        body.mobile-mode {
+            padding: 10px;
+            padding-top: 70px;
+        }
+
         nav {
             background-color: rgba(34, 34, 38, 0.5);
             backdrop-filter: blur(10px);
@@ -42,6 +47,10 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        body.mobile-mode nav {
+            padding: 10px 0;
+        }
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -49,6 +58,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        body.mobile-mode .nav-container {
+            padding: 0 15px;
         }
 
         .logo {
@@ -59,6 +72,11 @@
             color: #dc2626;
             font-size: 1.8rem;
             font-weight: 700;
+        }
+
+        body.mobile-mode .logo {
+            font-size: 1.4rem;
+            gap: 8px;
         }
 
         .logo-text-underline {
@@ -89,6 +107,11 @@
             border-radius: 5px;
         }
 
+        body.mobile-mode .logo-svg {
+            width: 24px;
+            height: 24px;
+        }
+
         .container {
             max-width: 550px;
             width: 100%;
@@ -99,6 +122,11 @@
             overflow: hidden;
             animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
+        }
+
+        body.mobile-mode .container {
+            max-width: 100%;
+            border-radius: 12px;
         }
 
         @keyframes slideIn {
@@ -112,6 +140,10 @@
             position: relative;
             overflow: hidden;
             background: #1e1e22;
+        }
+
+        body.mobile-mode .thumbnail-container {
+            height: 200px;
         }
 
         .game-thumbnail {
@@ -151,12 +183,22 @@
             animation: spin 1s linear infinite;
         }
 
+        body.mobile-mode .spinner {
+            width: 30px;
+            height: 30px;
+            border-width: 2px;
+        }
+
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
         .content {
             padding: 32px;
+        }
+
+        body.mobile-mode .content {
+            padding: 20px;
         }
 
         .game-title {
@@ -168,12 +210,21 @@
             letter-spacing: -0.5px;
         }
 
+        body.mobile-mode .game-title {
+            font-size: 20px;
+        }
+
         /* Stats — Warm, Horizontal */
         .game-stats {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 24px;
+        }
+
+        body.mobile-mode .game-stats {
+            margin-top: 16px;
+            gap: 6px;
         }
 
         .stat-alt {
@@ -184,6 +235,12 @@
             border: 1px solid rgba(181, 101, 29, 0.2);
             text-align: center;
             position: relative;
+        }
+
+        body.mobile-mode .stat-alt {
+            flex: 1 1 calc(50% - 3px);
+            padding: 10px 12px;
+            border-radius: 8px;
         }
 
         .stat-alt::before {
@@ -204,6 +261,10 @@
             letter-spacing: -0.5px;
         }
 
+        body.mobile-mode .stat-value-alt {
+            font-size: 16px;
+        }
+
         .stat-label-alt {
             font-size: 10px;
             font-weight: 700;
@@ -211,6 +272,11 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 4px;
+        }
+
+        body.mobile-mode .stat-label-alt {
+            font-size: 9px;
+            letter-spacing: 0.5px;
         }
 
         /* Status */
@@ -222,11 +288,21 @@
             margin-top: 24px;
         }
 
+        body.mobile-mode .status-section-alt {
+            padding: 16px;
+            border-radius: 10px;
+            margin-top: 16px;
+        }
+
         .status-title-alt {
             font-size: 18px;
             font-weight: 700;
             color: #f1e9d2;
             margin-bottom: 6px;
+        }
+
+        body.mobile-mode .status-title-alt {
+            font-size: 16px;
         }
 
         .status-message-alt {
@@ -235,12 +311,21 @@
             margin-bottom: 16px;
         }
 
+        body.mobile-mode .status-message-alt {
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
         .progress-bar-alt {
             width: 100%;
             height: 6px;
             background: rgba(255, 255, 255, 0.06);
             border-radius: 3px;
             overflow: hidden;
+        }
+
+        body.mobile-mode .progress-bar-alt {
+            height: 5px;
         }
 
         .progress-fill-alt {
@@ -260,6 +345,11 @@
             gap: 6px;
         }
 
+        body.mobile-mode .countdown-text-alt {
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
         .countdown-text-alt::before {
             content: '⏱';
         }
@@ -272,6 +362,16 @@
 
         .status-title-critical {
             color: #f87171 !important;
+        }
+
+        /* Warning styling */
+        .status-section-warning {
+            background: rgba(251, 191, 36, 0.1) !important;
+            border-color: rgba(251, 191, 36, 0.4) !important;
+        }
+
+        .status-title-warning {
+            color: #fbbf24 !important;
         }
 
         @media (max-width: 600px) {
@@ -312,7 +412,7 @@
                 <div class="progress-bar-alt">
                     <div class="progress-fill-alt" id="progressFill" style="width: 0%"></div>
                 </div>
-                <div class="countdown-text-alt" id="countdownText">Time remaining: 5s</div>
+                <div class="countdown-text-alt" id="countdownText">Time remaining: 3s</div>
             </div>
         </div>
     </div>
@@ -332,6 +432,12 @@
         function formatDate(isoString) {
             const d = new Date(isoString);
             return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        // Check for mobile mode
+        const mobileMode = getQueryParam('mobilemode') === 'true';
+        if (mobileMode) {
+            document.body.classList.add('mobile-mode');
         }
 
         async function fetchGameData() {
@@ -395,6 +501,12 @@
             setTimeout(() => window.location.href = 'https://www.roblox.com', 2500);
         }
 
+        function showWarning(message) {
+            document.getElementById('statusMessage').textContent = message;
+            document.getElementById('statusSection').classList.add('status-section-warning');
+            document.getElementById('statusTitle').classList.add('status-title-warning');
+        }
+
         function startCountdown(duration, onComplete) {
             let t = duration;
             const fill = document.getElementById('progressFill');
@@ -451,18 +563,32 @@
             }
 
             // Try to fetch — never block launch
+            let dataFetched = false;
             try {
                 const data = await fetchGameData();
-                displayGameData(data);
+                if (data) {
+                    displayGameData(data);
+                    dataFetched = true;
+                }
             } catch (e) {
                 console.warn('Data fetch failed, launching anyway', e);
             }
 
+            // Show warning if no response from proxy
+            if (!dataFetched) {
+                showWarning('No response given by proxy, continuing to join server');
+            }
+
             // Proceed regardless
             document.getElementById('statusTitle').textContent = 'Ready to Launch';
-            document.getElementById('statusMessage').textContent = 'Starting in a moment…';
+            
+            if (!dataFetched) {
+                document.getElementById('statusMessage').textContent = 'No response given by proxy, continuing to join server';
+            } else {
+                document.getElementById('statusMessage').textContent = 'Starting in a moment…';
+            }
 
-            startCountdown(5, redirectToRoblox);
+            startCountdown(3, redirectToRoblox);
         })();
     </script>
 </body>
