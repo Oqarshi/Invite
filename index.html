@@ -380,6 +380,72 @@
             .stat-alt { flex: 1 1 110px; padding: 12px 10px; }
             .stat-value-alt { font-size: 18px; }
         }
+
+        .manual-launch-section {
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(193, 154, 107, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(193, 154, 107, 0.2);
+        }
+
+        body.mobile-mode .manual-launch-section {
+            margin-top: 16px;
+            padding: 16px;
+        }
+
+        .manual-launch-btn {
+            background: linear-gradient(135deg, #c19a6b, #b5651d);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(193, 154, 107, 0.3);
+        }
+
+        body.mobile-mode .manual-launch-btn {
+            padding: 12px 24px;
+            font-size: 14px;
+        }
+
+        .manual-launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(193, 154, 107, 0.4);
+            background: linear-gradient(135deg, #d4a974, #c67422);
+        }
+
+        .manual-launch-btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-icon {
+            font-size: 18px;
+        }
+
+        .btn-text {
+            letter-spacing: 0.3px;
+        }
+
+        .manual-launch-hint {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #dfd1b1;
+            opacity: 0.8;
+        }
+
+        body.mobile-mode .manual-launch-hint {
+            font-size: 11px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -414,6 +480,14 @@
                 </div>
                 <div class="countdown-text-alt" id="countdownText">Time remaining: 3s</div>
             </div>
+
+        <div class="manual-launch-section" id="manualLaunchSection" style="display: none;">
+            <button class="manual-launch-btn" id="manualLaunchBtn">
+                <span class="btn-icon">🚀</span>
+                <span class="btn-text">Click here to launch manually</span>
+            </button>
+            <p class="manual-launch-hint">If you are not automatically redirected, press the button above</p>
+        </div>
         </div>
     </div>
 
@@ -586,7 +660,8 @@
             document.body.classList.add('mobile-mode');
             // Show notification for mobile users
             setTimeout(() => {
-                notifications('Click the "Open" button to launch the Roblox app.', 'info', '📱', 60000);
+                notifications('Click the "Open" button to launch the Roblox app.', 'success', '📱', 60000);
+                notifications('If the app does not open, please ensure you have Roblox installed.', 'info', '⚠️', 60000);
             }, 500);
         }
 
@@ -672,8 +747,16 @@
                 if (t < 0) {
                     clearInterval(window.countdownTimer);
                     onComplete();
+                    // Show manual launch button after auto-redirect attempts
+                    setTimeout(showManualLaunch, 2000);
                 }
             }, 1000);
+        }
+
+        // this does some stuff for manual launch button
+        function showManualLaunch() {
+            document.getElementById('manualLaunchSection').style.display = 'block';
+            document.getElementById('manualLaunchBtn').addEventListener('click', redirectToRoblox);
         }
 
         function redirectToRoblox() {
