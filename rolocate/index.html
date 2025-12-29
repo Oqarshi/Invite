@@ -519,7 +519,7 @@
         }
 
         try {
-          const res = await fetch('https://greasyfork.org/en/scripts/523727.json');
+          const res = await fetch('https://api.greasyfork.org/en/scripts/523727.json');
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
 
