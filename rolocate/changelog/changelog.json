@@ -1,6 +1,25 @@
 {
   "versions": [
     {
+      "version": "44.5",
+      "date": "2025-12-31",
+      "type": "minor",
+      "description": "Bug Fixes and Mobile Mode added. Still very experimental.",
+      "changes": {
+        "added": [
+          "Mobile Mode (Experimental)"
+        ],
+        "improved": [
+          "XSS Attack Vectors Protection",
+          "Mutual Friends load a lot faster now",
+          "Auto Server Regions; Select how many servers to search. Customizable in settings."
+        ],
+        "fixed": [
+          "Mutual Friends being very slow"
+        ]
+      }
+    },
+    {
       "version": "44.4",
       "date": "2025-12-6",
       "type": "patch",
