@@ -1,6 +1,30 @@
 {
   "versions": [
     {
+      "version": "45.5",
+      "date": "SneakPEAK",
+      "type": "major",
+      "description": "",
+      "changes": {
+        "added": [
+          "Technical tab in settings with storage info and live console for better debugging.",
+          "Light Mode support for all UIs on the roblox website. Popups have not been updated yet."
+        ],
+        "improved": [
+          "Recent Servers now checks outside of the gamepage if you are in a game.",
+          "Recent Servers to check for server status.",
+          "SVG icons for better visual looks.",
+          "Code Refactor for better performance, maintainability, readability, and stuff like that.",
+          "Smart Join Popup UI improvements.",
+          "Moved from ips to datacenters for checking server regions for smaller script size & accuracy."
+        ],
+        "fixed": [
+          "Some servers being flagged as Dallas when they are not. (Thx Orca Fan)",
+          "Fixed Recent Servers not working."
+        ]
+      }
+    },
+    {
       "version": "44.5",
       "date": "2025-12-31",
       "type": "minor",
