@@ -7,7 +7,7 @@
       "description": "",
       "changes": {
         "added": [
-          "Confirmation popup when user is already in a game, but is trying to join another game/server.",
+          "Confirmation popup when user is already in a game, but is trying to join another game or another server.",
           "Technical tab in settings with storage info and live console for better debugging.",
           "Light Mode support for all UIs on the roblox website. Popups have not been updated yet."
         ],
