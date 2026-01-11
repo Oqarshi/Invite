@@ -7,6 +7,7 @@
       "description": "",
       "changes": {
         "added": [
+          "Easter Eggs",
           "Confirmation popup when user is already in a game, but is trying to join another game or another server.",
           "Technical tab in settings with storage info and live console for better debugging.",
           "Light Mode support for all UIs on the roblox website. Popups have not been updated yet."
@@ -16,7 +17,7 @@
           "Recent Servers to check for server status.",
           "SVG icons for better visual looks.",
           "Code Refactor for better performance, maintainability, readability, and stuff like that.",
-          "Smart Join Popup UI improvements.",
+          "Slight Smart Join Popup UI improvements.",
           "Moved from ips to datacenters for checking server regions for smaller script size & accuracy."
         ],
         "fixed": [
