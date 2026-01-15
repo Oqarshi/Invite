@@ -23,7 +23,8 @@
         ],
         "fixed": [
           "Some servers being flagged as Dallas when they are not. (Thx Orca Fan)",
-          "Fixed Recent Servers not working."
+          "Fixed Recent Servers not working.",
+          "Best Connection not searching for high player servers -> Low player servers (if no high player servers found) correctly."
         ]
       }
     },
