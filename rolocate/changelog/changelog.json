@@ -110,7 +110,7 @@
     },
     {
       "version": "42.2",
-      "date": "2025-08-30",
+      "date": "2025-09-12",
       "type": "patch",
       "description": "Temporary fix",
       "changes": {
@@ -132,7 +132,7 @@
     },
     {
       "version": "42.0",
-      "date": "2025-08-23",
+      "date": "2025-08-24",
       "type": "minor",
       "description": "Bug fixes & Updates",
       "changes": {
@@ -246,7 +246,7 @@
     },
     {
       "version": "38.4",
-      "date": "2025-06-20",
+      "date": "2025-06-19",
       "type": "minor",
       "description": "Server region improvements and new locations",
       "changes": {
@@ -289,7 +289,7 @@
     },
     {
       "version": "35.3",
-      "date": "2025-05-02",
+      "date": "2025-05-01",
       "type": "minor",
       "description": "Settings menu improvements and bug fixes",
       "changes": {
@@ -306,7 +306,7 @@
     },
     {
       "version": "34.3",
-      "date": "2025-04-20",
+      "date": "2025-04-19",
       "type": "major",
       "description": "Added new features and UI improvements",
       "changes": {
@@ -327,7 +327,7 @@
     },
     {
       "version": "33.3",
-      "date": "2025-03-17",
+      "date": "2025-03-16",
       "type": "patch",
       "description": "Bug fix for server recognition",
       "changes": {
@@ -338,7 +338,7 @@
     },
     {
       "version": "32.3",
-      "date": "2025-02-22",
+      "date": "2025-02-21",
       "type": "patch",
       "description": "Bug fixes",
       "changes": {
@@ -398,7 +398,7 @@
     },
     {
       "version": "27.2",
-      "date": "2025-02-07",
+      "date": "2025-02-06",
       "type": "minor",
       "description": "UI enhancements for Dark Mode",
       "changes": {
@@ -449,7 +449,7 @@
     },
     {
       "version": "24.8",
-      "date": "2025-01-25",
+      "date": "2025-01-24",
       "type": "patch",
       "description": "Bug fix for connection button delay",
       "changes": {
@@ -460,7 +460,7 @@
     },
     {
       "version": "24.7",
-      "date": "2025-01-25",
+      "date": "2025-01-24",
       "type": "minor",
       "description": "New player location feature and additions",
       "changes": {
@@ -474,7 +474,7 @@
     },
     {
       "version": "23.4",
-      "date": "2025-01-22",
+      "date": "2025-01-21",
       "type": "patch",
       "description": "Server region updates",
       "changes": {
@@ -488,7 +488,7 @@
     },
     {
       "version": "22.4",
-      "date": "2025-01-20",
+      "date": "2025-01-19",
       "type": "minor",
       "description": "GUI code rewrite",
       "changes": {
@@ -511,7 +511,7 @@
     },
     {
       "version": "21.3",
-      "date": "2025-01-14",
+      "date": "2025-01-13",
       "type": "patch",
       "description": "Initial version",
       "changes": {}
