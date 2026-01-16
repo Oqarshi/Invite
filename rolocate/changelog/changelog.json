@@ -14,6 +14,7 @@
           "Light Mode support for all UIs on the roblox website. Popups have not been updated yet."
         ],
         "improved": [
+          "Script Size reduced by ~63% (2.2 MB -> 850 KB).",
           "Recent Servers now checks outside of the gamepage if you are in a game.",
           "Recent Servers to check for server status.",
           "SVG icons for better visual looks.",
