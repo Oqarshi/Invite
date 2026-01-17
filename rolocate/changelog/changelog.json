@@ -11,7 +11,8 @@
           "Contributor list in settings (About tab).",
           "Confirmation popup when user is already in a game, but is trying to join another game or another server.",
           "Technical tab in settings with storage info and live console for better debugging.",
-          "Light Mode support for all UIs on the roblox website. Popups have not been updated yet."
+          "Light Mode support for all UIs on the roblox website. Popups have not been updated yet.",
+          "New Mobile Mode UI Improvements (Still experimental)."
         ],
         "improved": [
           "Script Size reduced by ~63% (2.2 MB -> 850 KB).",
@@ -23,7 +24,7 @@
           "Moved from ips to datacenters for checking server regions for smaller script size & accuracy."
         ],
         "fixed": [
-          "Some servers being flagged as Dallas when they are not. (Thx Orca Fan)",
+          "Some servers being flagged as Dallas when they are not. (Thx Orca Fan Also known as Waivy)",
           "Fixed Recent Servers not working.",
           "Best Connection not searching for high player servers -> Low player servers (if no high player servers found) correctly."
         ]
