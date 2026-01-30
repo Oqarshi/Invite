@@ -21,7 +21,8 @@
           "SVG icons for better visual looks.",
           "Code Refactor for better performance, maintainability, readability, and stuff like that.",
           "Slight Smart Join Popup UI improvements.",
-          "Moved from ips to datacenters for checking server regions for smaller script size & accuracy."
+          "Moved from ips to datacenters for checking server regions for smaller script size & accuracy.",
+          "Fast Server Search is now the default method for searching servers. You can still disable it in settings if it causes issues."
         ],
         "fixed": [
           "Some servers being flagged as Dallas when they are not. (Thx Orca Fan Also known as Waivy)",
