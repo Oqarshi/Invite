@@ -95,7 +95,7 @@
         font-weight: 600;
       }
       .nav-links a:hover {
-        color: #dc2626;
+        color: #bb6161;
       }
       @keyframes pulse {
         0%, 100% {
@@ -246,13 +246,13 @@
         opacity: 1;
         visibility: visible;
       }
-
       .hero-stats {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
         margin-top: 12px;
         max-width: 360px;
+        position: relative;
       }
       .stat-item {
         background: rgba(220, 38, 38, 0.1);
@@ -383,6 +383,82 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #b91c1c;
       }
+      /* Chart button + modal */
+      .chart-btn {
+        background: rgba(220, 38, 38, 0.1);
+        border: 2px solid rgba(220, 38, 38, 0.3);
+        color: #ffffff;
+        padding: 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(50% - 4px);
+        text-align: center;
+        z-index: 10;
+      }
+      .chart-btn:hover {
+        background: rgba(220, 38, 38, 0.15);
+        border-color: rgba(220, 38, 38, 0.5);
+        transform: translate(-50%, calc(-50% - 2px));
+      }
+      .chart-modal {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        transition: opacity 500ms ease;
+        z-index: 2000;
+        padding: 24px;
+      }
+      .chart-modal .modal-content {
+        width: min(960px, 98%);
+        background: #0f0f11;
+        border-radius: 12px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+        transform: translateY(8px);
+        opacity: 0;
+        transition: transform 220ms ease, opacity 220ms ease;
+      }
+      .chart-modal.open { opacity: 1; }
+      .chart-modal.open .modal-content { transform: translateY(0); opacity: 1; }
+      .chart-modal header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .chart-modal .close-btn {
+        background: linear-gradient(90deg, #ef4444 0%, #b91c1c 100%);
+        border: none;
+        color: #ffffff;
+        font-size: 0.95rem;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 8px;
+        box-shadow: 0 6px 18px rgba(185, 28, 28, 0.25);
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
+      .chart-modal .close-btn:hover {
+        transform: translateY(-2px);
+      }
+      .chart-modal canvas { width: 100%; height: 380px; }
       .footer {
         text-align: center;
         padding: 40px 0;
@@ -404,6 +480,9 @@
             <span>RoLocate</span>
           </a>
           <ul class="nav-links">
+            <li>
+              <a href="#" style="color:#dc2626;text-decoration:underline;text-decoration-color:red;text-underline-offset:5px;">Home</a>
+            </li>
             <li>
               <a href="docs/">Documentation</a>
             </li>
@@ -440,7 +519,7 @@
                 <div class="stat-label">Total Installs</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">20+</div>
+                <div class="stat-number">25+</div>
                 <div class="stat-label">Features</div>
               </div>
               <div class="stat-item">
@@ -473,7 +552,7 @@
     </section>
     <footer class="footer">
       <div class="container">
-        <p>&copy; 2025 RoLocate. Open-source project available under a Custom License – Personal Use Only.</p>
+        <p>&copy; 2026 RoLocate. Open-source project available under a Custom License – Personal Use Only.</p>
       </div>
     </footer>
     <script>
@@ -575,7 +654,14 @@
         }
       }
 
+      // store latest stats globally so chart can access them
+      window._rolocate_stats_data = window._rolocate_stats_data || null;
+      window._rolocate_chart_instance = null;
+
       function applyDailyStats(stats, expiresAt, isStale = false) {
+        // cache for chart usage
+        window._rolocate_stats_data = stats;
+
         const today = new Date().toLocaleDateString('sv-SE');
         let users = 0;
         let labelSuffix = '';
@@ -603,6 +689,23 @@
         dailyUsersEl.appendChild(indicator);
         dailyUsersEl.appendChild(count);
 
+        // create a single graph button in center of stats grid (idempotent)
+        const statsContainer = document.querySelector('.hero-stats');
+        if (statsContainer && !document.getElementById('rolocate-stats-button')) {
+          const btn = document.createElement('button');
+          btn.id = 'rolocate-stats-button';
+          btn.className = 'chart-btn';
+          btn.textContent = '📊 Daily Users All Time';
+          btn.addEventListener('click', async () => {
+            const data = window._rolocate_stats_data;
+            if (!data) return;
+            await ensureChartJs();
+            openChartModal(data);
+          });
+          // append to stats container so it's positioned absolutely inside
+          statsContainer.appendChild(btn);
+        }
+
         const labelEl = document.querySelector('.hero-stats .stat-item:nth-child(3) .stat-label');
         if (!labelEl) return;
 
@@ -626,6 +729,198 @@
         tooltipDiv.appendChild(content);
 
         labelEl.appendChild(tooltipDiv);
+      }
+
+      // dynamically load Chart.js (UMD build)
+      function ensureChartJs() {
+        if (window.Chart) return Promise.resolve();
+        return new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+          s.async = true;
+          s.onload = () => resolve();
+          s.onerror = () => reject(new Error('Failed to load Chart.js'));
+          document.head.appendChild(s);
+        });
+      }
+
+      function openChartModal(stats) {
+        // if modal already exists, don't recreate (just focus)
+        let modal = document.getElementById('rolocate-chart-modal');
+        if (modal) return;
+
+        modal = document.createElement('div');
+        modal.id = 'rolocate-chart-modal';
+        modal.className = 'chart-modal';
+
+        const content = document.createElement('div');
+        content.className = 'modal-content';
+
+        const header = document.createElement('header');
+        const title = document.createElement('div');
+        title.style.fontWeight = 700;
+        title.style.color = '#ffffff';
+        title.textContent = 'Daily Player Count For RoLocate';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.textContent = 'Close';
+        closeBtn.addEventListener('click', closeChartModal);
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+
+        const canvas = document.createElement('canvas');
+        canvas.id = 'rolocate-stats-canvas';
+
+        content.appendChild(header);
+        content.appendChild(canvas);
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+
+        // trigger fade/slide in
+        requestAnimationFrame(() => {
+          modal.classList.add('open');
+        });
+
+        renderStatsChart(stats, canvas);
+      }
+
+      function closeChartModal() {
+        const modal = document.getElementById('rolocate-chart-modal');
+        if (modal) {
+          // animate out then remove
+          modal.classList.remove('open');
+          setTimeout(() => { try { modal.remove(); } catch (e) {} }, 500);
+        }
+        if (window._rolocate_chart_instance) {
+          try { window._rolocate_chart_instance.destroy(); } catch (e) {}
+          window._rolocate_chart_instance = null;
+        }
+        if (window._rolocate_resize_observer) {
+          try { window._rolocate_resize_observer.disconnect(); } catch (e) {}
+          window._rolocate_resize_observer = null;
+        }
+        // allow garbage collection
+      }
+
+      function renderStatsChart(stats, canvasEl) {
+        // parse keys ascending
+        const allDates = Object.keys(stats).sort((a, b) => new Date(a) - new Date(b));
+        // only include dates up to the user's current date
+        const today = new Date();
+        const dates = allDates.filter(d => new Date(d) <= today);
+        // exclude the last day cause it may be incomplete
+        if (dates.length > 1) {
+          dates.pop();
+        }
+        const labels = [];
+        const values = [];
+        dates.forEach(d => {
+          const v = stats[d]?.update_checks ?? null;
+          if (v == null) return;
+          labels.push(new Date(d).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
+          values.push(v);
+        });
+
+        // fallback when no data
+        if (!labels.length) {
+          labels.push('N/A');
+          values.push(0);
+        }
+
+        const ctx = canvasEl.getContext('2d');
+
+        // desired display height (px)
+        const desiredHeight = 380;
+        // ensure CSS height
+        canvasEl.style.height = desiredHeight + 'px';
+
+        if (window._rolocate_chart_instance) {
+          try { window._rolocate_chart_instance.destroy(); } catch (e) {}
+          window._rolocate_chart_instance = null;
+        }
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvasEl.clientHeight || desiredHeight);
+        gradient.addColorStop(0, 'rgba(220,38,38,0.18)');
+        gradient.addColorStop(1, 'rgba(220,38,38,0.02)');
+
+        // compute aspect ratio to prevent stretching
+        const width = canvasEl.clientWidth || 800;
+        const aspectRatio = width / desiredHeight;
+
+        window._rolocate_chart_instance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Daily Users',
+              data: values,
+              fill: true,
+              backgroundColor: gradient,
+              borderColor: '#ff6b6b',
+              borderWidth: 2,
+              pointRadius: 0,
+              tension: 0.5,
+              cubicInterpolationMode: 'monotone'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: aspectRatio,
+            elements: {
+              line: { tension: 0.5, cubicInterpolationMode: 'monotone' },
+              point: { radius: 0 }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(255,255,255,0.03)' },
+                ticks: {
+                  color: '#dcdcdc',
+                  maxRotation: 0,
+                  autoSkip: false,
+                  callback: function(value, index) {
+                    // show month and year only for the first day of month labels
+                    const dateStr = dates[index];
+                    if (!dateStr) return '';
+                    const d = new Date(dateStr);
+                    if (d.getDate() === 1 || index === 0) {
+                      return [d.toLocaleDateString(undefined, { month: 'short' }), d.getFullYear()];
+                    }
+                    return '';
+                  }
+                }
+              },
+              y: {
+                grid: { color: 'rgba(255,255,255,0.03)' },
+                ticks: { color: '#dcdcdc' }
+              }
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: { mode: 'index', intersect: false }
+            },
+            interaction: { mode: 'nearest', axis: 'x', intersect: false }
+          }
+        });
+
+        // observe resize to keep correct aspect ratio and avoid stretch
+        if (typeof ResizeObserver !== 'undefined') {
+          if (window._rolocate_resize_observer) {
+            try { window._rolocate_resize_observer.disconnect(); } catch (e) {}
+            window._rolocate_resize_observer = null;
+          }
+          window._rolocate_resize_observer = new ResizeObserver(() => {
+            if (!window._rolocate_chart_instance) return;
+            const w = canvasEl.clientWidth || 800;
+            const ar = w / desiredHeight;
+            window._rolocate_chart_instance.options.aspectRatio = ar;
+            try { window._rolocate_chart_instance.resize(); } catch (e) {}
+          });
+          // observe the modal content (parent) so width changes trigger
+          window._rolocate_resize_observer.observe(canvasEl.parentElement || canvasEl);
+        }
       }
 
       document.addEventListener('DOMContentLoaded', () => {

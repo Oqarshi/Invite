@@ -2,7 +2,7 @@
   "versions": [
     {
       "version": "45.5",
-      "date": "SneakPEAK",
+      "date": "2026-2-15",
       "type": "major",
       "description": "",
       "changes": {
@@ -10,24 +10,35 @@
           "Easter Eggs.",
           "Contributor list in settings (About tab).",
           "Confirmation popup when user is already in a game, but is trying to join another game or another server.",
-          "Technical tab in settings with storage info and live console for better debugging.",
+          "Technical tab in settings with storage info, live console, and reset button for better debugging.",
           "Light Mode support for all UIs on the roblox website. Popups have not been updated yet.",
-          "New Mobile Mode UI Improvements (Still experimental)."
+          "Responsive Game Cards have been added. Available in settings -> appearance.",
+          "Two more preset options in settings.",
+          "Added Force Dark Mode Styles for users who are in light mode but want the script to run in dark mode. Available in settings -> advanced."
         ],
         "improved": [
-          "Script Size reduced by ~63% (2.2 MB -> 850 KB).",
+          "Script Size reduced by ~59% (2.2 MB -> 900 KB).",
           "Recent Servers now checks outside of the gamepage if you are in a game.",
           "Recent Servers to check for server status.",
           "SVG icons for better visual looks.",
           "Code Refactor for better performance, maintainability, readability, and stuff like that.",
           "Slight Smart Join Popup UI improvements.",
           "Moved from ips to datacenters for checking server regions for smaller script size & accuracy.",
-          "Fast Server Search is now the default method for searching servers. You can still disable it in settings if it causes issues."
+          "Fast Server Search is now the default method for searching servers. You can still disable it in settings if it causes issues.",
+          "You can now add games to Quick Launch from Smart Search.",
+          "Smart Search now shows the amount of friends and followers a user has.",
+          "Smart Search now shows verified badges for users and groups.",
+          "Smart Join Popup now joins servers a little faster.",
+          "You can now search through all the settings in the settings menu.",
+          "You can now ban regions in the server selector. Banned regions will not appear in server search, Best Connection, or Server Hop.",
+          "You can now drag and drop games in Quick Launch to reorder them instead of using the move left and right buttons.",
+          "Compact Private Servers are now called Better Private Servers. You can now only see your private servers instead of all of your friends private servers. In the future you will be able to search through your friends private servers and see more info about them like the server region."
         ],
         "fixed": [
           "Some servers being flagged as Dallas when they are not. (Thx Orca Fan Also known as Waivy)",
           "Fixed Recent Servers not working.",
-          "Best Connection not searching for high player servers -> Low player servers (if no high player servers found) correctly."
+          "Best Connection not searching for high player servers -> Low player servers (if no high player servers found) correctly.",
+          "Fixed some UI issues in SmartSearch."
         ]
       }
     },
