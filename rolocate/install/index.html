@@ -1,770 +1,797 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoLocate - Installation Guide</title>
-    <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoLocate - Install</title>
+  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-      body {
-        font-family: 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
-        background: #1b1b1f;
-        background-image:
-          radial-gradient(circle at 15px 15px, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-        background-size: 30px 30px;
-        color: #ffffff;
-        line-height: 1.6;
-        overflow-x: hidden;
-        position: relative;
-      }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
+    nav {
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 16px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-      /* Navigation */
-      nav {
-        background: transparent;
-        background-color: rgba(34, 34, 38, 0.5);
-        padding: 15px 0;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .nav-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #dc2626;
+      font-size: 1.25rem;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
 
-      .logo {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: #dc2626;
-        font-size: 1.8rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-      }
+    .logo:hover { color: #ef4444; }
+    .logo img { width: 28px; height: 28px; border-radius: 6px; }
 
-      .logo-text-underline {
-        color: #ef4444;
-        text-decoration: none;
-        position: relative;
-        transition: color 0.2s ease;
-      }
-      .logo-text-underline::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 1px;
-        left: 0;
-        bottom: -2px;
-        background-color: #ef4444;
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.2s ease;
-      }
-      .logo-text-underline:hover {
-        color: #f87171;
-      }
-      .logo-text-underline:hover::after {
-        transform: scaleX(1);
-      }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+    }
 
-      .logo-svg {
-        width: 32px;
-        height: 32px;
-        border-radius: 5px;
-      }
+    .nav-links a {
+      color: #999;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
 
-      .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 30px;
-      }
+    .nav-links a:hover { color: #ffffff; }
+    .nav-links a.active { color: #ffffff; text-decoration: underline; }
 
-      .nav-links a {
-        color: #ffffff;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        font-weight: 600;
-      }
+    .nav-icons { display: flex; gap: 16px; align-items: center; }
 
-      .nav-links a:hover {
-        color: #bb6161;
-      }
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      opacity: 0.7;
+      transition: opacity 0.2s, transform 0.2s;
+      color: #e8eaed;
+    }
 
-      /* Header Section */
-      .header {
-        padding-top: 120px;
-        padding-bottom: 60px;
-        text-align: center;
-      }
+    .nav-icon:hover { opacity: 1; transform: translateY(-2px); }
 
-      .header h1 {
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        background: linear-gradient(135deg, #ffffff 0%, #dc2626 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        letter-spacing: -0.03em;
-      }
+    /* Page header */
+    .page-header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 120px 32px 20px;
+      text-align: center;
+    }
 
-      .header .subtitle {
-        font-size: 1.4rem;
-        color: #cccccc;
-        margin-bottom: 30px;
-        font-weight: 400;
-      }
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #dc2626;
+      margin-bottom: 12px;
+    }
 
-      /* Install Cards */
-      .install-methods {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 30px;
-        margin-bottom: 60px;
-      }
+    .page-header p {
+      font-size: 1.1rem;
+      color: #999;
+      max-width: 560px;
+      margin: 0 auto 24px;
+    }
 
-      .install-card {
-        background: #26262a;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
-        padding: 30px;
-        transition: all 0.3s ease;
-      }
+    .time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(220, 38, 38, 0.1);
+      border: 1px solid rgba(220, 38, 38, 0.25);
+      color: #ef4444;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 48px;
+    }
 
-      .install-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(220, 38, 38, 0.3);
-        box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
-      }
+    /* Tab switcher */
+    .tab-bar {
+      max-width: 860px;
+      margin: 0 auto 32px;
+      padding: 0 32px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-      .install-card h3 {
-        color: #dc2626;
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-        font-weight: 600;
-      }
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #888;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
 
-      .install-card p {
-        color: #cccccc;
-        margin-bottom: 20px;
-        line-height: 1.7;
-      }
+    .tab-btn:hover {
+      background: rgba(255,255,255,0.08);
+      color: #ccc;
+    }
 
-      .btn-install {
-        flex: 1;
-        text-align: center;
-        background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.2) 100%);
-        color: #dc2626;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-        box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
-        width: 100%;
-        margin-top: auto;
-        align-self: flex-end;
-      }
+    .tab-btn.active {
+      background: rgba(220, 38, 38, 0.12);
+      border-color: rgba(220, 38, 38, 0.35);
+      color: #ef4444;
+    }
 
-      .btn-install:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
-      }
+    /* Install card */
+    .install-wrapper {
+      max-width: 700px;
+      margin: 0 auto 80px;
+      padding: 0 32px;
+    }
 
-      /* Step-by-step Guide */
-      .step-guide {
-        margin-bottom: 60px;
-      }
+    .install-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
 
-      .step-guide h2 {
-        font-size: 2.5rem;
-        color: #ffffff;
-        margin-bottom: 30px;
-        text-align: center;
-        font-weight: 600;
-      }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
-      .steps {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-      }
+    .browser-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #222;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
 
-      .step {
-        background: #26262a;
-        border-left: 4px solid #dc2626;
-        border-radius: 0 15px 15px 0;
-        padding: 25px;
-        position: relative;
-      }
+    .card-header-text h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
 
-      .step-number {
-        position: absolute;
-        left: -15px;
-        top: 20px;
-        width: 30px;
-        height: 30px;
-        background: #dc2626;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 0.9rem;
-      }
+    .card-header-text p {
+      font-size: 0.875rem;
+      color: #666;
+      margin-top: 3px;
+    }
 
-      .step h3 {
-        color: #ffffff;
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-        font-weight: 600;
-        margin-left: 20px;
-      }
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 1px;
+    }
 
-      .step p {
-        color: #cccccc;
-        line-height: 1.7;
-        margin-left: 20px;
-      }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
 
-      .step code,
-      .step a code {
-        background: rgba(220, 38, 38, 0.1);
-        color: #dc2626;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-family: inherit;
-        text-decoration: none;
-        /* Prevent underlining from 
-						
-						<a> */
-      }
+    .step {
+      display: flex;
+      gap: 16px;
+      position: relative;
+    }
 
-      .step a {
-        text-decoration: none;
-        /* Optional: remove underline from entire link */
-      }
+    /* Vertical connector line */
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 28px;
+      bottom: -12px;
+      width: 2px;
+      background: rgba(220, 38, 38, 0.15);
+    }
 
-      /* Browser Support */
-      .browser-support {
-        background: #26262a;
-        border-radius: 15px;
-        padding: 30px;
-        margin-bottom: 60px;
-      }
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
 
-      .browser-support h2 {
-        color: #ffffff;
-        font-size: 2rem;
-        margin-bottom: 20px;
-        text-align: center;
-        font-weight: 600;
-      }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      background: rgba(220, 38, 38, 0.15);
+      border: 1px solid rgba(220, 38, 38, 0.35);
+      color: #ef4444;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+      position: relative;
+    }
 
-      .browsers {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
-      }
+    .step-body {
+      flex: 1;
+      padding-bottom: 24px;
+    }
 
-      .browser {
-        text-align: center;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        transition: all 0.3s ease;
-      }
+    .step:last-child .step-body {
+      padding-bottom: 0;
+    }
 
-      .browser:hover {
-        background: rgba(220, 38, 38, 0.1);
-      }
+    .step-body strong {
+      display: block;
+      font-size: 0.975rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
 
-      .browser-name {
-        color: #ffffff;
-        font-weight: 600;
-        margin-bottom: 5px;
-      }
+    .step-body p {
+      font-size: 0.875rem;
+      color: #888;
+      line-height: 1.65;
+    }
 
-      .browser-status {
-        color: #22c55e;
-        font-size: 0.9rem;
-      }
+    .step-body a {
+      color: #ef4444;
+      text-decoration: none;
+      font-weight: 500;
+    }
 
-      .browser-status.partial {
-        color: #eab308;
-      }
+    .step-body a:hover { text-decoration: underline; }
 
-      /* FAQ Section */
-      .faq {
-        margin-bottom: 60px;
-      }
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #ef4444 !important;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin: 2px 2px 0 0;
+      text-decoration: none !important;
+      transition: background 0.2s;
+    }
 
-      .faq h2 {
-        font-size: 2.5rem;
-        color: #ffffff;
-        margin-bottom: 30px;
-        text-align: center;
-        font-weight: 600;
-      }
+    .pill-link:hover {
+      background: rgba(239, 68, 68, 0.2) !important;
+      text-decoration: none !important;
+    }
 
-      .faq-item {
-        background: #26262a;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        overflow: hidden;
-      }
+    .inline-ui {
+      display: inline-block;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #ddd;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: inherit;
+    }
 
-      .faq-question {
-        padding: 20px;
-        color: #ffffff;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
+    .tip-box {
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 200, 0, 0.05);
+      border: 1px solid rgba(255, 200, 0, 0.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.84rem;
+      color: #aaa;
+      line-height: 1.55;
+      margin-top: 8px;
+    }
 
-      .faq-question:hover {
-        background: rgba(220, 38, 38, 0.1);
-      }
+    .tip-box .tip-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
 
-      .faq-answer {
-        padding: 20px;
-        color: #cccccc;
-        line-height: 1.7;
-      }
+    .install-btn {
+      background: #dc2626;
+      color: #ffffff;
+      padding: 14px 22px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
 
-      .footer {
-        text-align: center;
-        padding: 40px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        margin-top: 60px;
-      }
+    .install-btn:hover {
+      background: #ef4444;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.35);
+    }
 
-      .footer p {
-        color: #888888;
-        font-size: 0.9rem;
-      }
+    .note-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      color: #777;
+      line-height: 1.55;
+    }
 
-      /* Responsive */
-      @media (max-width: 768px) {
-        .header h1 {
-          font-size: 2.5rem;
-        }
+    .note-box strong { color: #aaa; }
 
-        .nav-links {
-          display: none;
-        }
+    footer {
+      text-align: center;
+      padding: 48px 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        .install-methods {
-          grid-template-columns: 1fr;
-        }
+    footer p { color: #555; font-size: 0.875rem; }
 
-        .browsers {
-          grid-template-columns: repeat(2, 1fr);
-        }
+    @media (max-width: 600px) {
+      .page-header h1 { font-size: 2rem; }
+      .nav-links { display: none; }
+      .install-card { padding: 28px 20px; }
+    }
 
-        .footer-links {
-          flex-direction: column;
-          gap: 15px;
-        }
-      }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+  </style>
+</head>
+<body>
 
-      /* Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #1b1b1f;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #dc2626;
-        border-radius: 10px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: #b91c1c;
-      }
-
-      a {
-        color: #ef4444;
-        /* Tailwind red-500 */
-        text-decoration: none;
-        position: relative;
-        transition: color 0.2s ease;
-      }
-
-      a:hover::after {
-        transform: scaleX(1);
-      }
-      /* New: No Support Tag */
-      .browser-status.no-support {
-        color: #ef4444;
-      }
-      
-      /* Popup styles */
-      .reason-popup {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #26262a;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-        padding: 15px 20px;
-        color: white;
-        max-width: 80%;
-        text-align: center;
-        z-index: 10000;
-        opacity: 0;
-        animation: fadeIn 0.5s ease forwards;
-      }
-      
-      .reason-popup.fade-out {
-        animation: fadeOut 0.5s ease forwards;
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; bottom: 0; }
-        to { opacity: 1; bottom: 20px; }
-      }
-      
-      @keyframes fadeOut {
-        from { opacity: 1; bottom: 20px; }
-        to { opacity: 0; bottom: 0; }
-      }
-      
-      /* Make browser names clickable */
-      .browser-name {
-        cursor: pointer;
-        position: relative;
-        transition: color 0.3s ease;
-      }
-      
-      .browser-name:hover {
-        color: #dc2626;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navigation -->
-    <nav>
-      <div class="nav-container">
-        <a href="../index.html" class="logo logo-text-underline">
-          <img src="../assets/logo.svg" alt="logo" class="logo-svg" />
-          <span>RoLocate</span>
+  <nav>
+    <div class="nav-container">
+      <a href="../" class="logo">
+        <img src="../assets/logo.svg" alt="RoLocate">
+        <span>RoLocate</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../">Home</a></li>
+        <li><a href="../install/" class="active">Install</a></li>
+        <li><a href="../changelog/">Changelog</a></li>
+        <li><a href="../faq/">FAQ</a></li>
+        <li>
+          <a href="https://greasyfork.org/en/scripts/523727-rolocate/feedback" target="_blank">Support</a>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="12" height="12" style="margin-left:-1px; transform: translateY(2px);">
+            <path d="M5 19L19 5M10 5h9v9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </li>
+      </ul>
+      <div class="nav-icons">
+        <a href="https://github.com/Oqarshi/RoLocate" target="_blank">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
         </a>
-        <ul class="nav-links">
-          <li>
-            <a href="../index.html">Home</a>
-          </li>
-          <li>
-            <a href="../docs">Documentation</a>
-          </li>
-          <li>
-            <a href="#" style="color:#dc2626;text-decoration:underline;text-decoration-color:red;text-underline-offset:5px;">Install</a>
-          </li>
-          <li>
-            <a href="../changelog">Changelog</a>
-          </li>
-          <li>
-            <a href="https://greasyfork.org/en/scripts/523727-rolocate/feedback" target="_blank" rel="noopener noreferrer" style="line-height:1;"> Feedback/Support <svg viewBox="2 2 20 20" style="display:inline-block;vertical-align:middle;margin-left:-5px;width:12px;height:12px;stroke:gray;stroke-width:1.8;fill:none;">
-                <path d="M5 19L19 5M10 5h9v9" />
-              </svg>
+        <a href="https://greasyfork.org/en/scripts/523727-rolocate" target="_blank">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5.89 2.227a0.28 0.28 0 0 1 0.266 0.076l5.063 5.062c0.54 0.54 0.509 1.652 -0.031 2.192l8.771 8.77c1.356 1.355 -0.36 3.097 -1.73 1.728l-8.772 -8.77c-0.54 0.54 -1.651 0.571 -2.191 0.031l-5.063 -5.06c-0.304 -0.304 0.304 -0.911 0.608 -0.608l3.714 3.713L7.59 8.297 3.875 4.582c-0.304 -0.304 0.304 -0.911 0.607 -0.607l3.715 3.714 1.067 -1.066L5.549 2.91c-0.228 -0.228 0.057 -0.626 0.342 -0.683ZM12 0C5.374 0 0 5.375 0 12s5.374 12 12 12c6.625 0 12 -5.375 12 -12S18.625 0 12 0Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Install RoLocate</h1>
+    <p>Pick your browser below and follow the steps. It only takes a couple of minutes!</p>
+    <div>
+      <span class="time-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+        Under 2 minutes to set up
+      </span>
+    </div>
+  </div>
+
+  <!-- Browser tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('chrome')">
+      <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve"><path style="fill:#d24441" d="M480.759 133.469H275.417c-6.339-1.029-12.85-1.541-19.446-1.541-68.533 0-124.045 55.512-124.045 124.045 0 25.784 7.796 49.685 21.246 69.56L10.537 182.896C42.062 77.1 139.978 0 255.971 0c52.085 0 100.486 15.592 140.921 42.319 28.869 19.103 53.627 43.776 72.645 72.645 4.026 5.996 7.709 12.165 11.222 18.505"/><path style="fill:#4cb566" d="M325.532 358.771 182.897 501.405a251.2 251.2 0 0 1-57.225-25.102 256 256 0 0 1-90.035-90.033C12.935 348.063 0 303.601 0 255.972c0-25.359 3.684-49.858 10.537-73.076l142.634 142.636c22.273 32.896 60.052 54.568 102.799 54.568 25.786 0 49.687-7.881 69.562-21.329"/><path style="fill:#d5cb44" d="M275.395 133.442c59.299 9.325 104.657 60.639 104.657 122.557 0 42.759-21.63 80.462-54.543 102.775L182.888 501.396c23.16 6.887 47.686 10.603 73.083 10.603 141.385 0 256-114.615 256-256 0-44.4-11.309-86.158-31.195-122.557z"/><path style="fill:#fff" d="M275.417 133.469c-6.339-1.029-12.85-1.541-19.446-1.541-68.533 0-124.045 55.512-124.045 124.045 0 25.784 7.796 49.685 21.246 69.56 22.273 32.896 60.052 54.568 102.799 54.568 25.785 0 49.686-7.881 69.561-21.329 32.896-22.274 54.484-60.054 54.484-102.799-.001-61.854-45.319-113.168-104.599-122.504m-19.446 223.073c-55.426 0-100.573-45.058-100.573-100.57 0-55.428 45.146-100.574 100.573-100.574s100.572 45.146 100.572 100.574c0 55.511-45.147 100.57-100.572 100.57"/><path style="fill:#5991cd" d="M155.399 256.001c0 55.454 45.117 100.571 100.571 100.571s100.571-45.117 100.571-100.571S311.424 155.43 255.97 155.43s-100.571 45.117-100.571 100.571"/><path style="fill:none" d="M255.971 155.398c-55.426 0-100.573 45.146-100.573 100.574l.001.021c.005-55.451 45.12-100.564 100.571-100.564 27.731 0 52.876 11.283 71.087 29.498l.005-.004c-18.216-18.229-43.367-29.525-71.091-29.525m124.044 100.574c0 27.352-8.871 52.646-23.856 73.17 15.004-20.513 23.893-45.78 23.893-73.143 0-34.26-13.929-65.235-36.383-87.684l-.019.019c22.444 22.447 36.365 53.409 36.365 87.638"/><path style="fill:none" d="m356.541 256.001.002-.029c0-27.704-11.278-52.837-29.48-71.049l-.005.004c18.207 18.21 29.483 43.352 29.483 71.074"/><path style="opacity:.06;fill:#040000" d="M480.744 133.441c-3.509-6.329-7.187-12.49-11.207-18.478a254.2 254.2 0 0 0-32.581-39.934l-93.286 93.285c22.453 22.45 36.383 53.424 36.383 87.684 0 27.363-8.889 52.63-23.893 73.143 14.985-20.523 23.856-45.818 23.856-73.17 0-34.229-13.921-65.191-36.364-87.639l-16.588 16.59c18.202 18.212 29.48 43.345 29.48 71.049l-.002.029c0-27.722-11.277-52.864-29.484-71.074L74.991 436.994a256 256 0 0 0 50.681 39.309 251.2 251.2 0 0 0 57.225 25.102l.005-.004C206.059 508.284 230.579 512 255.971 512c141.385 0 255.999-114.616 255.999-256.001 0-44.4-11.309-86.158-31.195-122.557h-.031z"/></svg>
+      Chrome
+    </button>
+    <button class="tab-btn" onclick="showTab('firefox')">
+      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28.99 10.727c-.608-1.47-1.843-3.056-2.812-3.557.789 1.55 1.245 3.105 1.42 4.264l.003.024c-1.585-3.96-4.273-5.557-6.468-9.034-.112-.175-.223-.35-.331-.538a4 4 0 0 1-.154-.293 2.6 2.6 0 0 1-.218-.578.04.04 0 0 0-.023-.013h-.026l-.007.004-.01.005.006-.007c-3.522 2.067-4.716 5.89-4.826 7.804a7 7 0 0 0-3.861 1.49 4 4 0 0 0-.363-.275 6.5 6.5 0 0 1-.039-3.434c-1.44.658-2.56 1.696-3.374 2.614H7.9c-.556-.706-.517-3.033-.485-3.519-.007-.03-.414.213-.467.25q-.737.526-1.37 1.176A12 12 0 0 0 4.27 8.683a11.9 11.9 0 0 0-1.881 4.257l-.019.093c-.026.123-.121.742-.138.877v.03q-.186.961-.231 1.94v.071C2 23.71 8.276 30 16.018 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.279-2.41-.031-4.942-.91-7.06M12.834 21.724c.065.03.127.065.194.096l.01.006zm14.769-10.26v-.013.015z" fill="url(#a)"/><path d="M28.99 10.727c-.608-1.47-1.842-3.056-2.811-3.557.788 1.55 1.244 3.105 1.419 4.264v.03c1.323 3.593.602 7.248-.436 9.481-1.607 3.455-5.496 6.997-11.584 6.824-6.572-.187-12.366-5.08-13.448-11.485-.197-1.01 0-1.523.099-2.343-.12.631-.167.814-.227 1.938v.072C2.002 23.71 8.278 30 16.02 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.277-2.41-.033-4.942-.911-7.06" fill="url(#b)"/><path d="M28.99 10.727c-.608-1.47-1.842-3.056-2.811-3.557.788 1.55 1.244 3.105 1.419 4.264v.03c1.323 3.593.602 7.248-.436 9.481-1.607 3.455-5.496 6.997-11.584 6.824-6.572-.187-12.366-5.08-13.448-11.485-.197-1.01 0-1.523.099-2.343-.12.631-.167.814-.227 1.938v.072C2.002 23.71 8.278 30 16.02 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.277-2.41-.033-4.942-.911-7.06" fill="url(#c)"/><path d="m22.178 12.377.087.065a7.6 7.6 0 0 0-1.302-1.702c-4.357-4.367-1.142-9.47-.6-9.729l.006-.008c-3.522 2.068-4.716 5.891-4.826 7.805.163-.011.326-.025.492-.025 2.628 0 4.917 1.448 6.143 3.594" fill="url(#d)"/><path d="M16.045 13.25c-.023.35-1.255 1.555-1.686 1.555-3.986 0-4.633 2.417-4.633 2.417.175 2.035 1.59 3.711 3.302 4.598q.118.06.233.113.206.089.412.169a6.2 6.2 0 0 0 1.824.35c6.987.33 8.341-8.372 3.299-10.899 1.29-.225 2.63.296 3.38.823C20.95 10.23 18.66 8.78 16.032 8.78c-.166 0-.329.014-.492.025a7 7 0 0 0-3.858 1.492c.214.182.456.424.964.926.953.942 3.392 1.912 3.398 2.026" fill="url(#e)"/><path d="M16.045 13.25c-.023.35-1.255 1.555-1.686 1.555-3.986 0-4.633 2.417-4.633 2.417.175 2.035 1.59 3.711 3.302 4.598q.118.06.233.113.206.089.412.169a6.2 6.2 0 0 0 1.824.35c6.987.33 8.341-8.372 3.299-10.899 1.29-.225 2.63.296 3.38.823C20.95 10.23 18.66 8.78 16.032 8.78c-.166 0-.329.014-.492.025a7 7 0 0 0-3.858 1.492c.214.182.456.424.964.926.953.942 3.392 1.912 3.398 2.026" fill="url(#f)"/><path d="m11.031 9.83.292.193a6.5 6.5 0 0 1-.04-3.434c-1.44.658-2.56 1.696-3.374 2.614.066-.002 2.1-.039 3.122.628" fill="url(#g)"/><path d="M2.13 16.284c1.082 6.404 6.876 11.298 13.453 11.485 6.088.172 9.974-3.369 11.583-6.824 1.038-2.234 1.76-5.888.436-9.482v-.027l.003.023c.497 3.255-1.154 6.407-3.736 8.54l-.007.018c-5.031 4.105-9.845 2.477-10.82 1.812l-.204-.102c-2.933-1.403-4.145-4.083-3.885-6.38-2.476 0-3.321-2.094-3.321-2.094s2.224-1.589 5.154-.207c2.714 1.28 5.263.208 5.263.207-.005-.114-2.444-1.087-3.396-2.026-.508-.502-.75-.744-.963-.926a4 4 0 0 0-.363-.274c-.084-.059-.175-.117-.292-.193-1.022-.666-3.056-.63-3.123-.628h-.006c-.556-.705-.517-3.033-.486-3.518-.006-.03-.414.212-.466.249-.49.35-.95.744-1.37 1.176a12.3 12.3 0 0 0-1.31 1.573 11.9 11.9 0 0 0-1.88 4.257c-.012.027-.51 2.21-.264 3.341" fill="url(#h)"/><path d="M20.963 10.74c.512.503.95 1.076 1.302 1.702q.11.083.21.176c3.178 2.932 1.516 7.083 1.39 7.381 2.581-2.132 4.232-5.284 3.735-8.539-1.585-3.962-4.272-5.56-6.468-9.036-.11-.175-.222-.35-.33-.538a4 4 0 0 1-.154-.293 2.6 2.6 0 0 1-.218-.578.04.04 0 0 0-.023-.013h-.026l-.007.004-.01.005c-.543.26-3.758 5.362.6 9.729" fill="url(#i)"/><path d="M22.474 12.615a3 3 0 0 0-.21-.176l-.087-.065c-.749-.526-2.089-1.047-3.38-.822 5.042 2.526 3.688 11.228-3.299 10.899a6.2 6.2 0 0 1-1.824-.35 8 8 0 0 1-.411-.17 4 4 0 0 1-.234-.113l.01.006c.974.667 5.788 2.295 10.82-1.812l.007-.018c.125-.293 1.787-4.444-1.392-7.38" fill="url(#j)"/><path d="M9.725 17.222s.647-2.417 4.634-2.417c.43 0 1.663-1.206 1.685-1.555.023-.35-2.549 1.073-5.263-.207-2.93-1.382-5.154.207-5.154.207s.845 2.094 3.32 2.094c-.259 2.297.953 4.975 3.886 6.38.066.031.127.066.194.096-1.712-.885-3.125-2.563-3.302-4.599" fill="url(#k)"/><path d="M28.99 10.727c-.608-1.47-1.843-3.056-2.812-3.557.789 1.55 1.245 3.105 1.42 4.264l.003.024c-1.585-3.96-4.273-5.557-6.468-9.034-.112-.175-.223-.35-.331-.538a4 4 0 0 1-.154-.293 2.6 2.6 0 0 1-.218-.578.04.04 0 0 0-.023-.013h-.026l-.007.004-.01.005.006-.007c-3.522 2.067-4.716 5.89-4.826 7.804.163-.011.326-.025.492-.025 2.628 0 4.917 1.448 6.143 3.594-.749-.526-2.09-1.047-3.38-.822 5.042 2.527 3.688 11.228-3.299 10.899a6.2 6.2 0 0 1-1.824-.35 8 8 0 0 1-.412-.17 4 4 0 0 1-.233-.113l.01.006-.204-.101c.065.03.127.065.194.096-1.716-.887-3.129-2.565-3.306-4.6 0 0 .647-2.417 4.634-2.417.43 0 1.663-1.206 1.685-1.555-.005-.114-2.444-1.087-3.396-2.027-.508-.501-.75-.743-.963-.925a4 4 0 0 0-.363-.275 6.5 6.5 0 0 1-.04-3.434c-1.44.658-2.56 1.696-3.374 2.614h-.006c-.556-.706-.517-3.033-.485-3.519-.007-.03-.414.213-.467.25-.49.35-.95.744-1.37 1.176a12.3 12.3 0 0 0-1.31 1.573 11.9 11.9 0 0 0-1.88 4.257l-.019.093a25 25 0 0 0-.162.885c0 .01 0-.01 0 0q-.164.975-.209 1.961v.072C2 23.71 8.276 30 16.018 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.279-2.41-.031-4.942-.91-7.06m-1.39.72v.016z" fill="url(#l)"/><defs><radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(29.2246 0 0 29.2888 26.06 4.219)"><stop offset=".13" stop-color="#ffbd4f"/><stop offset=".19" stop-color="#ffac31"/><stop offset=".25" stop-color="#ff9d17"/><stop offset=".28" stop-color="#ff980e"/><stop offset=".4" stop-color="#ff563b"/><stop offset=".47" stop-color="#ff3750"/><stop offset=".71" stop-color="#f5156c"/><stop offset=".78" stop-color="#eb0878"/><stop offset=".86" stop-color="#e50080"/></radialGradient><radialGradient id="c" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(29.2246 0 0 29.2888 15.38 16.192)"><stop offset=".3" stop-color="#960e18"/><stop offset=".35" stop-color="#b11927" stop-opacity=".74"/><stop offset=".43" stop-color="#db293d" stop-opacity=".34"/><stop offset=".5" stop-color="#f5334b" stop-opacity=".09"/><stop offset=".53" stop-color="#ff3750" stop-opacity="0"/></radialGradient><radialGradient id="d" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(21.172 0 0 21.2184 18.904 -2.428)"><stop offset=".13" stop-color="#fff44f"/><stop offset=".25" stop-color="#ffdc3e"/><stop offset=".51" stop-color="#ff9d12"/><stop offset=".53" stop-color="#ff980e"/></radialGradient><radialGradient id="e" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(13.915 0 0 13.9455 12.149 23.843)"><stop offset=".35" stop-color="#3a8ee6"/><stop offset=".47" stop-color="#5c79f0"/><stop offset=".67" stop-color="#9059ff"/><stop offset="1" stop-color="#c139e6"/></radialGradient><radialGradient id="f" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="rotate(-13.926 59.941 -58.33)scale(7.37316 8.67852)"><stop offset=".21" stop-color="#9059ff" stop-opacity="0"/><stop offset=".28" stop-color="#8c4ff3" stop-opacity=".06"/><stop offset=".75" stop-color="#7716a8" stop-opacity=".45"/><stop offset=".97" stop-color="#6e008b" stop-opacity=".6"/></radialGradient><radialGradient id="g" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(10.0108 0 0 10.0328 15.011 3.02)"><stop stop-color="#ffe226"/><stop offset=".12" stop-color="#ffdb27"/><stop offset=".3" stop-color="#ffc82a"/><stop offset=".5" stop-color="#ffa930"/><stop offset=".73" stop-color="#ff7e37"/><stop offset=".79" stop-color="#ff7139"/></radialGradient><radialGradient id="h" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(42.7109 0 0 42.8046 22.88 -3.343)"><stop offset=".11" stop-color="#fff44f"/><stop offset=".46" stop-color="#ff980e"/><stop offset=".62" stop-color="#ff5634"/><stop offset=".72" stop-color="#ff3647"/><stop offset=".9" stop-color="#e31587"/></radialGradient><radialGradient id="i" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="rotate(84.245 8.638 11.035)scale(31.1996 20.4543)"><stop stop-color="#fff44f"/><stop offset=".06" stop-color="#ffe847"/><stop offset=".17" stop-color="#ffc830"/><stop offset=".3" stop-color="#ff980e"/><stop offset=".36" stop-color="#ff8b16"/><stop offset=".45" stop-color="#ff672a"/><stop offset=".57" stop-color="#ff3647"/><stop offset=".74" stop-color="#e31587"/></radialGradient><radialGradient id="j" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(26.6644 0 0 26.723 14.776 6.736)"><stop offset=".14" stop-color="#fff44f"/><stop offset=".48" stop-color="#ff980e"/><stop offset=".59" stop-color="#ff5634"/><stop offset=".66" stop-color="#ff3647"/><stop offset=".9" stop-color="#e31587"/></radialGradient><radialGradient id="k" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(29.1844 0 0 29.2484 21.814 8.3)"><stop offset=".09" stop-color="#fff44f"/><stop offset=".23" stop-color="#ffe141"/><stop offset=".51" stop-color="#ffaf1e"/><stop offset=".63" stop-color="#ff980e"/></radialGradient><linearGradient id="a" x1="27.135" y1="5.493" x2="3.814" y2="27.944" gradientUnits="userSpaceOnUse"><stop offset=".05" stop-color="#fff44f"/><stop offset=".11" stop-color="#ffe847"/><stop offset=".22" stop-color="#ffc830"/><stop offset=".37" stop-color="#ff980e"/><stop offset=".4" stop-color="#ff8b16"/><stop offset=".46" stop-color="#ff672a"/><stop offset=".53" stop-color="#ff3647"/><stop offset=".7" stop-color="#e31587"/></linearGradient><linearGradient id="l" x1="26.855" y1="5.372" x2="7.01" y2="25.174" gradientUnits="userSpaceOnUse"><stop offset=".17" stop-color="#fff44f" stop-opacity=".8"/><stop offset=".27" stop-color="#fff44f" stop-opacity=".63"/><stop offset=".49" stop-color="#fff44f" stop-opacity=".22"/><stop offset=".6" stop-color="#fff44f" stop-opacity="0"/></linearGradient></defs></svg>
+      Firefox
+    </button>
+    <button class="tab-btn" onclick="showTab('edge')">
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg width="20" height="20" viewBox="0 0 27600 27600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="A" gradientUnits="userSpaceOnUse"/><linearGradient id="B" x1="6870" x2="24704" y1="18705" y2="18705" xlink:href="#A"><stop offset="0" stop-color="#0c59a4"/><stop offset="1" stop-color="#114a8b"/></linearGradient><linearGradient id="C" x1="16272" x2="5133" y1="10968" y2="23102" xlink:href="#A"><stop offset="0" stop-color="#1b9de2"/><stop offset=".16" stop-color="#1595df"/><stop offset=".67" stop-color="#0680d7"/><stop offset="1" stop-color="#0078d4"/></linearGradient><radialGradient id="D" cx="16720" cy="18747" r="9538" xlink:href="#A"><stop offset=".72" stop-opacity="0"/><stop offset=".95" stop-opacity=".53"/><stop offset="1"/></radialGradient><radialGradient id="E" cx="7130" cy="19866" r="14324" gradientTransform="matrix(.14843 -.98892 .79688 .1196 -8759 25542)" xlink:href="#A"><stop offset=".76" stop-opacity="0"/><stop offset=".95" stop-opacity=".5"/><stop offset="1"/></radialGradient><radialGradient id="F" cx="2523" cy="4680" r="20243" gradientTransform="matrix(-.03715 .99931 -2.12836 -.07913 13579 3530)" xlink:href="#A"><stop offset="0" stop-color="#35c1f1"/><stop offset=".11" stop-color="#34c1ed"/><stop offset=".23" stop-color="#2fc2df"/><stop offset=".31" stop-color="#2bc3d2"/><stop offset=".67" stop-color="#36c752"/></radialGradient><radialGradient id="G" cx="24247" cy="7758" r="9734" gradientTransform="matrix(.28109 .95968 -.78353 .22949 24510 -16292)" xlink:href="#A"><stop offset="0" stop-color="#66eb6e"/><stop offset="1" stop-color="#66eb6e" stop-opacity="0"/></radialGradient><path id="H" d="M24105 20053a9345 9345 0 01-1053 472 10202 10202 0 01-3590 646c-4732 0-8855-3255-8855-7432 0-1175 680-2193 1643-2729-4280 180-5380 4640-5380 7253 0 7387 6810 8137 8276 8137 791 0 1984-230 2704-456l130-44a12834 12834 0 006660-5282c220-350-168-757-535-565z"/><path id="I" d="M11571 25141a7913 7913 0 01-2273-2137 8145 8145 0 01-1514-4740 8093 8093 0 013093-6395 8082 8082 0 011373-859c312-148 846-414 1554-404a3236 3236 0 012569 1297 3184 3184 0 01636 1866c0-21 2446-7960-8005-7960-4390 0-8004 4166-8004 7820 0 2319 538 4170 1212 5604a12833 12833 0 007684 6757 12795 12795 0 003908 610c1414 0 2774-233 4045-656a7575 7575 0 01-6278-803z"/><path id="J" d="M16231 15886c-80 105-330 250-330 566 0 260 170 512 472 723 1438 1003 4149 868 4156 868a5954 5954 0 003027-839 6147 6147 0 001133-850 6180 6180 0 001910-4437c26-2242-796-3732-1133-4392-2120-4141-6694-6525-11668-6525-7011 0-12703 5635-12798 12620 47-3654 3679-6605 7996-6605 350 0 2346 34 4200 1007 1634 858 2490 1894 3086 2921 618 1067 728 2415 728 2952s-271 1333-780 1990z"/><use fill="url(#B)" xlink:href="#H"/><use fill="url(#D)" opacity=".35" xlink:href="#H"/><use fill="url(#C)" xlink:href="#I"/><use fill="url(#E)" opacity=".4" xlink:href="#I"/><use fill="url(#F)" xlink:href="#J"/><use fill="url(#G)" xlink:href="#J"/></svg>
+      Edge
+    </button>
+    <button class="tab-btn" onclick="showTab('brave')">
+      <svg width="20px" height="20px" viewBox="0 0 555 555" xmlns="http://www.w3.org/2000/svg"><linearGradient id="a" x1="63" x2="283" y1="303" y2="303" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffffff"/><stop offset=".2" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient><path fill="#ff5000" d="M495.7 186.7l-16-43 11-25c1-3 1-7-2-9l-30-30a49 49 0 00-50-12l-8 3-46-49-156 1-46 50-8-3c-16-7-36-2-49 11l-30 31c-2 2-2 5-1 7l11 26-16 43 56 215a89 89 0 0035 50s56 40 112 76c5 3 10 5 15 5a27 27 0 0015-5l112-76a94 94 0 0035-50l46-176z"/><path fill="url(#a)" d="M117.7 409.7l-59-219 17-43-12-32 29-28c9-8 28-11 36-6l45 26 58 13 45-19 4 388c-1 56 3 50-38 24l-102-69c-11-10-19-22-23-35z" opacity=".15"/><path fill="#ffffff" d="M290.7 338.7c-4-2-8-3-9-3h-6c-1 0-5 1-9 3l-14 6-16 7-25 13c-4 2-4 6-1 9l22 16 20 16c4 3 9 8 13 11l6 5a10.5 10.5 0 0013 0l6-5c4-3 9-8 13-11l6-5 14-11 22-16c4-3 4-7-1-9l-25-13-16-7zm156-142l1-2c0-3 0-7-1-9 0-2-6-11-8-15l-14-21-10-14-19-24c-3-4-6-7-6-7l-9 2-29 6-13 2c-3 0-8 0-13-2l-23-8c-5-1-12-4-17-5h-14c-5 1-12 3-17 5l-23 8-13 2c-2 0-8-2-13-2l-29-6-9-2s-3 3-6 7l-19 23c-3 4-8 10-10 14l-14 21a90 90 0 00-7 11c-1 2-2 11-2 13l1 2 1 4c3 4 8 10 11 13l50 53c3 3 4 10 3 14l-8 19c-2 4-2 12 0 16l2 5c3 7 7 14 13 19l8 6c4 3 10 4 14 2l28-13a67 67 0 0014-9l22-20c4-3 4-9 0-13l-51-34c-4-3-5-8-3-12l20-37c2-4 3-11 1-15s-7-8-11-10l-62-23c-4-2-4-3 1-4l36-3c5 0 12 0 17 2l32 9c5 1 8 6 7 11l-12 67c-1 5-1 10-1 11 1 2 5 4 9 5l19 4c5 1 12 1 17 0l17-4c5-1 9-3 9-5s0-7-1-11l-12-68c-1-5 2-10 7-11l31-9c5-1 12-2 17-2l36 3c5 0 5 2 1 4l-62 23c-4 2-9 6-11 10s-1 10 1 15l20 37c2 4 1 10-3 12l-50 36c-4 4-3 10 0 13l22 20a110 110 0 0014 9l28 13c4 2 11 1 14-2l8-6c6-5 11-11 13-19l2-5c2-4 1-12 0-16l-8-19c-2-4-1-11 3-14l50-53c3-3 8-9 11-13 1 0 1 0 2-4z"/><path d="M404.7 451.7l-86 59c-24 13-36 26-38 20-2-5 0-19-1-42l-1-380c0-4 3-10 7-9l44 13 63-10 43-30c5-3 11-3 15 1l37 36c3 4 4 11 2 15l-10 19 17 45-59 221c-9 26-22 33-33 42z" opacity=".07"/></svg>
+      Brave
+    </button>
+    <button class="tab-btn" onclick="showTab('opera')">
+      <svg version="1.1" width="20px" height="20px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve"><style type="text/css">.st0{fill:url(#SVGID_1_);} .st1{fill:url(#SVGID_2_);}</style><g><linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="416.6229" y1="16.304" x2="416.6229" y2="985.446"><stop offset="0.3" style="stop-color:#FF1B2D"/><stop offset="0.4381" style="stop-color:#FA1A2C"/><stop offset="0.5939" style="stop-color:#ED1528"/><stop offset="0.7581" style="stop-color:#D60E21"/><stop offset="0.9272" style="stop-color:#B70519"/><stop offset="1" style="stop-color:#A70014"/></linearGradient><path class="st0" d="M335.4,781.8c-55.3-65.3-91.1-161.7-93.5-270c0-0.3,0-23.3,0-23.6c2.4-108.3,38.2-204.7,93.5-270C407.2,125.1,513.8,66,632.8,66c73.2,0,141.8,22.4,200.4,61.3C745.2,48.5,629.2,0.5,501.9,0c-0.6,0-1.3,0-1.9,0C223.9,0,0,223.9,0,500c0,268.2,211.1,487,476.2,499.4c7.9,0.4,15.8,0.6,23.8,0.6c128,0,244.8-48.1,333.2-127.2C774.6,911.6,706.1,934,632.8,934C513.8,934,407.2,874.9,335.4,781.8z"/><g><linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="667.7092" y1="73.4257" x2="667.7092" y2="930.5844"><stop offset="0" style="stop-color:#9C0000"/><stop offset="0.7" style="stop-color:#FF4B4B"/></linearGradient><path class="st1" d="M335.4,218.2c45.9-54.2,105.1-86.8,169.9-86.8c145.6,0,263.5,165,263.5,368.6s-118,368.6-263.5,368.6c-64.7,0-124-32.7-169.9-86.8C407.2,874.9,513.8,934,632.8,934c73.2,0,141.8-22.4,200.4-61.2C935.6,781.2,1000,648.1,1000,500c0-148.1-64.4-281.2-166.8-372.7C774.6,88.4,706.1,66,632.8,66C513.8,66,407.2,125.1,335.4,218.2z"/></g></g></svg>
+      Opera
+    </button>
+  </div>
+
+  <div class="install-wrapper">
+
+    <!-- Chrome -->
+    <div class="install-card" id="tab-chrome">
+      <div class="card-header">
+        <div class="browser-icon">
+          <svg height="28" width="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve"><path style="fill:#d24441" d="M480.759 133.469H275.417c-6.339-1.029-12.85-1.541-19.446-1.541-68.533 0-124.045 55.512-124.045 124.045 0 25.784 7.796 49.685 21.246 69.56L10.537 182.896C42.062 77.1 139.978 0 255.971 0c52.085 0 100.486 15.592 140.921 42.319 28.869 19.103 53.627 43.776 72.645 72.645 4.026 5.996 7.709 12.165 11.222 18.505"/><path style="fill:#4cb566" d="M325.532 358.771 182.897 501.405a251.2 251.2 0 0 1-57.225-25.102 256 256 0 0 1-90.035-90.033C12.935 348.063 0 303.601 0 255.972c0-25.359 3.684-49.858 10.537-73.076l142.634 142.636c22.273 32.896 60.052 54.568 102.799 54.568 25.786 0 49.687-7.881 69.562-21.329"/><path style="fill:#d5cb44" d="M275.395 133.442c59.299 9.325 104.657 60.639 104.657 122.557 0 42.759-21.63 80.462-54.543 102.775L182.888 501.396c23.16 6.887 47.686 10.603 73.083 10.603 141.385 0 256-114.615 256-256 0-44.4-11.309-86.158-31.195-122.557z"/><path style="fill:#fff" d="M275.417 133.469c-6.339-1.029-12.85-1.541-19.446-1.541-68.533 0-124.045 55.512-124.045 124.045 0 25.784 7.796 49.685 21.246 69.56 22.273 32.896 60.052 54.568 102.799 54.568 25.785 0 49.686-7.881 69.561-21.329 32.896-22.274 54.484-60.054 54.484-102.799-.001-61.854-45.319-113.168-104.599-122.504m-19.446 223.073c-55.426 0-100.573-45.058-100.573-100.57 0-55.428 45.146-100.574 100.573-100.574s100.572 45.146 100.572 100.574c0 55.511-45.147 100.57-100.572 100.57"/><path style="fill:#5991cd" d="M155.399 256.001c0 55.454 45.117 100.571 100.571 100.571s100.571-45.117 100.571-100.571S311.424 155.43 255.97 155.43s-100.571 45.117-100.571 100.571"/><path style="fill:none" d="M255.971 155.398c-55.426 0-100.573 45.146-100.573 100.574l.001.021c.005-55.451 45.12-100.564 100.571-100.564 27.731 0 52.876 11.283 71.087 29.498l.005-.004c-18.216-18.229-43.367-29.525-71.091-29.525m124.044 100.574c0 27.352-8.871 52.646-23.856 73.17 15.004-20.513 23.893-45.78 23.893-73.143 0-34.26-13.929-65.235-36.383-87.684l-.019.019c22.444 22.447 36.365 53.409 36.365 87.638"/><path style="fill:none" d="m356.541 256.001.002-.029c0-27.704-11.278-52.837-29.48-71.049l-.005.004c18.207 18.21 29.483 43.352 29.483 71.074"/><path style="opacity:.06;fill:#040000" d="M480.744 133.441c-3.509-6.329-7.187-12.49-11.207-18.478a254.2 254.2 0 0 0-32.581-39.934l-93.286 93.285c22.453 22.45 36.383 53.424 36.383 87.684 0 27.363-8.889 52.63-23.893 73.143 14.985-20.523 23.856-45.818 23.856-73.17 0-34.229-13.921-65.191-36.364-87.639l-16.588 16.59c18.202 18.212 29.48 43.345 29.48 71.049l-.002.029c0-27.722-11.277-52.864-29.484-71.074L74.991 436.994a256 256 0 0 0 50.681 39.309 251.2 251.2 0 0 0 57.225 25.102l.005-.004C206.059 508.284 230.579 512 255.971 512c141.385 0 255.999-114.616 255.999-256.001 0-44.4-11.309-86.158-31.195-122.557h-.031z"/></svg>
+        </div>
+        <div class="card-header-text">
+          <h2>Google Chrome</h2>
+          <p>Uses the ScriptCat extension</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num">1</div></div>
+          <div class="step-body">
+            <strong>Install ScriptCat</strong>
+            <p>ScriptCat is a free browser extension that runs userscripts like RoLocate. Click the link below to add it to Chrome — it only takes a few seconds.</p>
+            <br>
+            <a class="pill-link" href="https://chromewebstore.google.com/detail/scriptcat/ndcooeababalnlpkfedmmbbbgkljhpjf" target="_blank">
+              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Get ScriptCat on the Chrome Web Store
             </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- Header -->
-    <section class="header">
-      <div class="container">
-        <h1>Installation Guide</h1>
-        <p class="subtitle">Get Rolocate Installed</p>
-      </div>
-    </section>
-    <!-- Installation Methods -->
-    <section class="container">
-      <div class="install-methods">
-        <div class="install-card">
-          <h3>🚀 Install RoLocate</h3>
-          <p>Install directly from GreasyFork. Easy to install, just one click. Automatic updates included.&nbsp</p>
-          <a href="https://greasyfork.org/en/scripts/523727-rolocate" class="btn-install" target="_blank">Install from GreasyFork</a>
+          </div>
         </div>
-        <div class="install-card">
-          <h3 style="display: flex; align-items: center; gap: 10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="8" x2="12" y2="12"></line>
-              <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg> Version Information
-          </h3>
-          <div style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 20px; margin: 15px 0; border: 1px solid rgba(255,255,255,0.05);">
-            <div style="display: grid; grid-template-columns: max-content 1fr; gap: 12px; align-items: center;">
-              <span style="color: #888; font-size: 0.9rem;">Current Version:</span>
-              <span style="font-size: 1.4rem; font-weight: 700; color: #dc2626; letter-spacing: 0.5px;">v45.5</span>
-              <span style="color: #888; font-size: 0.9rem;">Release Date:</span>
-              <span>February 15, 2026</span>
+        <div class="step">
+          <div class="step-left"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <strong>Allow user scripts in Chrome</strong>
+            <p>Chrome requires a one-time permission before extensions like ScriptCat can run scripts. Here's how:</p>
+            <div class="tip-box" style="margin-top:10px;">
+              <span class="tip-icon">👆</span>
+              <span>Go to <strong style="color:#ddd;">chrome://extensions</strong> → find <strong style="color:#ddd;">ScriptCat</strong> → click <span class="inline-ui">Details</span> → enable <span class="inline-ui">Allow user scripts</span>.</span>
             </div>
           </div>
-          <div style="margin-top: 5px; font-size: 0.9rem; color: #aaa;">
-            <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 8px;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-              <span>Changelog highlights:</span>
-            </div>
-            <ul style="margin-left: 20px; color: #ccc; line-height: 1.7;">
-              <li>Bug Fix</li>
-              <li>Server Versions</li>
-              <li>Fixed BTRoblox Compatibility</li>
-            </ul>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">3</div></div>
+          <div class="step-body">
+            <strong>Install RoLocate</strong>
+            <p>Hit the button below to open RoLocate on Greasy Fork, then click <span class="inline-ui">Install This Script</span>. ScriptCat will handle the rest.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">4</div></div>
+          <div class="step-body">
+            <strong>Restart Chrome</strong>
+            <p>Close and reopen Chrome so ScriptCat loads up properly. This only needs to be done once.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">5</div></div>
+          <div class="step-body">
+            <strong>You're done! 🎉</strong>
+            <p>Go to <a href="https://www.roblox.com" target="_blank">roblox.com.</a></p>
           </div>
         </div>
       </div>
-    </section>
-    <!-- Step-by-step Guide -->
-    <section class="step-guide">
-      <div class="container">
-        <h2>Step-by-Step Installation</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">1</div>
-            <h3>Install a Userscript Manager Extension</h3>
-            <p>
-              You'll need a userscript manager to get started. I recommend 
-              <a href="https://violentmonkey.github.io/" target="_blank" rel="noopener noreferrer">
-                <code>Violentmonkey</code>
-              </a> because it helps with faster server region searching.
-            </p>
-            <p>
-              If you're using Chrome and Violentmonkey is blocked, you can try 
-              <a href="https://docs.scriptcat.org/en/" target="_blank" rel="noopener noreferrer">
-                <code>ScriptCat</code>
-              </a> instead. Just keep in mind that its English translation isn't fully complete.
-            </p>
-            <p>
-              <strong>Heads up:</strong> Tampermonkey is <em>not recommended</em> right now, since it has a bug that can slow down server region searching by up to 100×.
-            </p>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <h3>Go to Greasyfork</h3>
-            <p>Click the "Install from GreasyFork" button above. Note: GreasyFork is a trusted repository for userscripts.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <h3>Install the Script</h3>
-            <p>On the GreasyFork page, click the install button. Confirm the action if your userscript manager shows a popup. Note: You can see the source code if you click the code tab on the top.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">5</div>
-            <h3>Visit Roblox</h3>
-            <p>Go to Roblox.com and enjoy the free features!</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Browser Support -->
 
-    <!-- Browser Support -->
-    <section class="container">
-      <div class="browser-support">
-        <h2>Browser Compatibility</h2>
-        <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">RoLocate works on most browsers</p>
-        <div class="browsers">
-          <div class="browser">
-            <div class="browser-name" data-reason="Chrome fully supports userscript managers and Rolocate works without issues.">Chrome</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="Firefox fully supports userscript managers and Rolocate works without issues.">Firefox</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="Edge fully supports userscript managers and Rolocate works without issues.">Edge</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="RoLocate has not been tested on Safari yet.">Safari</div>
-            <div class="browser-status partial">⚠️ Limited Support</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="Opera fully supports userscript managers and Rolocate works without issues.">Opera</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="Brave fully supports userscript managers and Rolocate works without issues.">Brave</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Extension Compatibility -->
-    <section class="container">
-      <div class="browser-support">
-        <h2>Extension Compatibility</h2>
-        <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">I try to keep RoLocate compatible with most extensions, but sometimes it’s just not possible. Please check here! Note: This does not mean each of the extensions here are compatible with each other.</p>
-        <div class="browsers">
-          <div class="browser">
-            <div class="browser-name" data-reason="There maybe some minor issues, but nothing significant is broken.">Ropro</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="BTRoblox is fully compatible with Rolocate and works without issues. Just make sure to turn on the compatability settings.">BTRoblox</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="Almost fully compatible with RoLocate (some ui issues), but nothing major is broken">RoSeal</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="RoGold® (Free) is fully compatible with Rolocate and works without issues.">RoGold® (Free)</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="RoGold® (Ultimate) changes the entire roblox ui, which causes rolocate to not work at all.">RoGold® (Ultimate)</div>
-            <div class="browser-status no-support">❌ No Support</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="Roblox+ is fully compatible with Rolocate and works without issues.">Roblox+</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="RoValra is fully compatible with Rolocate and works without issues.">RoValra</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="BetterBLOX V1 is fully compatible with Rolocate and works without issues.">BetterBLOX V1</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="BetterBLOX V2 changes the entire roblox ui, which causes rolocate to not work at all.">BetterBLOX V2</div>
-            <div class="browser-status no-support">❌ No Support</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="RoQol is fully compatible with Rolocate and works without issues.">RoQol</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="Some features may break due to the custom css.">Roblokis</div>
-            <div class="browser-status partial">⚠️ Limited Support</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="DashBlox is fully compatible with Rolocate and works without issues.">DashBlox</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-          <div class="browser">
-            <div class="browser-name" data-reason="RoValk is fully compatible with Rolocate and works without issues.">RoValk</div>
-            <div class="browser-status">✅ Fully Supported</div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- FAQ -->
-    <section class="faq">
-      <div class="container">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-          <div class="faq-question">Does RoLocate work on all browsers?</div>
-          <div class="faq-answer">Almost, RoLocate does work on all major browsers except Safari which I have not tested it on yet so there is no guarantee it will work.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">Is Rolocate free to use?</div>
-          <div class="faq-answer">Yes, Rolocate is completely free to use and open-source.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">How do I update RoLocate?</div>
-          <div class="faq-answer">If you installed from GreasyFork, updates are automatic!</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">I don't see the filter button!</div>
-          <div class="faq-answer">Firstly try refreshing the page. If that does not work then try reinstalling everything again. As a last resort ask a question on <a href="https://greasyfork.org/en/scripts/523727-rolocate/feedback">Greasyfork</a>. </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">Can I use RoLocate on mobile?</div>
-          <div class="faq-answer">RoLocate is designed for desktop browsers. It is possible however on android devices if you have the firefox browser installed. Refer to this <a href="https://www.youtube.com/watch?v=gz5SHAro08Q">Video</a>.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">How does RoLocate find server locations?</div>
-          <div class="faq-answer">Rolocate uses this modified technique for finding server locations: <a href="https://devforum.roblox.com/t/server-region-from-website/2862705">Roblox dev Forums</a>. </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">My question isn't answered here!</div>
-          <div class="faq-answer">Go to <a href="https://greasyfork.org/en/scripts/523727-rolocate/feedback">Greasyfork</a> to get more help or the <a href="../docs/#troubleshooting">troubleshooting page</a>. </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2026 RoLocate. Open-source project available under a Custom License – Personal Use Only.</p>
-      </div>
-    </footer>
+      <a class="install-btn" href="https://greasyfork.org/en/scripts/523727-rolocate" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        Install RoLocate
+      </a>
 
-    <script>
-      // Handle click events on browser/extension names
-      document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('browser-name') && e.target.dataset.reason) {
-          // Remove any existing popup
-          let existingPopup = document.querySelector('.reason-popup');
-          if (existingPopup) {
-            existingPopup.remove();
-          }
+      <div class="note-box">
+        <strong>Why ScriptCat instead of Tampermonkey?</strong> There's currently a bug that causes RoLocate to run much slower with Tampermonkey. ScriptCat is also fully open-source, which is always a plus.
+      </div>
+    </div>
 
-          // Create new popup
-          let popup = document.createElement('div');
-          popup.className = 'reason-popup';
-          popup.textContent = e.target.dataset.reason;
-          
-          document.body.appendChild(popup);
-          
-          // Auto-remove after 3 seconds
-          setTimeout(function() {
-            popup.classList.add('fade-out');
-            // Remove after animation completes
-            setTimeout(function() {
-              popup.remove();
-            }, 500);
-          }, 3000);
-        }
+    <!-- Firefox -->
+    <div class="install-card" id="tab-firefox" style="display:none;">
+      <div class="card-header">
+        <div class="browser-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28.99 10.727c-.608-1.47-1.843-3.056-2.812-3.557.789 1.55 1.245 3.105 1.42 4.264l.003.024c-1.585-3.96-4.273-5.557-6.468-9.034-.112-.175-.223-.35-.331-.538a4 4 0 0 1-.154-.293 2.6 2.6 0 0 1-.218-.578.04.04 0 0 0-.023-.013h-.026l-.007.004-.01.005.006-.007c-3.522 2.067-4.716 5.89-4.826 7.804a7 7 0 0 0-3.861 1.49 4 4 0 0 0-.363-.275 6.5 6.5 0 0 1-.039-3.434c-1.44.658-2.56 1.696-3.374 2.614H7.9c-.556-.706-.517-3.033-.485-3.519-.007-.03-.414.213-.467.25q-.737.526-1.37 1.176A12 12 0 0 0 4.27 8.683a11.9 11.9 0 0 0-1.881 4.257l-.019.093c-.026.123-.121.742-.138.877v.03q-.186.961-.231 1.94v.071C2 23.71 8.276 30 16.018 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.279-2.41-.031-4.942-.91-7.06M12.834 21.724c.065.03.127.065.194.096l.01.006zm14.769-10.26v-.013.015z" fill="url(#a)"/><path d="M28.99 10.727c-.608-1.47-1.842-3.056-2.811-3.557.788 1.55 1.244 3.105 1.419 4.264v.03c1.323 3.593.602 7.248-.436 9.481-1.607 3.455-5.496 6.997-11.584 6.824-6.572-.187-12.366-5.08-13.448-11.485-.197-1.01 0-1.523.099-2.343-.12.631-.167.814-.227 1.938v.072C2.002 23.71 8.278 30 16.02 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.277-2.41-.033-4.942-.911-7.06" fill="url(#b)"/><path d="M28.99 10.727c-.608-1.47-1.842-3.056-2.811-3.557.788 1.55 1.244 3.105 1.419 4.264v.03c1.323 3.593.602 7.248-.436 9.481-1.607 3.455-5.496 6.997-11.584 6.824-6.572-.187-12.366-5.08-13.448-11.485-.197-1.01 0-1.523.099-2.343-.12.631-.167.814-.227 1.938v.072C2.002 23.71 8.278 30 16.02 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.277-2.41-.033-4.942-.911-7.06" fill="url(#c)"/><path d="m22.178 12.377.087.065a7.6 7.6 0 0 0-1.302-1.702c-4.357-4.367-1.142-9.47-.6-9.729l.006-.008c-3.522 2.068-4.716 5.891-4.826 7.805.163-.011.326-.025.492-.025 2.628 0 4.917 1.448 6.143 3.594" fill="url(#d)"/><path d="M16.045 13.25c-.023.35-1.255 1.555-1.686 1.555-3.986 0-4.633 2.417-4.633 2.417.175 2.035 1.59 3.711 3.302 4.598q.118.06.233.113.206.089.412.169a6.2 6.2 0 0 0 1.824.35c6.987.33 8.341-8.372 3.299-10.899 1.29-.225 2.63.296 3.38.823C20.95 10.23 18.66 8.78 16.032 8.78c-.166 0-.329.014-.492.025a7 7 0 0 0-3.858 1.492c.214.182.456.424.964.926.953.942 3.392 1.912 3.398 2.026" fill="url(#e)"/><path d="M16.045 13.25c-.023.35-1.255 1.555-1.686 1.555-3.986 0-4.633 2.417-4.633 2.417.175 2.035 1.59 3.711 3.302 4.598q.118.06.233.113.206.089.412.169a6.2 6.2 0 0 0 1.824.35c6.987.33 8.341-8.372 3.299-10.899 1.29-.225 2.63.296 3.38.823C20.95 10.23 18.66 8.78 16.032 8.78c-.166 0-.329.014-.492.025a7 7 0 0 0-3.858 1.492c.214.182.456.424.964.926.953.942 3.392 1.912 3.398 2.026" fill="url(#f)"/><path d="m11.031 9.83.292.193a6.5 6.5 0 0 1-.04-3.434c-1.44.658-2.56 1.696-3.374 2.614.066-.002 2.1-.039 3.122.628" fill="url(#g)"/><path d="M2.13 16.284c1.082 6.404 6.876 11.298 13.453 11.485 6.088.172 9.974-3.369 11.583-6.824 1.038-2.234 1.76-5.888.436-9.482v-.027l.003.023c.497 3.255-1.154 6.407-3.736 8.54l-.007.018c-5.031 4.105-9.845 2.477-10.82 1.812l-.204-.102c-2.933-1.403-4.145-4.083-3.885-6.38-2.476 0-3.321-2.094-3.321-2.094s2.224-1.589 5.154-.207c2.714 1.28 5.263.208 5.263.207-.005-.114-2.444-1.087-3.396-2.026-.508-.502-.75-.744-.963-.926a4 4 0 0 0-.363-.274c-.084-.059-.175-.117-.292-.193-1.022-.666-3.056-.63-3.123-.628h-.006c-.556-.705-.517-3.033-.486-3.518-.006-.03-.414.212-.466.249-.49.35-.95.744-1.37 1.176a12.3 12.3 0 0 0-1.31 1.573 11.9 11.9 0 0 0-1.88 4.257c-.012.027-.51 2.21-.264 3.341" fill="url(#h)"/><path d="M20.963 10.74c.512.503.95 1.076 1.302 1.702q.11.083.21.176c3.178 2.932 1.516 7.083 1.39 7.381 2.581-2.132 4.232-5.284 3.735-8.539-1.585-3.962-4.272-5.56-6.468-9.036-.11-.175-.222-.35-.33-.538a4 4 0 0 1-.154-.293 2.6 2.6 0 0 1-.218-.578.04.04 0 0 0-.023-.013h-.026l-.007.004-.01.005c-.543.26-3.758 5.362.6 9.729" fill="url(#i)"/><path d="M22.474 12.615a3 3 0 0 0-.21-.176l-.087-.065c-.749-.526-2.089-1.047-3.38-.822 5.042 2.526 3.688 11.228-3.299 10.899a6.2 6.2 0 0 1-1.824-.35 8 8 0 0 1-.411-.17 4 4 0 0 1-.234-.113l.01.006c.974.667 5.788 2.295 10.82-1.812l.007-.018c.125-.293 1.787-4.444-1.392-7.38" fill="url(#j)"/><path d="M9.725 17.222s.647-2.417 4.634-2.417c.43 0 1.663-1.206 1.685-1.555.023-.35-2.549 1.073-5.263-.207-2.93-1.382-5.154.207-5.154.207s.845 2.094 3.32 2.094c-.259 2.297.953 4.975 3.886 6.38.066.031.127.066.194.096-1.712-.885-3.125-2.563-3.302-4.599" fill="url(#k)"/><path d="M28.99 10.727c-.608-1.47-1.843-3.056-2.812-3.557.789 1.55 1.245 3.105 1.42 4.264l.003.024c-1.585-3.96-4.273-5.557-6.468-9.034-.112-.175-.223-.35-.331-.538a4 4 0 0 1-.154-.293 2.6 2.6 0 0 1-.218-.578.04.04 0 0 0-.023-.013h-.026l-.007.004-.01.005.006-.007c-3.522 2.067-4.716 5.89-4.826 7.804.163-.011.326-.025.492-.025 2.628 0 4.917 1.448 6.143 3.594-.749-.526-2.09-1.047-3.38-.822 5.042 2.527 3.688 11.228-3.299 10.899a6.2 6.2 0 0 1-1.824-.35 8 8 0 0 1-.412-.17 4 4 0 0 1-.233-.113l.01.006-.204-.101c.065.03.127.065.194.096-1.716-.887-3.129-2.565-3.306-4.6 0 0 .647-2.417 4.634-2.417.43 0 1.663-1.206 1.685-1.555-.005-.114-2.444-1.087-3.396-2.027-.508-.501-.75-.743-.963-.925a4 4 0 0 0-.363-.275 6.5 6.5 0 0 1-.04-3.434c-1.44.658-2.56 1.696-3.374 2.614h-.006c-.556-.706-.517-3.033-.485-3.519-.007-.03-.414.213-.467.25-.49.35-.95.744-1.37 1.176a12.3 12.3 0 0 0-1.31 1.573 11.9 11.9 0 0 0-1.88 4.257l-.019.093a25 25 0 0 0-.162.885c0 .01 0-.01 0 0q-.164.975-.209 1.961v.072C2 23.71 8.276 30 16.018 30c6.934 0 12.69-5.045 13.818-11.672q.034-.27.064-.542c.279-2.41-.031-4.942-.91-7.06m-1.39.72v.016z" fill="url(#l)"/><defs><radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(29.2246 0 0 29.2888 26.06 4.219)"><stop offset=".13" stop-color="#ffbd4f"/><stop offset=".19" stop-color="#ffac31"/><stop offset=".25" stop-color="#ff9d17"/><stop offset=".28" stop-color="#ff980e"/><stop offset=".4" stop-color="#ff563b"/><stop offset=".47" stop-color="#ff3750"/><stop offset=".71" stop-color="#f5156c"/><stop offset=".78" stop-color="#eb0878"/><stop offset=".86" stop-color="#e50080"/></radialGradient><radialGradient id="c" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(29.2246 0 0 29.2888 15.38 16.192)"><stop offset=".3" stop-color="#960e18"/><stop offset=".35" stop-color="#b11927" stop-opacity=".74"/><stop offset=".43" stop-color="#db293d" stop-opacity=".34"/><stop offset=".5" stop-color="#f5334b" stop-opacity=".09"/><stop offset=".53" stop-color="#ff3750" stop-opacity="0"/></radialGradient><radialGradient id="d" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(21.172 0 0 21.2184 18.904 -2.428)"><stop offset=".13" stop-color="#fff44f"/><stop offset=".25" stop-color="#ffdc3e"/><stop offset=".51" stop-color="#ff9d12"/><stop offset=".53" stop-color="#ff980e"/></radialGradient><radialGradient id="e" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(13.915 0 0 13.9455 12.149 23.843)"><stop offset=".35" stop-color="#3a8ee6"/><stop offset=".47" stop-color="#5c79f0"/><stop offset=".67" stop-color="#9059ff"/><stop offset="1" stop-color="#c139e6"/></radialGradient><radialGradient id="f" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="rotate(-13.926 59.941 -58.33)scale(7.37316 8.67852)"><stop offset=".21" stop-color="#9059ff" stop-opacity="0"/><stop offset=".28" stop-color="#8c4ff3" stop-opacity=".06"/><stop offset=".75" stop-color="#7716a8" stop-opacity=".45"/><stop offset=".97" stop-color="#6e008b" stop-opacity=".6"/></radialGradient><radialGradient id="g" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(10.0108 0 0 10.0328 15.011 3.02)"><stop stop-color="#ffe226"/><stop offset=".12" stop-color="#ffdb27"/><stop offset=".3" stop-color="#ffc82a"/><stop offset=".5" stop-color="#ffa930"/><stop offset=".73" stop-color="#ff7e37"/><stop offset=".79" stop-color="#ff7139"/></radialGradient><radialGradient id="h" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(42.7109 0 0 42.8046 22.88 -3.343)"><stop offset=".11" stop-color="#fff44f"/><stop offset=".46" stop-color="#ff980e"/><stop offset=".62" stop-color="#ff5634"/><stop offset=".72" stop-color="#ff3647"/><stop offset=".9" stop-color="#e31587"/></radialGradient><radialGradient id="i" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="rotate(84.245 8.638 11.035)scale(31.1996 20.4543)"><stop stop-color="#fff44f"/><stop offset=".06" stop-color="#ffe847"/><stop offset=".17" stop-color="#ffc830"/><stop offset=".3" stop-color="#ff980e"/><stop offset=".36" stop-color="#ff8b16"/><stop offset=".45" stop-color="#ff672a"/><stop offset=".57" stop-color="#ff3647"/><stop offset=".74" stop-color="#e31587"/></radialGradient><radialGradient id="j" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(26.6644 0 0 26.723 14.776 6.736)"><stop offset=".14" stop-color="#fff44f"/><stop offset=".48" stop-color="#ff980e"/><stop offset=".59" stop-color="#ff5634"/><stop offset=".66" stop-color="#ff3647"/><stop offset=".9" stop-color="#e31587"/></radialGradient><radialGradient id="k" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(29.1844 0 0 29.2484 21.814 8.3)"><stop offset=".09" stop-color="#fff44f"/><stop offset=".23" stop-color="#ffe141"/><stop offset=".51" stop-color="#ffaf1e"/><stop offset=".63" stop-color="#ff980e"/></radialGradient><linearGradient id="a" x1="27.135" y1="5.493" x2="3.814" y2="27.944" gradientUnits="userSpaceOnUse"><stop offset=".05" stop-color="#fff44f"/><stop offset=".11" stop-color="#ffe847"/><stop offset=".22" stop-color="#ffc830"/><stop offset=".37" stop-color="#ff980e"/><stop offset=".4" stop-color="#ff8b16"/><stop offset=".46" stop-color="#ff672a"/><stop offset=".53" stop-color="#ff3647"/><stop offset=".7" stop-color="#e31587"/></linearGradient><linearGradient id="l" x1="26.855" y1="5.372" x2="7.01" y2="25.174" gradientUnits="userSpaceOnUse"><stop offset=".17" stop-color="#fff44f" stop-opacity=".8"/><stop offset=".27" stop-color="#fff44f" stop-opacity=".63"/><stop offset=".49" stop-color="#fff44f" stop-opacity=".22"/><stop offset=".6" stop-color="#fff44f" stop-opacity="0"/></linearGradient></defs></svg>
+        </div>
+        <div class="card-header-text">
+          <h2>Mozilla Firefox</h2>
+          <p>Uses the Violentmonkey extension</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num">1</div></div>
+          <div class="step-body">
+            <strong>Install Violentmonkey</strong>
+            <p>Violentmonkey is a free, open-source extension for running userscripts. Add it to Firefox with the link below.</p>
+            <br>
+            <a class="pill-link" href="https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/" target="_blank">
+              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Get Violentmonkey for Firefox
+            </a>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <strong>Install RoLocate</strong>
+            <p>Hit the button below to open RoLocate on Greasy Fork, then click <span class="inline-ui">Install This Script</span>. Violentmonkey will handle the rest.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">3</div></div>
+          <div class="step-body">
+            <strong>Restart Firefox</strong>
+            <p>Close and reopen Firefox so Violentmonkey loads up properly. This only needs to be done once.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">4</div></div>
+          <div class="step-body">
+            <strong>You're done! 🎉</strong>
+            <p>Go to <a href="https://www.roblox.com" target="_blank">roblox.com.</a></p>
+          </div>
+        </div>
+      </div>
+
+      <a class="install-btn" href="https://greasyfork.org/en/scripts/523727-rolocate" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        Install RoLocate
+      </a>
+
+      <div class="note-box">
+                <strong>Why Violentmonkey instead of Tampermonkey?</strong> There's currently a bug that causes RoLocate to run much slower with Tampermonkey. Violentmonkey is also fully open-source.
+      </div>
+    </div>
+
+    <!-- Edge -->
+    <div class="install-card" id="tab-edge" style="display:none;">
+      <div class="card-header">
+        <div class="browser-icon">
+          <svg width="32" height="32" viewBox="0 0 27600 27600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="A" gradientUnits="userSpaceOnUse"/><linearGradient id="B" x1="6870" x2="24704" y1="18705" y2="18705" xlink:href="#A"><stop offset="0" stop-color="#0c59a4"/><stop offset="1" stop-color="#114a8b"/></linearGradient><linearGradient id="C" x1="16272" x2="5133" y1="10968" y2="23102" xlink:href="#A"><stop offset="0" stop-color="#1b9de2"/><stop offset=".16" stop-color="#1595df"/><stop offset=".67" stop-color="#0680d7"/><stop offset="1" stop-color="#0078d4"/></linearGradient><radialGradient id="D" cx="16720" cy="18747" r="9538" xlink:href="#A"><stop offset=".72" stop-opacity="0"/><stop offset=".95" stop-opacity=".53"/><stop offset="1"/></radialGradient><radialGradient id="E" cx="7130" cy="19866" r="14324" gradientTransform="matrix(.14843 -.98892 .79688 .1196 -8759 25542)" xlink:href="#A"><stop offset=".76" stop-opacity="0"/><stop offset=".95" stop-opacity=".5"/><stop offset="1"/></radialGradient><radialGradient id="F" cx="2523" cy="4680" r="20243" gradientTransform="matrix(-.03715 .99931 -2.12836 -.07913 13579 3530)" xlink:href="#A"><stop offset="0" stop-color="#35c1f1"/><stop offset=".11" stop-color="#34c1ed"/><stop offset=".23" stop-color="#2fc2df"/><stop offset=".31" stop-color="#2bc3d2"/><stop offset=".67" stop-color="#36c752"/></radialGradient><radialGradient id="G" cx="24247" cy="7758" r="9734" gradientTransform="matrix(.28109 .95968 -.78353 .22949 24510 -16292)" xlink:href="#A"><stop offset="0" stop-color="#66eb6e"/><stop offset="1" stop-color="#66eb6e" stop-opacity="0"/></radialGradient><path id="H" d="M24105 20053a9345 9345 0 01-1053 472 10202 10202 0 01-3590 646c-4732 0-8855-3255-8855-7432 0-1175 680-2193 1643-2729-4280 180-5380 4640-5380 7253 0 7387 6810 8137 8276 8137 791 0 1984-230 2704-456l130-44a12834 12834 0 006660-5282c220-350-168-757-535-565z"/><path id="I" d="M11571 25141a7913 7913 0 01-2273-2137 8145 8145 0 01-1514-4740 8093 8093 0 013093-6395 8082 8082 0 011373-859c312-148 846-414 1554-404a3236 3236 0 012569 1297 3184 3184 0 01636 1866c0-21 2446-7960-8005-7960-4390 0-8004 4166-8004 7820 0 2319 538 4170 1212 5604a12833 12833 0 007684 6757 12795 12795 0 003908 610c1414 0 2774-233 4045-656a7575 7575 0 01-6278-803z"/><path id="J" d="M16231 15886c-80 105-330 250-330 566 0 260 170 512 472 723 1438 1003 4149 868 4156 868a5954 5954 0 003027-839 6147 6147 0 001133-850 6180 6180 0 001910-4437c26-2242-796-3732-1133-4392-2120-4141-6694-6525-11668-6525-7011 0-12703 5635-12798 12620 47-3654 3679-6605 7996-6605 350 0 2346 34 4200 1007 1634 858 2490 1894 3086 2921 618 1067 728 2415 728 2952s-271 1333-780 1990z"/><use fill="url(#B)" xlink:href="#H"/><use fill="url(#D)" opacity=".35" xlink:href="#H"/><use fill="url(#C)" xlink:href="#I"/><use fill="url(#E)" opacity=".4" xlink:href="#I"/><use fill="url(#F)" xlink:href="#J"/><use fill="url(#G)" xlink:href="#J"/></svg>
+        </div>
+        <div class="card-header-text">
+          <h2>Microsoft Edge</h2>
+          <p>Uses the Violentmonkey extension</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num">1</div></div>
+          <div class="step-body">
+            <strong>Install Violentmonkey</strong>
+            <p>Violentmonkey is a free, open-source extension for running userscripts. Add it to Edge with the link below.</p>
+            <br>
+            <a class="pill-link" href="https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao" target="_blank">
+              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Get Violentmonkey for Edge
+            </a>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <strong>Install RoLocate</strong>
+            <p>Hit the button below to open RoLocate on Greasy Fork, then click <span class="inline-ui">Install This Script</span>. Violentmonkey will handle the rest.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">3</div></div>
+          <div class="step-body">
+            <strong>Restart Edge</strong>
+            <p>Close and reopen Edge so Violentmonkey loads up properly. This only needs to be done once.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">4</div></div>
+          <div class="step-body">
+            <strong>You're done! 🎉</strong>
+            <p>Go to <a href="https://www.roblox.com" target="_blank">roblox.com.</a></p>
+          </div>
+        </div>
+      </div>
+
+      <a class="install-btn" href="https://greasyfork.org/en/scripts/523727-rolocate" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        Install RoLocate
+      </a>
+
+      <div class="note-box">
+        <strong>Why Violentmonkey instead of Tampermonkey?</strong> There's currently a bug that causes RoLocate to run much slower with Tampermonkey. Violentmonkey is also fully open-source.
+      </div>
+    </div>
+
+    <!-- Brave -->
+    <div class="install-card" id="tab-brave" style="display:none;">
+      <div class="card-header">
+        <div class="browser-icon">
+          <svg width="32px" height="32px" viewBox="0 0 555 555" xmlns="http://www.w3.org/2000/svg"><linearGradient id="a" x1="63" x2="283" y1="303" y2="303" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffffff"/><stop offset=".2" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff" stop-opacity=".7"/></linearGradient><path fill="#ff5000" d="M495.7 186.7l-16-43 11-25c1-3 1-7-2-9l-30-30a49 49 0 00-50-12l-8 3-46-49-156 1-46 50-8-3c-16-7-36-2-49 11l-30 31c-2 2-2 5-1 7l11 26-16 43 56 215a89 89 0 0035 50s56 40 112 76c5 3 10 5 15 5a27 27 0 0015-5l112-76a94 94 0 0035-50l46-176z"/><path fill="url(#a)" d="M117.7 409.7l-59-219 17-43-12-32 29-28c9-8 28-11 36-6l45 26 58 13 45-19 4 388c-1 56 3 50-38 24l-102-69c-11-10-19-22-23-35z" opacity=".15"/><path fill="#ffffff" d="M290.7 338.7c-4-2-8-3-9-3h-6c-1 0-5 1-9 3l-14 6-16 7-25 13c-4 2-4 6-1 9l22 16 20 16c4 3 9 8 13 11l6 5a10.5 10.5 0 0013 0l6-5c4-3 9-8 13-11l6-5 14-11 22-16c4-3 4-7-1-9l-25-13-16-7zm156-142l1-2c0-3 0-7-1-9 0-2-6-11-8-15l-14-21-10-14-19-24c-3-4-6-7-6-7l-9 2-29 6-13 2c-3 0-8 0-13-2l-23-8c-5-1-12-4-17-5h-14c-5 1-12 3-17 5l-23 8-13 2c-2 0-8-2-13-2l-29-6-9-2s-3 3-6 7l-19 23c-3 4-8 10-10 14l-14 21a90 90 0 00-7 11c-1 2-2 11-2 13l1 2 1 4c3 4 8 10 11 13l50 53c3 3 4 10 3 14l-8 19c-2 4-2 12 0 16l2 5c3 7 7 14 13 19l8 6c4 3 10 4 14 2l28-13a67 67 0 0014-9l22-20c4-3 4-9 0-13l-51-34c-4-3-5-8-3-12l20-37c2-4 3-11 1-15s-7-8-11-10l-62-23c-4-2-4-3 1-4l36-3c5 0 12 0 17 2l32 9c5 1 8 6 7 11l-12 67c-1 5-1 10-1 11 1 2 5 4 9 5l19 4c5 1 12 1 17 0l17-4c5-1 9-3 9-5s0-7-1-11l-12-68c-1-5 2-10 7-11l31-9c5-1 12-2 17-2l36 3c5 0 5 2 1 4l-62 23c-4 2-9 6-11 10s-1 10 1 15l20 37c2 4 1 10-3 12l-50 36c-4 4-3 10 0 13l22 20a110 110 0 0014 9l28 13c4 2 11 1 14-2l8-6c6-5 11-11 13-19l2-5c2-4 1-12 0-16l-8-19c-2-4-1-11 3-14l50-53c3-3 8-9 11-13 1 0 1 0 2-4z"/><path d="M404.7 451.7l-86 59c-24 13-36 26-38 20-2-5 0-19-1-42l-1-380c0-4 3-10 7-9l44 13 63-10 43-30c5-3 11-3 15 1l37 36c3 4 4 11 2 15l-10 19 17 45-59 221c-9 26-22 33-33 42z" opacity=".07"/></svg>
+        </div>
+        <div class="card-header-text">
+          <h2>Brave</h2>
+          <p>Uses the Violentmonkey extension</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num">1</div></div>
+          <div class="step-body">
+            <strong>Install Violentmonkey</strong>
+            <p>Violentmonkey is a free, open-source extension for running userscripts. Brave supports Chrome extensions, so use the link below.</p>
+            <br>
+            <a class="pill-link" href="https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag" target="_blank">
+              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Get Violentmonkey for Brave
+            </a>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <strong>Install RoLocate</strong>
+            <p>Hit the button below to open RoLocate on Greasy Fork, then click <span class="inline-ui">Install This Script</span>. Violentmonkey will handle the rest.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">3</div></div>
+          <div class="step-body">
+            <strong>Restart Brave</strong>
+            <p>Close and reopen Brave so Violentmonkey loads up properly. This only needs to be done once.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">4</div></div>
+          <div class="step-body">
+            <strong>You're done! 🎉</strong>
+            <p>Go to <a href="https://www.roblox.com" target="_blank">roblox.com.</a></p>
+          </div>
+        </div>
+      </div>
+
+      <a class="install-btn" href="https://greasyfork.org/en/scripts/523727-rolocate" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        Install RoLocate
+      </a>
+
+      <div class="note-box">
+        <strong>Why Violentmonkey instead of Tampermonkey?</strong> There's currently a bug that causes RoLocate to run much slower with Tampermonkey. Violentmonkey is also fully open-source.
+      </div>
+    </div>
+
+    <!-- Opera -->
+    <div class="install-card" id="tab-opera" style="display:none;">
+      <div class="card-header">
+        <div class="browser-icon">
+          <svg version="1.1" width="28px" height="28px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve"><style type="text/css">.st0{fill:url(#SVGID_1_);} .st1{fill:url(#SVGID_2_);}</style><g><linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="416.6229" y1="16.304" x2="416.6229" y2="985.446"><stop offset="0.3" style="stop-color:#FF1B2D"/><stop offset="0.4381" style="stop-color:#FA1A2C"/><stop offset="0.5939" style="stop-color:#ED1528"/><stop offset="0.7581" style="stop-color:#D60E21"/><stop offset="0.9272" style="stop-color:#B70519"/><stop offset="1" style="stop-color:#A70014"/></linearGradient><path class="st0" d="M335.4,781.8c-55.3-65.3-91.1-161.7-93.5-270c0-0.3,0-23.3,0-23.6c2.4-108.3,38.2-204.7,93.5-270C407.2,125.1,513.8,66,632.8,66c73.2,0,141.8,22.4,200.4,61.3C745.2,48.5,629.2,0.5,501.9,0c-0.6,0-1.3,0-1.9,0C223.9,0,0,223.9,0,500c0,268.2,211.1,487,476.2,499.4c7.9,0.4,15.8,0.6,23.8,0.6c128,0,244.8-48.1,333.2-127.2C774.6,911.6,706.1,934,632.8,934C513.8,934,407.2,874.9,335.4,781.8z"/><g><linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="667.7092" y1="73.4257" x2="667.7092" y2="930.5844"><stop offset="0" style="stop-color:#9C0000"/><stop offset="0.7" style="stop-color:#FF4B4B"/></linearGradient><path class="st1" d="M335.4,218.2c45.9-54.2,105.1-86.8,169.9-86.8c145.6,0,263.5,165,263.5,368.6s-118,368.6-263.5,368.6c-64.7,0-124-32.7-169.9-86.8C407.2,874.9,513.8,934,632.8,934c73.2,0,141.8-22.4,200.4-61.2C935.6,781.2,1000,648.1,1000,500c0-148.1-64.4-281.2-166.8-372.7C774.6,88.4,706.1,66,632.8,66C513.8,66,407.2,125.1,335.4,218.2z"/></g></g></svg>
+        </div>
+        <div class="card-header-text">
+          <h2>Opera</h2>
+          <p>Uses the Violentmonkey extension</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-left"><div class="step-num">1</div></div>
+          <div class="step-body">
+            <strong>Install Violentmonkey</strong>
+            <p>Violentmonkey is a free, open-source extension for running userscripts. Opera supports Chrome extensions, so use the link below.</p>
+            <br>
+            <a class="pill-link" href="https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag" target="_blank">
+              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              Get Violentmonkey for Opera
+            </a>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <strong>Install RoLocate</strong>
+            <p>Hit the button below to open RoLocate on Greasy Fork, then click <span class="inline-ui">Install This Script</span>. Violentmonkey will handle the rest.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">3</div></div>
+          <div class="step-body">
+            <strong>Restart Opera</strong>
+            <p>Close and reopen Opera so Violentmonkey loads up properly. This only needs to be done once.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left"><div class="step-num">4</div></div>
+          <div class="step-body">
+            <strong>You're done! 🎉</strong>
+            <p>Go to <a href="https://www.roblox.com" target="_blank">roblox.com.</a></p>
+          </div>
+        </div>
+      </div>
+
+      <a class="install-btn" href="https://greasyfork.org/en/scripts/523727-rolocate" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+        Install RoLocate
+      </a>
+
+      <div class="note-box">
+        <strong>Why Violentmonkey instead of Tampermonkey?</strong> There's currently a bug that causes RoLocate to run much slower with Tampermonkey. Violentmonkey is also fully open-source.
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RoLocate. Open-source project available under a Custom License – Personal Use Only.</p>
+  </footer>
+
+  <script>
+    function showTab(id) {
+      ['chrome','firefox','edge','brave','opera'].forEach(t => {
+        document.getElementById('tab-' + t).style.display = t === id ? 'flex' : 'none';
       });
-    </script>
-  </body>
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', ['chrome','firefox','edge','brave','opera'][i] === id);
+      });
+    }
+  </script>
+
+</body>
 </html>
