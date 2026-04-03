@@ -1,6 +1,17 @@
 {
   "versions": [
     {
+      "version": "45.6",
+      "date": "2026-4-2",
+      "type": "patch",
+      "description": "Bug fixes.",
+      "changes": {
+        "fixed": [
+          "As of April 2026, Roblox has significantly restricted how server regions are discovered, limiting results to only 10 servers per second. As a result discovering server regions may take longer than before."
+        ]
+      }
+    },
+    {
       "version": "45.5",
       "date": "2026-2-15",
       "type": "major",
