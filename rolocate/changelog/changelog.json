@@ -1,6 +1,36 @@
 {
   "versions": [
     {
+      "version": "46.5",
+      "date": "2026-4-11",
+      "type": "major",
+      "description": "Custom Backgrounds, Better Profile Info, and various improvements and bug fixes.",
+      "changes": {
+        "added": [
+          "Better Profile Info: This replaces the Mutual Friends feature. It shows you more info about a user's profile like their mutual friends, followers, following, etc.",
+          "You can now search through your friends private servers with a search bar. Might be buggy because I didn't have many private servers to test with.",
+          "You can now change your online status and game join status via show old greeting.",
+          "You can now see your weekly playtime & RoPro Compatability with Show Old Greeting."
+        ],
+        "improved": [
+          "Best Friends now shows the dropdown when hovering over best friends thumbnail instead of showing nothing.",
+          "Best Friends popup loads a lot faster now for users with a lot of friends.",
+          "Custom Backgrounds is now a lot more cusomizable. Presets have also been added for easier use.",
+          "You can now block the standout games section on the homepage in settings.",
+          "Smart Search now shows the exact usernames you are typing in as the first results (Friends take priority) instead of showing users with that display name. Also banned users will now be shown as well."
+        ], 
+        "fixed": [
+          "Disable Trailer Autoplay not working with the new roblox update.",
+          "Best Friend feature not working with BTR or Roseal.",
+          "Fixed Server Filter Feature not working with BTR.",
+          "Show old greeting not working with the new roblox sidebar update."
+        ],
+        "removed": [
+          "Mutual Friends (Replaced with Better Profile Info)."
+        ]
+      }
+    },
+    {
       "version": "45.6",
       "date": "2026-4-2",
       "type": "patch",
