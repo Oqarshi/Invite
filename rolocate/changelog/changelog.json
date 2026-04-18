@@ -8,7 +8,7 @@
       "changes": {
         "fixed": [
           "Smart Search: SmartSearch can no longer automatically find user stats due to new Roblox rate limits, so a new button has been added as a replacement.",
-          " Bug Fixes: Thanks to Akira for fixing the “This week’s playtime” overflow issue, and to Waivy for correcting the version number."
+          "Bug Fixes: Thanks to Akira for fixing the “This week’s playtime” overflow issue, and to Waivy for correcting the version number."
         ]
       }
     },
