@@ -4,7 +4,7 @@
       "version": "46.8",
       "date": "2026-5-1",
       "type": "minor",
-      "description": "Updates",
+      "description": "Added Server uptime",
       "changes": {
         "added": [
           "You can now sort by server age/uptime when searching for server regions. Roblox has recently provided this info in their gamejoin api."
