@@ -1,6 +1,48 @@
 {
   "versions": [
     {
+      "version": "47.0",
+      "date": "2026-8-1",
+      "type": "major",
+      "description": "",
+      "changes": {
+        "added": [
+          "Search History for Smart Search.",
+          "Detailed Preview. Shows info about a group or user when hovering over their names in certain areas of the website."
+        ],
+        "improved": [
+          "Recent Servers now shows the uptime of the server in the more info popup.",
+          "Ad blocker now blocks all Roblox Plus ads if enabled.",
+          "Join confirmation now looks similar to Smart Join Popup.",
+          "Recent servers now show 5 servers with an option to show all servers. Now roblox page isnt crowded if your server hopping. :)",
+          "QuickLaunchGames animations are now smoother, and drag-to-reorder is more responsive with less lag.",
+          "Searching settings animations are now smoother.",
+          "SmartJoin Popup now shows when using the main join button.",
+          "RoLocate logo now uses a SVG instead of base64 so its less blurry.",
+          "More datacenters have been added.",
+          "Show Old Greeting now shows the user's status and game join status.",
+          "Revamped settings menu."
+        ],
+        "fixed": [
+          "The small delay of Smart Join Popup when clicking the join button.",
+          "The delay of checking if recent servers were active.",
+          "More than 1 Quick Launch Container being added to the homepage in some instances.",
+          "Show old greeting calling the user Robloxian instead of their display name.",
+          "One Recent servers changed text from 'Last Played' to 'Last Joined' to be more accurate.",
+          "Select Max Player Count popup not correctly adjusting slider to max playercount.",
+          "Auto Server Region default server count is now 10 instead of 16.",
+          "Fixed a slight delay joining a server when user had smartjoin off while recent servers on.",
+          "Fixed a bug where join confirmation popup was slightly blurry.",
+          "Sometimes if the user clicks on the roblox search bar before smartsearch loads, then Roblox's native overlay will appear. Now the script hides it.",
+          "Custom Backgrouns now correctly styles the new Roblox sidebar."
+        ],
+        "removed": [
+          "Better Private Servers (Roblox has compacted the private server list themselves).",
+          "Estimated Revenue for games since it was very inaccurate."
+        ]
+      }
+    },
+    {
       "version": "46.11",
       "date": "2026-7-16",
       "type": "minor",
@@ -74,7 +116,7 @@
         "improved": [
           "Best Friends now shows the dropdown when hovering over best friends thumbnail instead of showing nothing.",
           "Best Friends popup loads a lot faster now for users with a lot of friends.",
-          "Custom Backgrounds is now a lot more cusomizable. Presets have also been added for easier use.",
+          "Custom Backgrounds is now a lot more customizable. Presets have also been added for easier use.",
           "You can now block the standout games section on the homepage in settings.",
           "Smart Search now shows the exact usernames you are typing in as the first results (Friends take priority) instead of showing users with that display name. Also banned users will now be shown as well."
         ], 
