@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "version": "47.1",
+      "date": "2026-9-6",
+      "type": "minor",
+      "description": "Stuff",
+      "changes": {
+      "added": [
+          "Added Better Connection V2. Its faster than V1, however it will use the Roblox API that finds regions closest to you directly so it will not account for the location you enter in settings.",
+          "Added Compare Server Ping for roblox's V2 best latency api."
+        ],
+      "improved": [
+        "Server region cards will now have a little flag icon next to the region name to make it easier to find specific countries.",
+        "More datacenters have been added."
+      ]
+      }
+    },
+    {
       "version": "47.0",
       "date": "2026-8-1",
       "type": "major",
