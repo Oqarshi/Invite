@@ -1,6 +1,23 @@
 {
   "versions": [
     {
+      "version": "47.2",
+      "date": "2026-9-18",
+      "type": "minor",
+      "description": "Small changes",
+      "changes": {
+      "added": [
+        ],
+        "fixed": [
+          "Fixed Compare Server Ping Making duplicate server cards with the same place version and server uptime when those server details are unknown.",
+          "ServerHop button not appearing with the new Roblox play button update."
+        ],
+      "improved": [
+        "Trusted Friends has been added as an option for changing your online status and game join status."
+      ]
+      }
+    },
+    {
       "version": "47.1",
       "date": "2026-9-6",
       "type": "minor",
@@ -20,7 +37,7 @@
       "version": "47.0",
       "date": "2026-8-1",
       "type": "major",
-      "description": "",
+      "description": "Big changes",
       "changes": {
         "added": [
           "Search History for Smart Search.",
