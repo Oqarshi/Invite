@@ -1,6 +1,19 @@
 {
   "versions": [
     {
+      "version": "47.3",
+      "date": "2026-9-23",
+      "type": "patch",
+      "description": "Fix",
+      "changes": {
+      "added": [
+        ],
+        "fixed": [
+          "Setting button not showing up, since Roblox updated the nav bar."
+        ]
+      }
+    },
+    {
       "version": "47.2",
       "date": "2026-9-19",
       "type": "minor",
