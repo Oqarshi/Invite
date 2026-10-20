@@ -1,6 +1,29 @@
 {
   "versions": [
     {
+      "version": "47.4",
+      "date": "2026-10-19",
+      "type": "patch",
+      "description": "Minor Changes",
+      "changes": {
+      "added": [
+        ],
+        "improved": [
+          "You can now Shift + Click Serverhop button to join via Best Connect V2.",
+          "CSS improvements for better profile info.",
+          "The sidebar can now be made smaller to the users liking with a little notch on the right side of the roblox sidebar.",
+          "You can now Shift + Click Join button in Smartsearch to join via Best Connect V2."
+        ],
+        "fixed": [
+          "Setting button not showing up, since Roblox updated the nav bar.",
+          "Better Profile Info is now fixed after Roblox website updated."
+        ],
+        "removed": [
+          "Better Game Stats in settings, since it didn't do anything."
+        ]
+      }
+    },
+    {
       "version": "47.3",
       "date": "2026-9-23",
       "type": "patch",
